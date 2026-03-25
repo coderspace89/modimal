@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_blocks_megamenu_columns",
+  "info": {
+    "displayName": "Megamenu Column"
+  },
+  "options": {},
+  "attributes": {
+    "columnTitle": {
+      "type": "string"
+    },
+    "links": {
+      "type": "component",
+      "component": "elements.menu-link",
+      "repeatable": true
+    },
+    "featuredItems": {
+      "type": "component",
+      "component": "blocks.featured-item",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

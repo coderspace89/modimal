@@ -1,0 +1,28 @@
+.topbarContainer {
+  background-color: var(--topbarbg);
+  text-align: center;
+  padding: 8px 0;
+  color: var(--background);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+}
+
+.megamenu {
+  display: flex;
+  gap: 3rem;
+  padding: 1.5rem;
+}
+.megacol {
+  min-width: 180px;
+}
+.featuredgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.featuredcard img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

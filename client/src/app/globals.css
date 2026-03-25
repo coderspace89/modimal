@@ -2,6 +2,7 @@
   --background: #ffffff;
   --primary: #748c70;
   --black: #0c0c0c;
+  --topbarbg: #5a6d57;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -47,4 +48,8 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+#megamenu-dropdown.dropdown-toggle::after {
+  display: none !important;
 }

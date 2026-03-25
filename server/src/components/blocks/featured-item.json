@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_blocks_featured_items",
+  "info": {
+    "displayName": "Featured Item"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
