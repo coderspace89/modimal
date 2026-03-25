@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_elements_header_icons",
+  "info": {
+    "displayName": "Header Icons"
+  },
+  "options": {},
+  "attributes": {
+    "iconName": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
