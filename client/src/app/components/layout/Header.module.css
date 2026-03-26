@@ -8,21 +8,126 @@
   letter-spacing: 0.8px;
 }
 
-.megamenu {
+.headerContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.nav {
+  position: relative;
+}
+
+.navlist {
   display: flex;
-  gap: 3rem;
-  padding: 1.5rem;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
+.navitem {
+  position: relative;
+}
+
+.navlink {
+  text-decoration: none;
+  font-weight: 400;
+  color: var(--black);
+  font-size: clamp(16px, 5vw, 18px);
+  margin-right: 24px;
+}
+
+.megamenu {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 110px;
+  width: 100%;
+  background: #fff;
+  z-index: 1000;
+  padding: 2rem 4rem;
+}
+
+.megamenuInner {
+  display: flex;
+  gap: 4rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.megacolContainer {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: start;
+}
+
 .megacol {
-  min-width: 180px;
+  display: flex;
+  flex-direction: row;
+  gap: 3.375rem;
+  align-items: flex-start;
+  flex: 1;
 }
+
+.linklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 100%;
+}
+
+.linklist li a {
+  text-decoration: none;
+  color: var(--neutralgray);
+  text-transform: capitalize;
+  font-size: clamp(16px, 5vw, 18px);
+  font-weight: 400;
+}
+
 .featuredgrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  flex: 1;
+  align-items: start;
+  justify-content: start;
 }
+
+.featuredgrid1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.featuredcard {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  width: 100%;
+}
+
 .featuredcard img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+}
+
+.featuredcard span {
+  margin-top: 12px;
+  font-size: 16px;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.columnTitle {
+  font-size: clamp(16px, 5vw, 18px);
+  font-weight: 400;
+  color: var(--black);
+  text-transform: capitalize;
+  margin-bottom: 24px;
 }
