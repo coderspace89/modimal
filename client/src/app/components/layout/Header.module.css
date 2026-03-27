@@ -131,3 +131,40 @@
   text-transform: capitalize;
   margin-bottom: 24px;
 }
+
+.mobileHeaderIcon {
+  margin-right: 8px;
+}
+
+.mobileMenuListItemContainer {
+  margin-bottom: 32px;
+}
+
+.mobileMenuListItemContainer > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--black);
+  margin-bottom: 24px;
+  color: var(--black);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.mobileMenuContainer {
+  padding: 20px;
+  margin: 42px 0;
+}
+
+.mobileSubMenuItem {
+  margin-left: 35px;
+  text-transform: capitalize;
+  color: var(--neutralgray);
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}

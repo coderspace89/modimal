@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_menu_sub_items",
+  "info": {
+    "displayName": "subItems"
+  },
+  "options": {},
+  "attributes": {
+    "MenuLinks": {
+      "type": "component",
+      "component": "menu.menu-link",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

@@ -458,6 +458,37 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiMobileMenuMobileMenu extends Struct.SingleTypeSchema {
+  collectionName: 'mobile_menus';
+  info: {
+    displayName: 'Mobile Menu';
+    pluralName: 'mobile-menus';
+    singularName: 'mobile-menu';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    header: Schema.Attribute.Component<'layout.header', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::mobile-menu.mobile-menu'
+    > &
+      Schema.Attribute.Private;
+    menuItems: Schema.Attribute.DynamicZone<
+      ['menu.sub-items', 'menu.menu-link', 'menu.menu-item-section']
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiNavigationItemNavigationItem
   extends Struct.CollectionTypeSchema {
   collectionName: 'navigation_items';
@@ -1011,6 +1042,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::global.global': ApiGlobalGlobal;
+      'api::mobile-menu.mobile-menu': ApiMobileMenuMobileMenu;
       'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

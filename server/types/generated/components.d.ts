@@ -60,6 +60,40 @@ export interface LayoutHeader extends Struct.ComponentSchema {
   };
 }
 
+export interface MenuMenuItemSection extends Struct.ComponentSchema {
+  collectionName: 'components_menu_menu_item_sections';
+  info: {
+    displayName: 'MenuItemSection';
+  };
+  attributes: {
+    hasSubItems: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    subItems: Schema.Attribute.Component<'menu.sub-items', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface MenuMenuLink extends Struct.ComponentSchema {
+  collectionName: 'components_menu_menu_links';
+  info: {
+    displayName: 'MenuLink';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface MenuSubItems extends Struct.ComponentSchema {
+  collectionName: 'components_menu_sub_items';
+  info: {
+    displayName: 'subItems';
+  };
+  attributes: {
+    MenuLinks: Schema.Attribute.Component<'menu.menu-link', true>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -68,6 +102,9 @@ declare module '@strapi/strapi' {
       'elements.header-icons': ElementsHeaderIcons;
       'elements.menu-link': ElementsMenuLink;
       'layout.header': LayoutHeader;
+      'menu.menu-item-section': MenuMenuItemSection;
+      'menu.menu-link': MenuMenuLink;
+      'menu.sub-items': MenuSubItems;
     }
   }
 }

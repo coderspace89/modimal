@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_menu_menu_item_sections",
+  "info": {
+    "displayName": "MenuItemSection"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "hasSubItems": {
+      "type": "boolean",
+      "default": true
+    },
+    "subItems": {
+      "type": "component",
+      "component": "menu.sub-items",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

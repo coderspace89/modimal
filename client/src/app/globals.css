@@ -51,6 +51,6 @@ a {
   }
 }
 
-#megamenu-dropdown.dropdown-toggle::after {
+/* #megamenu-dropdown.dropdown-toggle::after {
   display: none !important;
-}
+} */
