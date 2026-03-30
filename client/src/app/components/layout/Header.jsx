@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import headerStyles from "./Header.module.css";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import qs from "qs";
 import Image from "next/image";
 import { getStrapiMedia } from "@/lib/utils";
@@ -16,6 +16,11 @@ const Header = () => {
   const [openId, setOpenId] = useState(null);
   const [mobileMenuData, setMobileMenuData] = useState(null);
   const [openSections, setOpenSections] = useState({});
+  const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(!show);
 
   const headerQuery = qs.stringify(
     {
@@ -162,6 +167,11 @@ const Header = () => {
       ...prev,
       [id]: !prev[id],
     }));
+  };
+
+  const toggleMobileMenu = () => {
+    setOpenMobileMenu(!openMobileMenu);
+    setShow(!show);
   };
 
   return (
@@ -312,16 +322,42 @@ const Header = () => {
                   {mobileMenuData?.header?.headerIcons.map(
                     (headerIcon, index) => (
                       <div key={headerIcon.id}>
-                        <Link href={headerIcon?.url || ""}>
-                          {headerIcon?.icon && index <= 1 && (
-                            <Image
-                              src={getStrapiMedia(headerIcon?.icon?.url)}
-                              width={headerIcon?.icon?.width}
-                              height={headerIcon?.icon?.height}
-                              alt={headerIcon?.icon?.name}
-                              className={headerStyles.mobileHeaderIcon}
-                            />
-                          )}
+                        <Link
+                          href={headerIcon?.url || ""}
+                          onClick={
+                            index === 0
+                              ? toggleMobileMenu
+                              : index === 0
+                                ? handleShow
+                                : ""
+                          }
+                        >
+                          {headerIcon?.icon &&
+                            index <= 1 &&
+                            (!openMobileMenu && index === 0 ? (
+                              <span className={headerStyles.mobileHeaderIcon}>
+                                <svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M21.375 12C21.375 12.2984 21.2565 12.5845 21.0455 12.7955C20.8345 13.0065 20.5484 13.125 20.25 13.125H3.75C3.45163 13.125 3.16548 13.0065 2.9545 12.7955C2.74353 12.5845 2.625 12.2984 2.625 12C2.625 11.7016 2.74353 11.4155 2.9545 11.2045C3.16548 10.9935 3.45163 10.875 3.75 10.875H20.25C20.5484 10.875 20.8345 10.9935 21.0455 11.2045C21.2565 11.4155 21.375 11.7016 21.375 12ZM3.75 7.125H20.25C20.5484 7.125 20.8345 7.00647 21.0455 6.7955C21.2565 6.58452 21.375 6.29837 21.375 6C21.375 5.70163 21.2565 5.41548 21.0455 5.2045C20.8345 4.99353 20.5484 4.875 20.25 4.875H3.75C3.45163 4.875 3.16548 4.99353 2.9545 5.2045C2.74353 5.41548 2.625 5.70163 2.625 6C2.625 6.29837 2.74353 6.58452 2.9545 6.7955C3.16548 7.00647 3.45163 7.125 3.75 7.125ZM20.25 16.875H3.75C3.45163 16.875 3.16548 16.9935 2.9545 17.2045C2.74353 17.4155 2.625 17.7016 2.625 18C2.625 18.2984 2.74353 18.5845 2.9545 18.7955C3.16548 19.0065 3.45163 19.125 3.75 19.125H20.25C20.5484 19.125 20.8345 19.0065 21.0455 18.7955C21.2565 18.5845 21.375 18.2984 21.375 18C21.375 17.7016 21.2565 17.4155 21.0455 17.2045C20.8345 16.9935 20.5484 16.875 20.25 16.875Z"
+                                    fill="black"
+                                  ></path>
+                                </svg>
+                              </span>
+                            ) : (
+                              <Image
+                                src={getStrapiMedia(headerIcon?.icon?.url)}
+                                width={headerIcon?.icon?.width}
+                                height={headerIcon?.icon?.height}
+                                alt={headerIcon?.icon?.name}
+                                className={headerStyles.mobileHeaderIcon}
+                              />
+                            ))}
                         </Link>
                       </div>
                     ),
@@ -364,121 +400,97 @@ const Header = () => {
               </div>
             </Container>
           </Navbar>
-          {/* <div className={headerStyles.mobileMenuContainer}>
-            <ul className="list-unstyled">
-              {mobileMenuData?.menuItems?.map((menuItem, index) => (
-                <li
-                  key={menuItem.id}
-                  className={headerStyles.mobileMenuListItemContainer}
-                >
-                  {index < 5 && (
-                    <div onClick={() => toggleSection(menuItem.id)}>
-                      <span>{menuItem?.title}</span>
-                      <span>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
+          <Offcanvas
+            show={show}
+            onHide={handleClose}
+            className={`${headerStyles.offcanvasContainer} w-100`}
+            backdrop={false}
+          >
+            {openMobileMenu && (
+              <div className={headerStyles.mobileMenuContainer}>
+                <ul className="list-unstyled">
+                  {mobileMenuData?.menuItems?.map((menuItem) => {
+                    if (menuItem.__component === "menu.menu-item-section") {
+                      const isOpen = !!openSections[menuItem.id];
+                      return (
+                        <li
+                          key={menuItem.id}
+                          className={headerStyles.mobileMenuListItemContainer}
                         >
-                          <path
-                            d="M7.41 8.29492L12 12.8749L16.59 8.29492L18 9.70492L12 15.7049L6 9.70492L7.41 8.29492Z"
-                            fill="#0C0C0C"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                  )}
-                  {menuItem.hasSubItems && menuItem.subItems?.length > 0 && (
-                    <ul className="list-unstyled">
-                      {menuItem.subItems.map((sub) =>
-                        sub.MenuLinks?.map((menuLink) => (
-                          <li
-                            key={menuLink.id}
-                            className={headerStyles.mobileSubMenuItem}
+                          <div
+                            onClick={() => toggleSection(menuItem.id)}
+                            className={headerStyles.sectionHeader}
                           >
-                            <Link href={menuLink.url}>
-                              {menuLink.title || menuLink.url}
-                            </Link>
-                          </li>
-                        )),
-                      )}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div> */}
-          <div className={headerStyles.mobileMenuContainer}>
-            <ul className="list-unstyled">
-              {mobileMenuData?.menuItems?.map((menuItem) => {
-                // Only render section-type items here
-                if (menuItem.__component !== "menu.menu-item-section") {
-                  // Plain link (Log In / Create Account)
-                  return (
-                    <li
-                      key={menuItem.id}
-                      className={headerStyles.mobileMenuListItemContainer}
-                    >
-                      <Link href={menuItem.url}>{menuItem.title}</Link>
-                    </li>
-                  );
-                }
-
-                const isOpen = !!openSections[menuItem.id];
-
-                return (
-                  <li
-                    key={menuItem.id}
-                    className={headerStyles.mobileMenuListItemContainer}
-                  >
-                    <div
-                      onClick={() => toggleSection(menuItem.id)}
-                      className={headerStyles.sectionHeader}
-                    >
-                      <span>{menuItem.title}</span>
-                      {menuItem.hasSubItems && (
-                        <span className={isOpen ? headerStyles.rotated : ""}>
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <path
-                              d="M7.41 8.29492L12 12.8749L16.59 8.29492L18 9.70492L12 15.7049L6 9.70492L7.41 8.29492Z"
-                              fill="#0C0C0C"
-                            />
-                          </svg>
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Show sub-menu only when this section is open */}
-                    {isOpen &&
-                      menuItem.hasSubItems &&
-                      menuItem.subItems?.length > 0 && (
-                        <ul className="list-unstyled">
-                          {menuItem.subItems.map((sub) =>
-                            sub.MenuLinks?.map((menuLink) => (
-                              <li
-                                key={menuLink.id}
-                                className={headerStyles.mobileSubMenuItem}
+                            <span>{menuItem.title}</span>
+                            {menuItem.hasSubItems && (
+                              <span
+                                className={isOpen ? headerStyles.rotated : ""}
                               >
-                                <Link href={menuLink.url}>
-                                  {menuLink.title || menuLink.url}
-                                </Link>
-                              </li>
-                            )),
-                          )}
-                        </ul>
-                      )}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+                                <svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                >
+                                  <path
+                                    d="M7.41 8.29492L12 12.8749L16.59 8.29492L18 9.70492L12 15.7049L6 9.70492L7.41 8.29492Z"
+                                    fill="#0C0C0C"
+                                  />
+                                </svg>
+                              </span>
+                            )}
+                          </div>
+
+                          {isOpen &&
+                            menuItem.hasSubItems &&
+                            menuItem.subItems?.length > 0 && (
+                              <ul className="list-unstyled">
+                                {menuItem.subItems.map((sub) =>
+                                  sub.MenuLinks?.map((menuLink) => (
+                                    <li
+                                      key={menuLink.id}
+                                      className={headerStyles.mobileSubMenuItem}
+                                    >
+                                      <Link href={menuLink.url}>
+                                        {menuLink.title || menuLink.url}
+                                      </Link>
+                                    </li>
+                                  )),
+                                )}
+                              </ul>
+                            )}
+                        </li>
+                      );
+                    }
+                    return null; // skip menu-link items here
+                  })}
+                </ul>
+
+                {/* Auth buttons outside the <ul> */}
+                <div className={headerStyles.mobileMenuBtnContainer}>
+                  {mobileMenuData?.menuItems
+                    ?.filter((item) => item.__component === "menu.menu-link")
+                    .map((menuLink) => (
+                      <Link
+                        key={menuLink.id}
+                        href={menuLink.url}
+                        className={headerStyles.mobileMenuBtn}
+                      >
+                        {menuLink.icon && (
+                          <Image
+                            src={getStrapiMedia(menuLink.icon.url)}
+                            width={menuLink.icon.width}
+                            height={menuLink.icon.height}
+                            alt={menuLink.icon.name}
+                          />
+                        )}
+                        {menuLink.title}
+                      </Link>
+                    ))}
+                </div>
+              </div>
+            )}
+          </Offcanvas>
         </Container>
       </section>
     </div>

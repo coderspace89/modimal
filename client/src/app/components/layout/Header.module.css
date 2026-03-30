@@ -153,7 +153,7 @@
 
 .mobileMenuContainer {
   padding: 20px;
-  margin: 42px 0;
+  margin-bottom: 42px;
 }
 
 .mobileSubMenuItem {
@@ -167,4 +167,32 @@
 
 .rotated {
   transform: rotate(180deg);
+}
+
+.mobileMenuBtnContainer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 68px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+.mobileMenuBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--topbarbg);
+  border-radius: 0;
+  text-decoration: none;
+  color: var(--topbarbg);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.offcanvasContainer {
+  margin-top: 95px;
+  overflow: scroll;
 }

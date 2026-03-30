@@ -12,6 +12,21 @@ export interface BlocksFeaturedItem extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksHeroSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_hero_sections';
+  info: {
+    displayName: 'Hero Section';
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<'images'>;
+    ctaLabel: Schema.Attribute.String;
+    ctaUrl: Schema.Attribute.String;
+    textPosition: Schema.Attribute.Enumeration<['left', 'center', 'right']>;
+    titleLine1: Schema.Attribute.String;
+    titleLine2: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksMegamenuColumn extends Struct.ComponentSchema {
   collectionName: 'components_blocks_megamenu_columns';
   info: {
@@ -98,6 +113,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'blocks.featured-item': BlocksFeaturedItem;
+      'blocks.hero-section': BlocksHeroSection;
       'blocks.megamenu-column': BlocksMegamenuColumn;
       'elements.header-icons': ElementsHeaderIcons;
       'elements.menu-link': ElementsMenuLink;
