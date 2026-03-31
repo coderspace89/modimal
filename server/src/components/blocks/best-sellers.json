@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_blocks_best_sellers",
+  "info": {
+    "displayName": "Best Sellers"
+  },
+  "options": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string"
+    },
+    "viewAllText": {
+      "type": "string"
+    },
+    "viewAllLink": {
+      "type": "string"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  },
+  "config": {}
+}

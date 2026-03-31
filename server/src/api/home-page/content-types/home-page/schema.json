@@ -16,6 +16,12 @@
       "components": [
         "blocks.hero-section"
       ]
+    },
+    "bestSellers": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.best-sellers"
+      ]
     }
   }
 }

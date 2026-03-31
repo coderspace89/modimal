@@ -31,7 +31,7 @@ const HomePageHero = () => {
     const fetchHero = async () => {
       const res = await fetch(`/api/home-page?${heroQuery}`);
       const data = await res.json();
-      // your API returns { data: { Hero: [ {...} ] } }
+      console.log(data?.data?.Hero?.[0]);
       setHeroData(data?.data?.Hero?.[0] || null);
     };
     fetchHero();
@@ -45,7 +45,7 @@ const HomePageHero = () => {
 
   return (
     <section
-      className={`${homePageHeroStyles.hero} ${homePageHeroStyles[heroData.textPosition || "left"]}`}
+      className={homePageHeroStyles.container}
       style={{
         backgroundImage: bgUrl ? `url(${bgUrl})` : "none",
         backgroundSize: "cover",
@@ -60,16 +60,24 @@ const HomePageHero = () => {
       <Container>
         <Row>
           <Col>
-            <h1 className={homePageHeroStyles.title}>
-              {heroData.titleLine1}
-              <br />
-              {heroData.titleLine2}
-            </h1>
-            {heroData.ctaLabel && (
-              <Link href={heroData.ctaUrl} className={homePageHeroStyles.heroBtn}>
-                {heroData.ctaLabel}
-              </Link>
-            )}
+            <div className={homePageHeroStyles.titleContainer}>
+              <div className="position-absolute top-100 start-0">
+                <h2 className={homePageHeroStyles.title}>
+                  {heroData.titleLine1}
+                </h2>
+                <h2 className={homePageHeroStyles.title}>
+                  {heroData.titleLine2}
+                </h2>
+                {heroData.ctaLabel && (
+                  <Link
+                    href={heroData.ctaUrl}
+                    className={homePageHeroStyles.ctaBtn}
+                  >
+                    {heroData.ctaLabel}
+                  </Link>
+                )}
+              </div>
+            </div>
           </Col>
         </Row>
       </Container>

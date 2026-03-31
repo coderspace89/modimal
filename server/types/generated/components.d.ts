@@ -1,5 +1,18 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface BlocksBestSellers extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_best_sellers';
+  info: {
+    displayName: 'Best Sellers';
+  };
+  attributes: {
+    products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
+    sectionTitle: Schema.Attribute.String;
+    viewAllLink: Schema.Attribute.String;
+    viewAllText: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksFeaturedItem extends Struct.ComponentSchema {
   collectionName: 'components_blocks_featured_items';
   info: {
@@ -112,6 +125,7 @@ export interface MenuSubItems extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'blocks.best-sellers': BlocksBestSellers;
       'blocks.featured-item': BlocksFeaturedItem;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.megamenu-column': BlocksMegamenuColumn;

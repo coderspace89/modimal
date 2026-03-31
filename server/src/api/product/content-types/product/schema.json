@@ -1,0 +1,84 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "shortDescription": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "sku": {
+      "type": "string",
+      "unique": true
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "salePrice": {
+      "type": "decimal"
+    },
+    "isOnSale": {
+      "type": "boolean",
+      "default": true
+    },
+    "currency": {
+      "type": "string"
+    },
+    "inStock": {
+      "type": "boolean",
+      "default": true
+    },
+    "stockQuantity": {
+      "type": "integer"
+    },
+    "mainImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "galleryImages": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "products"
+    },
+    "favoritesIcon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "colors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::color.color"
+    }
+  }
+}

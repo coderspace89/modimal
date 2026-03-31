@@ -1,0 +1,40 @@
+.container {
+  margin-top: 110px;
+  margin-bottom: 88px;
+  position: relative;
+}
+
+.title {
+  font-size: clamp(20px, 5vw, 34px);
+  font-style: italic;
+  color: var(--black);
+  line-height: 180%;
+  font-weight: 500;
+}
+
+.titleContainer {
+  position: relative;
+}
+
+.ctaBtn {
+  background-color: var(--background);
+  width: 184px;
+  height: 40px;
+  font-size: 14px;
+  color: var(--black);
+  font-weight: 400;
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 27px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    background-position-x: 25% !important;
+  }
+  .ctaBtn {
+    width: 68px;
+  }
+}

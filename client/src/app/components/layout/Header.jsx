@@ -176,11 +176,11 @@ const Header = () => {
 
   return (
     <div>
-      <section className="d-lg-block d-none">
+      <section className="d-lg-block d-none fixed-top">
         <div className={headerStyles.topbarContainer}>
           <span>{headerData?.topbarText}</span>
         </div>
-        <Navbar expand="lg">
+        <Navbar expand="lg" className="bg-white">
           <Container>
             <Navbar.Brand href="/">
               {headerData?.logoImage && (
@@ -310,14 +310,14 @@ const Header = () => {
           </Container>
         </Navbar>
       </section>
-      <section className="d-lg-none d-block">
+      <section className="d-lg-none d-block fixed-top">
         <div className={headerStyles.topbarContainer}>
           <span>{mobileMenuData?.header?.topbarText}</span>
         </div>
         <Container>
-          <Navbar expand="lg">
+          <Navbar expand="lg" className="bg-white">
             <Container>
-              <div className="d-flex align-items-center justify-content-between w-100">
+              <div className="d-flex align-items-center justify-content-between w-100 pt-2">
                 <div className="d-flex">
                   {mobileMenuData?.header?.headerIcons.map(
                     (headerIcon, index) => (
