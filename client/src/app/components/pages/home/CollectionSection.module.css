@@ -1,0 +1,119 @@
+.container {
+  margin-bottom: 88px;
+}
+
+.sectionTitle {
+  font-size: clamp(20px, 5vw, 32px);
+  color: var(--black);
+  font-weight: 600;
+  margin-bottom: clamp(8px, 3vw, 24px);
+}
+
+.collectionImage {
+  width: 100%;
+  height: 100%;
+}
+
+.collection-grid {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  /* Define the 2-column layout */
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "blouses pants"
+    "dresses pants"
+    "dresses outwear";
+}
+
+.grid-item {
+  position: relative;
+  width: 100%;
+}
+
+/* Assigning the mapped areas */
+.blouses {
+  grid-area: blouses;
+  height: 500px;
+}
+.pants {
+  grid-area: pants;
+  height: 840px;
+} /* Tallest item */
+.dresses {
+  grid-area: dresses;
+  height: 840px;
+}
+.outwear {
+  grid-area: outwear;
+  height: 500px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.collectionImage {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.label {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: var(--background);
+  color: var(--black);
+  padding: 16px;
+  font-size: 14px;
+  width: 185px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.labelLeft {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background: var(--background);
+  color: var(--black);
+  padding: 16px;
+  font-size: 14px;
+  width: 185px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .blouses {
+    grid-area: blouses;
+    height: 165px;
+    margin-bottom: 24px;
+  }
+  .pants {
+    grid-area: pants;
+    height: 275px;
+  } /* Tallest item */
+  .dresses {
+    grid-area: dresses;
+    height: 275px;
+  }
+  .outwear {
+    grid-area: outwear;
+    height: 165px;
+  }
+  .label,
+  .labelLeft {
+    position: unset;
+    display: block;
+    width: unset;
+    height: unset;
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_blocks_collection_sections",
+  "info": {
+    "displayName": "Collection Section"
+  },
+  "options": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string"
+    },
+    "collectionBanner": {
+      "type": "component",
+      "component": "blocks.collection-banner",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

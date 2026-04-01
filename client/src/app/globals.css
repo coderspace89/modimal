@@ -52,6 +52,6 @@ a {
   }
 }
 
-/* #megamenu-dropdown.dropdown-toggle::after {
-  display: none !important;
-} */
+.slick-slide > div {
+  padding: 0 10px;
+}

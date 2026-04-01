@@ -526,6 +526,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
   attributes: {
     bestSellers: Schema.Attribute.DynamicZone<['blocks.best-sellers']>;
+    collection: Schema.Attribute.DynamicZone<['blocks.collection-section']>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

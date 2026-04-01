@@ -35,3 +35,81 @@
   margin-bottom: 8px;
   text-transform: capitalize;
 }
+
+.productImgContainer {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.categoryName {
+  font-size: 16px;
+  color: var(--black);
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.priceText {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+/* color options css */
+
+.colorOptions {
+  display: flex;
+  gap: 8px; /* Space between color swatches */
+  margin-top: 8px;
+}
+
+.colorLabel {
+  cursor: pointer;
+  display: inline-block;
+  position: relative; /* Needed for positioning the checkmark */
+}
+
+.colorInput {
+  /* Hide the native radio button */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none; /* Allows click to pass through to the label */
+}
+
+.colorSwatch {
+  display: block;
+  width: clamp(16px, 5vw, 24px); /* Size of your color circle */
+  height: clamp(16px, 5vw, 24px);
+  border-radius: 50%; /* Makes it a circle */
+  border: 2px solid transparent; /* Default border, will change on hover/checked */
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); /* Subtle inner shadow for definition */
+}
+
+/* Style for when the radio button is focused (for keyboard accessibility) */
+.colorInput:focus + .colorSwatch {
+  outline: 2px solid #007bff; /* Example focus style */
+  outline-offset: 2px;
+}
+
+/* Style for when the radio button is checked */
+.colorInput:checked + .colorSwatch {
+  border-color: #000; /* Black border around selected color */
+  box-shadow: 0 0 0 3px #000; /* Stronger border on checked state */
+  transform: scale(1.05); /* Slightly larger for visual emphasis */
+}
+
+/* Style for the checkmark SVG */
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px; /* Size of the checkmark */
+  height: 18px;
+  color: #fff; /* Checkmark color (e.g., white for dark swatches) */
+  /* For light swatches, you might want a dark checkmark: */
+  /* filter: invert(1); */
+}

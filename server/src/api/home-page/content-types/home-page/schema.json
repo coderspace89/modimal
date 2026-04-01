@@ -22,6 +22,12 @@
       "components": [
         "blocks.best-sellers"
       ]
+    },
+    "collection": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.collection-section"
+      ]
     }
   }
 }

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_blocks_collection_banners",
+  "info": {
+    "displayName": "Collection Banner"
+  },
+  "options": {},
+  "attributes": {
+    "ctaLabel": {
+      "type": "string"
+    },
+    "ctaUrl": {
+      "type": "string"
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

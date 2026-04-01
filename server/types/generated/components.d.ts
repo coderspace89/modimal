@@ -13,6 +13,32 @@ export interface BlocksBestSellers extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksCollectionBanner extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_collection_banners';
+  info: {
+    displayName: 'Collection Banner';
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<'images'>;
+    ctaLabel: Schema.Attribute.String;
+    ctaUrl: Schema.Attribute.String;
+  };
+}
+
+export interface BlocksCollectionSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_collection_sections';
+  info: {
+    displayName: 'Collection Section';
+  };
+  attributes: {
+    collectionBanner: Schema.Attribute.Component<
+      'blocks.collection-banner',
+      true
+    >;
+    sectionTitle: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksFeaturedItem extends Struct.ComponentSchema {
   collectionName: 'components_blocks_featured_items';
   info: {
@@ -126,6 +152,8 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'blocks.best-sellers': BlocksBestSellers;
+      'blocks.collection-banner': BlocksCollectionBanner;
+      'blocks.collection-section': BlocksCollectionSection;
       'blocks.featured-item': BlocksFeaturedItem;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.megamenu-column': BlocksMegamenuColumn;

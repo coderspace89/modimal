@@ -14,7 +14,9 @@
     "qs": "^6.15.0",
     "react": "19.2.4",
     "react-bootstrap": "^2.10.10",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-slick": "^0.31.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "babel-plugin-react-compiler": "1.0.0",
