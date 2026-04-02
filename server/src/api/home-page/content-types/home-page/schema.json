@@ -28,6 +28,18 @@
       "components": [
         "blocks.collection-section"
       ]
+    },
+    "modiweek": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.modiweek-section"
+      ]
+    },
+    "sustainability": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.sustainability-section"
+      ]
     }
   }
 }

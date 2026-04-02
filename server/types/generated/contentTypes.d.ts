@@ -537,7 +537,11 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
       'api::home-page.home-page'
     > &
       Schema.Attribute.Private;
+    modiweek: Schema.Attribute.DynamicZone<['blocks.modiweek-section']>;
     publishedAt: Schema.Attribute.DateTime;
+    sustainability: Schema.Attribute.DynamicZone<
+      ['blocks.sustainability-section']
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

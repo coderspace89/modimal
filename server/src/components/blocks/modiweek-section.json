@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_blocks_modiweek_sections",
+  "info": {
+    "displayName": "Modiweek Section"
+  },
+  "options": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string"
+    },
+    "modiweekCards": {
+      "type": "component",
+      "component": "blocks.modiweek-card",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

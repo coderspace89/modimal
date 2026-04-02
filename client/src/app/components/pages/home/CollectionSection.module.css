@@ -36,14 +36,18 @@
   grid-area: blouses;
   height: 500px;
 }
+
 .pants {
   grid-area: pants;
   height: 840px;
-} /* Tallest item */
+}
+
+/* Tallest item */
 .dresses {
   grid-area: dresses;
   height: 840px;
 }
+
 .outwear {
   grid-area: outwear;
   height: 500px;
@@ -97,23 +101,32 @@
     height: 165px;
     margin-bottom: 24px;
   }
+
   .pants {
     grid-area: pants;
     height: 275px;
-  } /* Tallest item */
+  }
+
+  /* Tallest item */
   .dresses {
     grid-area: dresses;
     height: 275px;
   }
+
   .outwear {
     grid-area: outwear;
     height: 165px;
   }
+
   .label,
   .labelLeft {
     position: unset;
     display: block;
     width: unset;
     height: unset;
+  }
+
+  .container {
+    margin-bottom: 48px;
   }
 }

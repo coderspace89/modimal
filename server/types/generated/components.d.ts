@@ -78,6 +78,43 @@ export interface BlocksMegamenuColumn extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksModiweekCard extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_modiweek_cards';
+  info: {
+    displayName: 'Modiweek Card';
+  };
+  attributes: {
+    favoritesIcon: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.Media<'images'>;
+    label: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface BlocksModiweekSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_modiweek_sections';
+  info: {
+    displayName: 'Modiweek Section';
+  };
+  attributes: {
+    modiweekCards: Schema.Attribute.Component<'blocks.modiweek-card', true>;
+    sectionTitle: Schema.Attribute.String;
+  };
+}
+
+export interface BlocksSustainabilitySection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_sustainability_sections';
+  info: {
+    displayName: 'Sustainability Section';
+  };
+  attributes: {
+    ctaLabel: Schema.Attribute.String;
+    ctaUrl: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface ElementsHeaderIcons extends Struct.ComponentSchema {
   collectionName: 'components_elements_header_icons';
   info: {
@@ -157,6 +194,9 @@ declare module '@strapi/strapi' {
       'blocks.featured-item': BlocksFeaturedItem;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.megamenu-column': BlocksMegamenuColumn;
+      'blocks.modiweek-card': BlocksModiweekCard;
+      'blocks.modiweek-section': BlocksModiweekSection;
+      'blocks.sustainability-section': BlocksSustainabilitySection;
       'elements.header-icons': ElementsHeaderIcons;
       'elements.menu-link': ElementsMenuLink;
       'layout.header': LayoutHeader;

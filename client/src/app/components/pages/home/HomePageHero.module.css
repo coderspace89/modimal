@@ -33,7 +33,9 @@
 @media (max-width: 600px) {
   .container {
     background-position-x: 25% !important;
+    margin-bottom: 48px;
   }
+
   .ctaBtn {
     width: 68px;
   }

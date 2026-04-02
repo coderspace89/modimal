@@ -5,6 +5,7 @@
   --topbarbg: #5a6d57;
   --neutralgray: #404040;
   --border: #cbcbcb;
+  --text: #272F25
 }
 
 @media (prefers-color-scheme: dark) {
@@ -52,6 +53,6 @@ a {
   }
 }
 
-.slick-slide > div {
+.slick-slide>div {
   padding: 0 10px;
 }
