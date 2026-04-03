@@ -51,6 +51,28 @@ export interface BlocksFeaturedItem extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksFollowGrid extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_follow_grids';
+  info: {
+    displayName: 'Follow Grid';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images'>;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface BlocksFollowSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_follow_sections';
+  info: {
+    displayName: 'Follow Section';
+  };
+  attributes: {
+    followGrid: Schema.Attribute.Component<'blocks.follow-grid', true>;
+    sectionTitle: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksHeroSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_hero_sections';
   info: {
@@ -115,6 +137,42 @@ export interface BlocksSustainabilitySection extends Struct.ComponentSchema {
   };
 }
 
+export interface ElementsFooterNavLink extends Struct.ComponentSchema {
+  collectionName: 'components_elements_footer_nav_links';
+  info: {
+    displayName: 'Footer Nav Link';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface ElementsFooterNavSection extends Struct.ComponentSchema {
+  collectionName: 'components_elements_footer_nav_sections';
+  info: {
+    displayName: 'Footer Nav Section';
+  };
+  attributes: {
+    navLinks: Schema.Attribute.Component<'elements.footer-nav-link', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface ElementsFooterSocialLink extends Struct.ComponentSchema {
+  collectionName: 'components_elements_footer_social_links';
+  info: {
+    displayName: 'Footer Social Link';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'>;
+    platform: Schema.Attribute.Enumeration<
+      ['instagram', 'facebook', 'pinterest', 'tiktok']
+    >;
+    url: Schema.Attribute.String;
+  };
+}
+
 export interface ElementsHeaderIcons extends Struct.ComponentSchema {
   collectionName: 'components_elements_header_icons';
   info: {
@@ -135,6 +193,28 @@ export interface ElementsMenuLink extends Struct.ComponentSchema {
   attributes: {
     label: Schema.Attribute.String;
     url: Schema.Attribute.String;
+  };
+}
+
+export interface LayoutFooter extends Struct.ComponentSchema {
+  collectionName: 'components_layout_footers';
+  info: {
+    displayName: 'Footer';
+  };
+  attributes: {
+    copyrightIcon: Schema.Attribute.Media<'images'>;
+    copyrightText: Schema.Attribute.String;
+    footerNavigation: Schema.Attribute.Component<
+      'elements.footer-nav-section',
+      true
+    >;
+    newsletterPlaceholder: Schema.Attribute.String;
+    newsLetterTermsText: Schema.Attribute.Text;
+    newsletterTitle: Schema.Attribute.String;
+    socialMediaLinks: Schema.Attribute.Component<
+      'elements.footer-social-link',
+      true
+    >;
   };
 }
 
@@ -192,13 +272,19 @@ declare module '@strapi/strapi' {
       'blocks.collection-banner': BlocksCollectionBanner;
       'blocks.collection-section': BlocksCollectionSection;
       'blocks.featured-item': BlocksFeaturedItem;
+      'blocks.follow-grid': BlocksFollowGrid;
+      'blocks.follow-section': BlocksFollowSection;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.megamenu-column': BlocksMegamenuColumn;
       'blocks.modiweek-card': BlocksModiweekCard;
       'blocks.modiweek-section': BlocksModiweekSection;
       'blocks.sustainability-section': BlocksSustainabilitySection;
+      'elements.footer-nav-link': ElementsFooterNavLink;
+      'elements.footer-nav-section': ElementsFooterNavSection;
+      'elements.footer-social-link': ElementsFooterSocialLink;
       'elements.header-icons': ElementsHeaderIcons;
       'elements.menu-link': ElementsMenuLink;
+      'layout.footer': LayoutFooter;
       'layout.header': LayoutHeader;
       'menu.menu-item-section': MenuMenuItemSection;
       'menu.menu-link': MenuMenuLink;

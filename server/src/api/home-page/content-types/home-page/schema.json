@@ -40,6 +40,12 @@
       "components": [
         "blocks.sustainability-section"
       ]
+    },
+    "follow": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.follow-section"
+      ]
     }
   }
 }

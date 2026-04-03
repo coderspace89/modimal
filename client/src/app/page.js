@@ -4,6 +4,7 @@ import BestSellers from "./components/pages/home/BestSellers";
 import CollectionSection from "./components/pages/home/CollectionSection";
 import ModiweekSection from "./components/pages/home/ModiweekSection";
 import SustainabilitySection from "./components/pages/home/SustainabilitySection";
+import FollowSection from "./components/pages/home/FollowSection";
 
 const page = () => {
   return (
@@ -13,6 +14,7 @@ const page = () => {
       <CollectionSection />
       <ModiweekSection />
       <SustainabilitySection />
+      <FollowSection />
     </div>
   );
 };

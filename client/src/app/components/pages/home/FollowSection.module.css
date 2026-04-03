@@ -1,0 +1,47 @@
+.container {
+  margin-bottom: 48px;
+}
+.sectionHeader {
+  margin-bottom: clamp(8px, 3vw, 24px);
+}
+
+.sectionTitle {
+  font-size: clamp(20px, 5vw, 32px);
+  color: var(--black);
+  font-weight: 600;
+}
+
+.gridImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mobile Aspect Ratios (2x2 Grid) */
+.largeImage {
+  aspect-ratio: 1 / 2; /* Adjust this so it equals the height of 2 small images */
+}
+
+.smallImage {
+  aspect-ratio: 1 / 1; /* Makes the right-side images square */
+}
+
+/* Desktop Fixes (lg) */
+@media (min-width: 992px) {
+  .smallImage {
+    aspect-ratio: 1 / 1;
+  }
+
+  .largeImage {
+    /* Height should be (2 * smallImage height) + any potential gap */
+    aspect-ratio: 1 / 1;
+    height: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-bottom: 24px;
+  }
+}

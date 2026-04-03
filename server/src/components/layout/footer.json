@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_layout_footers",
+  "info": {
+    "displayName": "Footer"
+  },
+  "options": {},
+  "attributes": {
+    "copyrightText": {
+      "type": "string"
+    },
+    "copyrightIcon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "newsletterTitle": {
+      "type": "string"
+    },
+    "newsletterPlaceholder": {
+      "type": "string"
+    },
+    "newsLetterTermsText": {
+      "type": "text"
+    },
+    "footerNavigation": {
+      "type": "component",
+      "component": "elements.footer-nav-section",
+      "repeatable": true
+    },
+    "socialMediaLinks": {
+      "type": "component",
+      "component": "elements.footer-social-link",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

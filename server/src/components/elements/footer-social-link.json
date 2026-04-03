@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_elements_footer_social_links",
+  "info": {
+    "displayName": "Footer Social Link"
+  },
+  "options": {},
+  "attributes": {
+    "platform": {
+      "type": "enumeration",
+      "enum": [
+        "instagram",
+        "facebook",
+        "pinterest",
+        "tiktok"
+      ]
+    },
+    "url": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

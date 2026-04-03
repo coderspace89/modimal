@@ -8,7 +8,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Link from "next/link";
 import { getStrapiMedia } from "@/lib/utils";
-import Image from "next/image";
 
 const SustainabilitySection = () => {
   const [sustainabilityData, setSustainabilityData] = useState(null);

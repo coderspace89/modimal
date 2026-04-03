@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_blocks_follow_sections",
+  "info": {
+    "displayName": "Follow Section"
+  },
+  "options": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string"
+    },
+    "followGrid": {
+      "type": "component",
+      "component": "blocks.follow-grid",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
