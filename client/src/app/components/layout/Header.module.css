@@ -9,7 +9,7 @@
 }
 
 .headerContainer {
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
   position: relative;
 }
@@ -140,7 +140,7 @@
   margin-bottom: 32px;
 }
 
-.mobileMenuListItemContainer > div {
+.mobileMenuListItemContainer>div {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -194,5 +194,58 @@
 
 .offcanvasContainer {
   margin-top: 110px;
-  overflow: scroll;
+  overflow-y: scroll;
+  border: 0 !important;
+}
+
+.searchContainer {
+  padding: 40px 80px;
+  margin-top: 110px;
+  overflow-y: scroll;
+  border: 0 !important;
+  height: 150px !important;
+}
+
+/* search input css */
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  /* Adjust as needed */
+  border-bottom: 1px solid var(--form-placeholder);
+  /* Light grey bottom border */
+  padding-bottom: 8px;
+}
+
+.searchIcon {
+  margin-right: 10px;
+}
+
+.customSearch {
+  border: none;
+  outline: none;
+  box-shadow: none !important;
+  /* Removes the blue focus ring */
+  width: 100%;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.customSearch::placeholder {
+  color: var(--form-placeholder);
+  /* Subtle placeholder text color */
+}
+
+/* Optional: Darken border on focus */
+.inputContainer:focus-within {
+  border-bottom: 1px solid var(--form-placeholder);
+}
+
+@media(max-width:600px) {
+  .searchContainer {
+    padding: 20px;
+  }
 }
