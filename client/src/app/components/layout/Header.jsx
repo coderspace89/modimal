@@ -10,6 +10,7 @@ import Image from "next/image";
 import { getStrapiMedia } from "@/lib/utils";
 import Link from "next/link";
 import Form from "react-bootstrap/Form";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [headerData, setHeaderData] = useState(null);
@@ -191,6 +192,17 @@ const Header = () => {
     setShow(false);
   };
 
+  const router = useRouter();
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const onSearchEnter = (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    router.push(`/search?filters=${encodeURIComponent(searchQuery)}`);
+    setOpenSearch(false);
+  };
+
   return (
     <div>
       <section className="d-lg-block d-none fixed-top">
@@ -219,7 +231,9 @@ const Header = () => {
                       <li
                         key={navItem.id}
                         className={headerStyles.navitem}
-                        onMouseEnter={() => handleMouseEnter(navItem.id)}
+                        onMouseEnter={() =>
+                          openSearch ? "" : handleMouseEnter(navItem.id)
+                        }
                         onMouseLeave={handleMouseLeave}
                       >
                         <Link
@@ -356,7 +370,7 @@ const Header = () => {
                     backdrop="static"
                     className={headerStyles.searchContainer}
                   >
-                    <Form>
+                    <Form onSubmit={onSearchEnter}>
                       <div className={headerStyles.inputContainer}>
                         <svg
                           className={headerStyles.searchIcon}
@@ -377,6 +391,8 @@ const Header = () => {
                           type="text"
                           placeholder="Search"
                           className={headerStyles.customSearch}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          value={searchQuery}
                         />
                       </div>
                     </Form>
@@ -595,7 +611,7 @@ const Header = () => {
               backdrop="static"
               className={headerStyles.searchContainer}
             >
-              <Form>
+              <Form onSubmit={onSearchEnter}>
                 <div className={headerStyles.inputContainer}>
                   <svg
                     className={headerStyles.searchIcon}
@@ -616,6 +632,8 @@ const Header = () => {
                     type="text"
                     placeholder="Search"
                     className={headerStyles.customSearch}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    value={searchQuery}
                   />
                 </div>
               </Form>

@@ -79,6 +79,33 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::color.color"
+    },
+    "isNew": {
+      "type": "boolean",
+      "default": false
+    },
+    "sizes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::size.size"
+    },
+    "collections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::collection.collection"
+    },
+    "fabrics": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::fabric.fabric"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "totalSold": {
+      "type": "integer",
+      "default": 0
     }
   }
 }

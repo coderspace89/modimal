@@ -1,0 +1,42 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 50px;
+}
+
+/* search input css */
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  /* Adjust as needed */
+  border-bottom: 1px solid var(--form-placeholder);
+  /* Light grey bottom border */
+  padding-bottom: 8px;
+}
+
+.searchIcon {
+  margin-right: 10px;
+}
+
+.customSearch {
+  border: none;
+  outline: none;
+  box-shadow: none !important;
+  /* Removes the blue focus ring */
+  width: 100%;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.customSearch::placeholder {
+  color: var(--form-placeholder);
+  /* Subtle placeholder text color */
+}
+
+/* Optional: Darken border on focus */
+.inputContainer:focus-within {
+  border-bottom: 1px solid var(--form-placeholder);
+}
