@@ -7,9 +7,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { useRouter } from "next/navigation";
+import { useSearch } from "@/context/SearchContext";
 
 const SearchForm = ({ filters }) => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const { searchQuery, handleSearchQuery } = useSearch();
   const router = useRouter();
 
   const onSearchEnter = (e) => {
@@ -45,7 +46,7 @@ const SearchForm = ({ filters }) => {
                   placeholder="Search"
                   className={searchFormStyles.customSearch}
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => handleSearchQuery(e.target.value)}
                 />
               </div>
             </Form>

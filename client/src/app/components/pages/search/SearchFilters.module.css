@@ -1,0 +1,70 @@
+.filtersTitle {
+  font-size: clamp(26px, 3vw, 32px);
+  color: var(--black);
+  margin-bottom: 16px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.formCheck input {
+  border-radius: 0 !important;
+  color: var(--black);
+  text-transform: capitalize;
+  border-color: var(--topbarbg) !important;
+}
+
+.formCheck input:checked {
+  background-color: var(--topbarbg) !important;
+  border-color: var(--topbarbg) !important;
+  background-image: none !important;
+}
+
+.formCheck input:focus {
+  box-shadow: none !important;
+}
+
+.formCheck label {
+  color: var(--black) !important;
+  text-transform: capitalize !important;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.colorSwatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.filterBadge {
+  background-color: var(--placeholder);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.clearAllBtn {
+  background: none;
+  border: none;
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 14px;
+  padding: 0;
+}
+
+.appliedBtn {
+  background-color: var(--topbarbg);
+  color: var(--background);
+  border: none;
+  padding: 10px 24px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
