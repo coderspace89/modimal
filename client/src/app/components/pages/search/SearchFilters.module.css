@@ -68,3 +68,23 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.filterHeader {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.offcanvasTitle {
+  font-size: 24px;
+  color: var(--black);
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .filtersTitle {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+}

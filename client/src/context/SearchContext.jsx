@@ -25,19 +25,17 @@ export const SearchProvider = ({ children }) => {
   // Build the complete Strapi query
   const strapiQuery = useMemo(() => {
     const filters = { $and: [] };
-    let sort = [];
+    let sort = ["createdAt:desc"]; // default sort
 
-    // 1. Search query from SearchForm
     if (searchQuery.trim()) {
       filters.$and.push({
         $or: [
-          { title: { $containsi: searchQuery } },
-          { categories: { name: { $containsi: searchQuery } } },
+          { name: { $containsi: searchQuery } },
+          { category: { name: { $containsi: searchQuery } } },
         ],
       });
     }
 
-    // 2. Loop through grouped filters
     if (groupedFilters.size?.length) {
       filters.$and.push({
         sizes: { id: { $in: groupedFilters.size.map((f) => f.id) } },
@@ -61,25 +59,27 @@ export const SearchProvider = ({ children }) => {
       });
     }
 
-    // 3. Sort - only allow one sort option
+    // Sort logic - override default only if sort is selected
     if (groupedFilters.sort?.length) {
-      const sortValue = groupedFilters.sort[0].value; // take first one only
-      if (sortValue === "price:asc") sort.push("price:asc");
-      else if (sortValue === "price:desc") sort.push("price:desc");
+      const sortValue = groupedFilters.sort[0].value;
+      if (sortValue === "price:asc") sort = ["price:asc"];
+      else if (sortValue === "price:desc") sort = ["price:desc"];
       else if (sortValue === "featured") {
         filters.$and.push({ featured: { $eq: true } });
-        sort.push("featured:desc");
-      } else if (sortValue === "bestSeller") sort.push("totalSold:desc");
+        sort = ["createdAt:desc"]; // featured items, newest first
+      } else if (sortValue === "bestSeller") sort = ["totalSold:desc"];
     }
 
     return qs.stringify(
       {
         filters: filters.$and.length ? filters : {},
-        sort: sort.length ? sort : ["createdAt:desc"],
+        sort,
         populate: {
-          images: true,
+          mainImage: true,
           colors: true,
           sizes: true,
+          category: true,
+          favoritesIcon: true,
         },
         pagination: { pageSize: 24 },
       },
@@ -94,17 +94,18 @@ export const SearchProvider = ({ children }) => {
     const isChecked = e.target.checked;
 
     if (type === "sort") {
-      // Sort is radio behavior - remove other sorts first
+      // Sort is exclusive - replace any existing sort
       setSelectedFilters((prev) => {
         const withoutSort = prev.filter((f) => f.type !== "sort");
+        // For radio: if unchecked, it means user clicked same option, so clear it
         return isChecked
-          ? [...withoutSort, { id, label, type, value }]
+          ? [...withoutSort, { id, label, type, value: value || id }]
           : withoutSort;
       });
     } else {
       setSelectedFilters((prev) => {
         if (isChecked) {
-          return [...prev, { id, label, type, value }];
+          return [...prev, { id, label, type, value: value || id }];
         } else {
           return prev.filter((f) => !(f.id === id && f.type === type));
         }

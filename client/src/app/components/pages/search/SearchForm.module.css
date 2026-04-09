@@ -40,3 +40,7 @@
 .inputContainer:focus-within {
   border-bottom: 1px solid var(--form-placeholder);
 }
+
+.clearIcon {
+  cursor: pointer;
+}
