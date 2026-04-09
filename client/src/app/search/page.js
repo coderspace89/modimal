@@ -4,7 +4,6 @@ import SearchFilters from "../components/pages/search/SearchFilters";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { SearchProvider } from "@/context/SearchContext";
 import SearchResults from "../components/pages/search/SearchResults";
 
 const page = async ({ searchParams }) => {
@@ -13,21 +12,19 @@ const page = async ({ searchParams }) => {
   console.log(filters);
   return (
     <section>
-      <SearchProvider>
-        <Container>
-          <Row>
-            <Col lg={12}>
-              <SearchForm filters={filters} />
-            </Col>
-            <Col lg={4}>
-              <SearchFilters />
-            </Col>
-            <Col lg={8}>
-              <SearchResults />
-            </Col>
-          </Row>
-        </Container>
-      </SearchProvider>
+      <Container>
+        <Row>
+          <Col lg={12}>
+            <SearchForm filters={filters} />
+          </Col>
+          <Col lg={4}>
+            <SearchFilters />
+          </Col>
+          <Col lg={8}>
+            <SearchResults />
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };
