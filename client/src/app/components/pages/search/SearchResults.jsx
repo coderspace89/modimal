@@ -43,7 +43,9 @@ const SearchResults = () => {
           <Col>
             <div className={searchResultStyles.resultsLabelContainer}>
               <p className={searchResultStyles.resultsLabel}>
-                {products.length} Items
+                {products.length > 1
+                  ? `${products.length} Items`
+                  : `${products.length} Item`}
               </p>
             </div>
           </Col>

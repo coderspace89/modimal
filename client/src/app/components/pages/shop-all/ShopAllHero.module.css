@@ -1,0 +1,38 @@
+.container {
+  margin-top: 160px;
+  margin-bottom: 48px;
+}
+
+.breadcrumbsContainer {
+  margin-bottom: clamp(24px, 5vw, 48px);
+}
+
+.breadcrumbsText {
+  color: var(--black) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
+}
+
+.breadcrumbsLink a {
+  color: var(--primary) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
+}
+
+.heroImageContainer {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 655px;
+}
+
+@media (max-width: 600px) {
+  .heroImageContainer {
+    height: 480px;
+    background-position-x: 100%;
+    background-position-y: 100%;
+  }
+}

@@ -732,6 +732,36 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiShopAllPageShopAllPage extends Struct.SingleTypeSchema {
+  collectionName: 'shop_all_pages';
+  info: {
+    displayName: 'Shop All Page';
+    pluralName: 'shop-all-pages';
+    singularName: 'shop-all-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    breadcrumbLabel: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    heroImage: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::shop-all-page.shop-all-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSizeSize extends Struct.CollectionTypeSchema {
   collectionName: 'sizes';
   info: {
@@ -1278,6 +1308,7 @@ declare module '@strapi/strapi' {
       'api::mobile-menu.mobile-menu': ApiMobileMenuMobileMenu;
       'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;
       'api::product.product': ApiProductProduct;
+      'api::shop-all-page.shop-all-page': ApiShopAllPageShopAllPage;
       'api::size.size': ApiSizeSize;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

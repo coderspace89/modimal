@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "shop_all_pages",
+  "info": {
+    "singularName": "shop-all-page",
+    "pluralName": "shop-all-pages",
+    "displayName": "Shop All Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "breadcrumbLabel": {
+      "type": "string"
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}
