@@ -102,7 +102,10 @@ const ModiweekSection = () => {
                   className="mb-lg-0 mb-3"
                 >
                   <div>
-                    <Link href={modiweekCard?.url}>
+                    <Link
+                      href={modiweekCard?.url}
+                      className="text-decoration-none"
+                    >
                       {modiweekCard?.image && (
                         <div className={modiweekStyles.productImgContainer}>
                           <Image

@@ -28,6 +28,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 27px;
+  text-decoration: none;
 }
 
 @media (max-width: 600px) {

@@ -10,7 +10,8 @@ import Image from "next/image";
 import { getStrapiMedia } from "@/lib/utils";
 import Link from "next/link";
 import Form from "react-bootstrap/Form";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { FaHeart } from "react-icons/fa";
 
 const Header = () => {
   const [headerData, setHeaderData] = useState(null);
@@ -203,6 +204,8 @@ const Header = () => {
     setOpenSearch(false);
   };
 
+  const pathname = usePathname();
+
   return (
     <div>
       <section className="d-lg-block d-none fixed-top">
@@ -348,6 +351,8 @@ const Header = () => {
                                   />
                                 </svg>
                               </span>
+                            ) : pathname === "/favorites" && index === 2 ? (
+                              <FaHeart color="#C30000" size={24} />
                             ) : (
                               <Image
                                 src={getStrapiMedia(headerIcon?.icon?.url)}
@@ -495,15 +500,23 @@ const Header = () => {
                     (headerIcon, index) => (
                       <div key={headerIcon.id}>
                         <Link href={headerIcon?.url || ""}>
-                          {headerIcon?.icon && index > 1 && (
-                            <Image
-                              src={getStrapiMedia(headerIcon?.icon?.url)}
-                              width={headerIcon?.icon?.width}
-                              height={headerIcon?.icon?.height}
-                              alt={headerIcon?.icon?.name}
-                              className={headerStyles.mobileHeaderIcon}
-                            />
-                          )}
+                          {headerIcon?.icon &&
+                            index > 1 &&
+                            (pathname === "/favorites" && index === 2 ? (
+                              <FaHeart
+                                color="#C30000"
+                                size={24}
+                                className={headerStyles.mobileHeaderIcon}
+                              />
+                            ) : (
+                              <Image
+                                src={getStrapiMedia(headerIcon?.icon?.url)}
+                                width={headerIcon?.icon?.width}
+                                height={headerIcon?.icon?.height}
+                                alt={headerIcon?.icon?.name}
+                                className={headerStyles.mobileHeaderIcon}
+                              />
+                            ))}
                         </Link>
                       </div>
                     ),

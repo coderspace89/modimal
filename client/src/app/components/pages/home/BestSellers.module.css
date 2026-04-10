@@ -96,14 +96,14 @@
 }
 
 /* Style for when the radio button is focused (for keyboard accessibility) */
-.colorInput:focus+.colorSwatch {
+.colorInput:focus + .colorSwatch {
   outline: 2px solid #007bff;
   /* Example focus style */
   outline-offset: 2px;
 }
 
 /* Style for when the radio button is checked */
-.colorInput:checked+.colorSwatch {
+.colorInput:checked + .colorSwatch {
   border-color: #000;
   /* Black border around selected color */
   box-shadow: 0 0 0 3px #000;
@@ -127,7 +127,46 @@
   /* filter: invert(1); */
 }
 
-@media(max-width:600px) {
+.newLabel {
+  background-color: var(--background);
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+.resultsLabel {
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: 400;
+  color: var(--black);
+}
+
+.resultsLabelContainer {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.favoriteBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 2;
+}
+.favoriteBtn:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
   .container {
     margin-bottom: 48px;
   }

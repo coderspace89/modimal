@@ -51,9 +51,18 @@ const FavoritesPage = () => {
   return (
     <section className={favoritesPageStyles.container}>
       <Container>
-        <h1 className="my-4">My Wish List</h1>
+        <div className={favoritesPageStyles.sectionHeader}>
+          <h5>My Wish List</h5>
+          <p>
+            {products.length > 1
+              ? `${products.length} Items`
+              : `${products.length} Item`}
+          </p>
+        </div>
         {products.length === 0 ? (
-          <p>You haven't saved any items yet.</p>
+          <div className="text-center">
+            <p>You haven't saved any items yet.</p>
+          </div>
         ) : (
           <Row className="g-4">
             {products?.map((product) => (

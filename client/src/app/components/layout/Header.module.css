@@ -140,7 +140,7 @@
   margin-bottom: 32px;
 }
 
-.mobileMenuListItemContainer>div {
+.mobileMenuListItemContainer > div {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -225,8 +225,8 @@
 }
 
 .customSearch {
-  border: none;
-  outline: none;
+  border: none !important;
+  outline: none !important;
   box-shadow: none !important;
   /* Removes the blue focus ring */
   width: 100%;
@@ -244,7 +244,7 @@
   border-bottom: 1px solid var(--form-placeholder);
 }
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
   .searchContainer {
     padding: 20px;
   }

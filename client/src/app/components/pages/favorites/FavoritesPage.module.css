@@ -1,6 +1,24 @@
 .container {
-  margin-top: 110px;
+  margin-top: 160px;
   margin-bottom: 48px;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: clamp(25px, 3vw, 50px);
+}
+
+.sectionHeader h5 {
+  font-size: clamp(18px, 3vw, 20px);
+  margin-bottom: 16px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.sectionHeader p {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--black);
 }
 
 .mainImage {
@@ -144,4 +162,12 @@
 }
 .favoriteBtn:hover {
   transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .favoriteBtn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
 }
