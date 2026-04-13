@@ -201,7 +201,7 @@
 .searchContainer {
   padding: 40px 80px;
   margin-top: 110px;
-  overflow-y: scroll;
+  overflow: hidden;
   border: 0 !important;
   height: 150px !important;
 }

@@ -144,3 +144,25 @@
 .favoriteBtn:hover {
   transform: scale(1.1);
 }
+
+.loadMoreBtnContainer {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.loadMoreBtn {
+  background-color: transparent;
+  border: 1px solid var(--topbarbg);
+  padding: 8px;
+  width: 180px;
+  height: 40px;
+  color: var(--topbarbg);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@media (max-width: 600px) {
+  .loadMoreBtn {
+    width: 150px;
+  }
+}

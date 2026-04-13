@@ -22,7 +22,7 @@
 }
 
 .customSearch {
-  border: none;
+  border: none !important;
   outline: none;
   box-shadow: none !important;
   /* Removes the blue focus ring */

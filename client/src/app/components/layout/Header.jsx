@@ -12,6 +12,7 @@ import Link from "next/link";
 import Form from "react-bootstrap/Form";
 import { useRouter, usePathname } from "next/navigation";
 import { FaHeart } from "react-icons/fa";
+import { useSearch } from "@/context/SearchContext";
 
 const Header = () => {
   const [headerData, setHeaderData] = useState(null);
@@ -195,7 +196,7 @@ const Header = () => {
 
   const router = useRouter();
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const { searchQuery, handleSearchQuery } = useSearch();
 
   const onSearchEnter = (e) => {
     e.preventDefault();
@@ -396,7 +397,7 @@ const Header = () => {
                           type="text"
                           placeholder="Search"
                           className={headerStyles.customSearch}
-                          onChange={(e) => setSearchQuery(e.target.value)}
+                          onChange={(e) => handleSearchQuery(e.target.value)}
                           value={searchQuery}
                         />
                       </div>
@@ -645,7 +646,7 @@ const Header = () => {
                     type="text"
                     placeholder="Search"
                     className={headerStyles.customSearch}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => handleSearchQuery(e.target.value)}
                     value={searchQuery}
                   />
                 </div>

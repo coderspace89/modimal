@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import searchResultStyles from "./SearchResults.module.css";
 import { useSearch } from "@/context/SearchContext";
 import { useFavorites } from "@/context/FavoritesContext";
@@ -9,22 +9,56 @@ import Col from "react-bootstrap/Col";
 import { getStrapiMedia } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { FaHeart, FaRegHeart } from "react-icons/fa"; // install react-icons
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 const SearchResults = () => {
-  const { strapiQuery } = useSearch();
+  const { strapiQuery, currentPage, setCurrentPage, pageCount, setPageCount } =
+    useSearch();
   const { toggleFavorite, isFavorite } = useFavorites();
   const [products, setProducts] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [selectedColors, setSelectedColors] = useState({}); // track per product
+  const [selectedColors, setSelectedColors] = useState({});
+  const prevQueryRef = useRef(null); // track if filters changed
+
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
+
+      // Extract page from strapiQuery to check if only page changed
+      const urlParams = new URLSearchParams(
+        strapiQuery.split("?")[1] || strapiQuery,
+      );
+      const queryWithoutPage = strapiQuery.replace(
+        /&?pagination\[page\]=\d+/,
+        "",
+      );
+      const isSameFilters = prevQueryRef.current === queryWithoutPage;
+
       try {
         const res = await fetch(`/api/products?${strapiQuery}`);
         const data = await res.json();
-        setProducts(data?.data || []);
+        const newProducts = data?.data || [];
+        const meta = data?.meta?.pagination;
+
+        // If filters changed, replace. If only page changed, append.
+        if (currentPage === 1 || !isSameFilters) {
+          setProducts(newProducts);
+        } else {
+          setProducts((prev) => {
+            // Dedupe: filter out any products that already exist
+            const existingIds = new Set(prev.map((p) => p.id));
+            const uniqueNew = newProducts.filter((p) => !existingIds.has(p.id));
+            return [...prev, ...uniqueNew];
+          });
+        }
+
+        setTotalItems(meta?.total || 0);
+        setPageCount(meta?.pageCount || 1);
+        prevQueryRef.current = queryWithoutPage;
       } catch (err) {
         console.error("Error fetching products:", err);
       } finally {
@@ -32,9 +66,9 @@ const SearchResults = () => {
       }
     };
     fetchProducts();
-  }, [strapiQuery]);
+  }, [strapiQuery, setPageCount]); // Remove currentPage from deps
 
-  if (loading) return <div>Loading...</div>;
+  if (loading && currentPage === 1) return <div>Loading...</div>;
 
   return (
     <section className={searchResultStyles.container}>
@@ -43,17 +77,15 @@ const SearchResults = () => {
           <Col>
             <div className={searchResultStyles.resultsLabelContainer}>
               <p className={searchResultStyles.resultsLabel}>
-                {products.length > 1
-                  ? `${products.length} Items`
-                  : `${products.length} Item`}
+                {totalItems > 1 ? `${totalItems} Items` : `${totalItems} Item`}
               </p>
             </div>
           </Col>
         </Row>
         <Row className="g-4">
-          {products?.map((product) => (
+          {products?.map((product, index) => (
             <Col
-              key={product?.id}
+              key={`${product.id}-${index}`}
               lg={6}
               md={6}
               xs={6}
@@ -71,7 +103,6 @@ const SearchResults = () => {
                     />
                   </Link>
 
-                  {/* Favorites Icon - Outside Link to prevent navigation */}
                   <button
                     className={searchResultStyles.favoriteBtn}
                     onClick={(e) => {
@@ -112,7 +143,6 @@ const SearchResults = () => {
                   </div>
                 </Link>
 
-                {/* Color options - prevent Link navigation */}
                 <div className={searchResultStyles.colorOptions}>
                   {product.colors.map((colorOption) => (
                     <label
@@ -160,6 +190,23 @@ const SearchResults = () => {
             </Col>
           ))}
         </Row>
+
+        {/* Load More */}
+        {pathname === "/shop-all" && currentPage < pageCount && (
+          <Row>
+            <Col>
+              <div className={searchResultStyles.loadMoreBtnContainer}>
+                <button
+                  className={searchResultStyles.loadMoreBtn}
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  disabled={loading}
+                >
+                  {loading && currentPage > 1 ? "Loading..." : "Load More"}
+                </button>
+              </div>
+            </Col>
+          </Row>
+        )}
       </Container>
     </section>
   );

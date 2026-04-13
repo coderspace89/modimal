@@ -1,5 +1,11 @@
 "use client";
-import React, { createContext, useContext, useState, useMemo } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useEffect,
+} from "react";
 import qs from "qs";
 import { useSearchParams } from "next/navigation";
 
@@ -9,11 +15,12 @@ export const SearchProvider = ({ children }) => {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("filters") || "";
 
-  // Single source of truth for all filters
   const [searchQuery, setSearchQuery] = useState(initialQuery);
-  const [selectedFilters, setSelectedFilters] = useState([]); // {id, label, type, value}
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
+  const [pageSize] = useState(6); // Initial page size = 6
 
-  // Group filters by type for easier query building
   const groupedFilters = useMemo(() => {
     return selectedFilters.reduce((acc, filter) => {
       if (!acc[filter.type]) acc[filter.type] = [];
@@ -22,10 +29,9 @@ export const SearchProvider = ({ children }) => {
     }, {});
   }, [selectedFilters]);
 
-  // Build the complete Strapi query
   const strapiQuery = useMemo(() => {
     const filters = { $and: [] };
-    let sort = ["createdAt:desc"]; // default sort
+    let sort = ["createdAt:desc"];
 
     if (searchQuery.trim()) {
       filters.$and.push({
@@ -59,14 +65,13 @@ export const SearchProvider = ({ children }) => {
       });
     }
 
-    // Sort logic - override default only if sort is selected
     if (groupedFilters.sort?.length) {
       const sortValue = groupedFilters.sort[0].value;
       if (sortValue === "price:asc") sort = ["price:asc"];
       else if (sortValue === "price:desc") sort = ["price:desc"];
       else if (sortValue === "featured") {
         filters.$and.push({ featured: { $eq: true } });
-        sort = ["createdAt:desc"]; // featured items, newest first
+        sort = ["createdAt:desc"];
       } else if (sortValue === "bestSeller") sort = ["totalSold:desc"];
     }
 
@@ -77,27 +82,26 @@ export const SearchProvider = ({ children }) => {
         populate: {
           mainImage: true,
           colors: true,
-          sizes: true,
           category: true,
-          favoritesIcon: true,
         },
-        pagination: { pageSize: 24 },
+        pagination: { page: currentPage, pageSize },
       },
       { encodeValuesOnly: true },
     );
-  }, [searchQuery, groupedFilters]);
+  }, [searchQuery, groupedFilters, currentPage, pageSize]);
 
-  // Handlers that both components will use
+  // Reset to page 1 when filters/search change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedFilters]);
+
   const handleSearchQuery = (query) => setSearchQuery(query);
 
   const handleFilterChange = (e, label, type, id, value) => {
     const isChecked = e.target.checked;
-
     if (type === "sort") {
-      // Sort is exclusive - replace any existing sort
       setSelectedFilters((prev) => {
         const withoutSort = prev.filter((f) => f.type !== "sort");
-        // For radio: if unchecked, it means user clicked same option, so clear it
         return isChecked
           ? [...withoutSort, { id, label, type, value: value || id }]
           : withoutSort;
@@ -127,6 +131,11 @@ export const SearchProvider = ({ children }) => {
         searchQuery,
         selectedFilters,
         strapiQuery,
+        currentPage,
+        setCurrentPage,
+        pageCount,
+        setPageCount,
+        pageSize,
         handleSearchQuery,
         handleFilterChange,
         removeFilter,

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import searchFormStyles from "./SearchForm.module.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
