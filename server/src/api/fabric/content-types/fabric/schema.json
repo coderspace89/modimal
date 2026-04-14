@@ -17,6 +17,14 @@
     "slug": {
       "type": "uid",
       "targetField": "name"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "features": {
+      "type": "component",
+      "component": "elements.feature-tag",
+      "repeatable": true
     }
   }
 }

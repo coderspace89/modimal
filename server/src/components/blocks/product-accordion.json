@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_blocks_product_accordions",
+  "info": {
+    "displayName": "Product Accordion"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "isOpen": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}

@@ -529,6 +529,8 @@ export interface ApiFabricFabric extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    features: Schema.Attribute.Component<'elements.feature-tag', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -718,7 +720,15 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     mainImage: Schema.Attribute.Media<'images'>;
     name: Schema.Attribute.String;
     price: Schema.Attribute.Decimal;
+    productDetails: Schema.Attribute.Component<
+      'blocks.product-accordion',
+      true
+    >;
     publishedAt: Schema.Attribute.DateTime;
+    relatedProducts: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product.product'
+    >;
     salePrice: Schema.Attribute.Decimal;
     shortDescription: Schema.Attribute.String;
     sizes: Schema.Attribute.Relation<'oneToMany', 'api::size.size'>;

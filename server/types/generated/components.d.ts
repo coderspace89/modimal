@@ -124,6 +124,18 @@ export interface BlocksModiweekSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksProductAccordion extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_product_accordions';
+  info: {
+    displayName: 'Product Accordion';
+  };
+  attributes: {
+    content: Schema.Attribute.RichText;
+    isOpen: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksSustainabilitySection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_sustainability_sections';
   info: {
@@ -134,6 +146,16 @@ export interface BlocksSustainabilitySection extends Struct.ComponentSchema {
     ctaUrl: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images'>;
     title: Schema.Attribute.String;
+  };
+}
+
+export interface ElementsFeatureTag extends Struct.ComponentSchema {
+  collectionName: 'components_elements_feature_tags';
+  info: {
+    displayName: 'Feature Tag';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
   };
 }
 
@@ -278,7 +300,9 @@ declare module '@strapi/strapi' {
       'blocks.megamenu-column': BlocksMegamenuColumn;
       'blocks.modiweek-card': BlocksModiweekCard;
       'blocks.modiweek-section': BlocksModiweekSection;
+      'blocks.product-accordion': BlocksProductAccordion;
       'blocks.sustainability-section': BlocksSustainabilitySection;
+      'elements.feature-tag': ElementsFeatureTag;
       'elements.footer-nav-link': ElementsFooterNavLink;
       'elements.footer-nav-section': ElementsFooterNavSection;
       'elements.footer-social-link': ElementsFooterSocialLink;

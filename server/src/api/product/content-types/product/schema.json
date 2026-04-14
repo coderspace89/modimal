@@ -106,6 +106,16 @@
     "totalSold": {
       "type": "integer",
       "default": 0
+    },
+    "productDetails": {
+      "type": "component",
+      "component": "blocks.product-accordion",
+      "repeatable": true
+    },
+    "relatedProducts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
     }
   }
 }

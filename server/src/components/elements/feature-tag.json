@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_elements_feature_tags",
+  "info": {
+    "displayName": "Feature Tag"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
