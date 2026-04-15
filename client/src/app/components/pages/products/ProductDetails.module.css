@@ -4,7 +4,7 @@
 }
 
 .breadcrumbsContainer {
-  margin-bottom: clamp(24px, 5vw, 48px);
+  margin-bottom: clamp(24px, 3vw, 48px);
 }
 
 .breadcrumbsText {
@@ -21,4 +21,279 @@
   text-decoration: none !important;
   font-weight: 400;
   text-transform: capitalize;
+}
+
+/* .mainImage,
+.galleryImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
+.mainImage {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+}
+
+.galleryImage {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.sliderContainer {
+  display: flex;
+  gap: 20px;
+  height: 500px;
+}
+
+/* Add this wrapper class for the main slider div */
+.mainSliderWrapper {
+  flex: 1;
+  min-width: 0; /* Critical for React Slick inside Flexbox */
+}
+
+/* color options css */
+
+.colorOptions {
+  display: flex;
+  gap: 8px;
+  /* Space between color swatches */
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.colorLabel {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  /* Needed for positioning the checkmark */
+}
+
+.colorInput {
+  /* Hide the native radio button */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  /* Allows click to pass through to the label */
+}
+
+.colorSwatch {
+  display: block;
+  width: clamp(16px, 5vw, 24px);
+  /* Size of your color circle */
+  height: clamp(16px, 5vw, 24px);
+  border-radius: 50%;
+  /* Makes it a circle */
+  border: 1px solid transparent;
+  /* Default border, will change on hover/checked */
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  /* Subtle inner shadow for definition */
+}
+
+/* Style for when the radio button is focused (for keyboard accessibility) */
+.colorInput:focus + .colorSwatch {
+  outline: 1px solid #007bff;
+  /* Example focus style */
+  outline-offset: 1px;
+}
+
+/* Style for when the radio button is checked */
+.colorInput:checked + .colorSwatch {
+  border-color: var(--black);
+  /* Black border around selected color */
+  box-shadow: 0 0 0 1px var(--black);
+  /* Stronger border on checked state */
+  transform: scale(1.05);
+  /* Slightly larger for visual emphasis */
+}
+
+/* Style for the checkmark SVG */
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  /* Size of the checkmark */
+  height: 18px;
+  color: #fff;
+  /* Checkmark color (e.g., white for dark swatches) */
+  /* For light swatches, you might want a dark checkmark: */
+  /* filter: invert(1); */
+}
+
+.formCheck {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.formCheck input {
+  border-radius: 0 !important;
+  color: var(--black);
+  text-transform: capitalize;
+  border-color: var(--topbarbg) !important;
+}
+
+.formCheck input:checked {
+  background-color: var(--topbarbg) !important;
+  border-color: var(--topbarbg) !important;
+  background-image: none !important;
+}
+
+.formCheck input:focus {
+  box-shadow: none !important;
+}
+
+.formCheck label {
+  color: var(--black) !important;
+  text-transform: capitalize !important;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.sizeOptionsContainer {
+  margin-bottom: 16px;
+}
+
+.sizeOptions {
+  border: 1px solid var(--bordergray);
+  padding: 8px 16px;
+  width: 100%;
+  border-radius: 0;
+}
+
+.sizeOptionsToggle {
+  border: 1px solid var(--bordergray);
+  width: 100%;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.sizeOptionsToggle:hover,
+.sizeOptionsToggle:focus {
+  background-color: transparent;
+  border: 1px solid var(--bordergray);
+}
+
+.sizeGuideContainer {
+  text-align: end;
+  padding-right: 20px;
+  padding-bottom: 8px;
+}
+
+.sizeGuideContainer a {
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--lightgray);
+  font-weight: 400;
+}
+
+.productName {
+  font-size: clamp(26px, 3vw, 32px);
+  font-weight: 600;
+  color: var(--black);
+  text-transform: capitalize;
+  margin-bottom: clamp(24px, 3vw, 32px);
+}
+
+.productDescription {
+  font-size: clamp(16px, 3vw, 18px);
+  font-weight: 400;
+  color: var(--black);
+  text-transform: capitalize;
+  margin-bottom: clamp(16px, 3vw, 24px);
+}
+
+.colorsLabelContainer {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+.addToCartBtnContainer {
+  margin-bottom: 24px;
+}
+
+.addToCartBtn {
+  background-color: var(--topbarbg);
+  padding: 16px;
+  width: 100%;
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--background);
+  border-radius: 0;
+  border: 1px solid var(--topbarbg);
+}
+
+.addToCartBtn:hover,
+.addToCartBtn:first-child:active {
+  border: 1px solid var(--primary);
+  background-color: var(--primary);
+}
+
+.favoriteBtn {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.favoriteBtn span {
+  font-size: 14px;
+  color: var(--lightgray);
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.returnWishContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.returnText {
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--lightgray);
+  font-weight: 400;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+}
+
+.returnText span svg {
+  margin-right: 4px;
+}
+
+@media (max-width: 768px) {
+  .sliderContainer {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sliderContainer {
+    margin-bottom: 48px;
+  }
+  .returnWishContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 }

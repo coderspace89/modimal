@@ -8,6 +8,8 @@
   --text: #272f25;
   --placeholder: #d1d9cf;
   --form-placeholder: #adadad;
+  --bordergray: #dfdfdf;
+  --lightgray: #868686;
 }
 
 @media (prefers-color-scheme: dark) {
