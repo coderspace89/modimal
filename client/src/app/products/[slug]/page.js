@@ -1,5 +1,7 @@
 import React from "react";
 import ProductDetails from "@/app/components/pages/products/ProductDetails";
+import ProductFeatures from "@/app/components/pages/products/ProductFeatures";
+import RelatedProducts from "@/app/components/pages/products/RelatedProducts";
 
 const page = async ({ params }) => {
   const { slug } = await params;
@@ -7,6 +9,8 @@ const page = async ({ params }) => {
   return (
     <div>
       <ProductDetails slug={slug} />
+      <ProductFeatures slug={slug} />
+      <RelatedProducts slug={slug} />
     </div>
   );
 };

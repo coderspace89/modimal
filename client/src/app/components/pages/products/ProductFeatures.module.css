@@ -1,0 +1,59 @@
+.container {
+  margin-bottom: 32px;
+}
+
+.accordionContainer {
+  background-color: var(--accordionbg) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.fabricsContainer {
+  background-color: var(--accordionbg);
+  border: 1px solid var(--fabricsBorder);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.featureTagsContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.featureTagsContainer > div {
+  background-color: var(--background);
+  padding: 8px;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: clamp(24px, 3vw, 32px);
+}
+
+.markdownContainer p {
+  font-size: clamp(16px, 3vw, 18px);
+  font-weight: 400;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.markdownContainer {
+  margin-bottom: clamp(20px, 3vw, 40px);
+}
+
+.fabricsTitle {
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: 400;
+  color: var(--black);
+  text-transform: capitalize;
+  border-bottom: 1px solid var(--fabricsBorder);
+  margin-bottom: clamp(16px, 3vw, 24px);
+  padding-bottom: 10px;
+}
+
+.accordionContent p,
+.accordionContent h6 {
+  font-size: 16px;
+  color: var(--black);
+  font-weight: 400;
+}
