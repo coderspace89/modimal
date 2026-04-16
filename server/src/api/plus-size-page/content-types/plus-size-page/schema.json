@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "plus_size_pages",
+  "info": {
+    "singularName": "plus-size-page",
+    "pluralName": "plus-size-pages",
+    "displayName": "Plus Size Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "breadcrumbLabel": {
+      "type": "string"
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

@@ -11,12 +11,12 @@ import { useSearchParams } from "next/navigation";
 
 const SearchContext = createContext(null);
 
-export const SearchProvider = ({ children }) => {
+export const SearchProvider = ({ children, initialFilters = [] }) => {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("filters") || "";
 
   const [searchQuery, setSearchQuery] = useState(initialQuery);
-  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState(initialFilters);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
   const [pageSize] = useState(6); // Initial page size = 6
@@ -32,6 +32,14 @@ export const SearchProvider = ({ children }) => {
   const strapiQuery = useMemo(() => {
     const filters = { $and: [] };
     let sort = ["createdAt:desc"];
+
+    // Handle internal filters like plus-size
+    const hasPlusSize = selectedFilters.some(
+      (f) => f.type === "internal" && f.value === "plus-size",
+    );
+    if (hasPlusSize) {
+      filters.$and.push({ sizes: { isPlusSize: { $eq: true } } });
+    }
 
     if (searchQuery.trim()) {
       filters.$and.push({

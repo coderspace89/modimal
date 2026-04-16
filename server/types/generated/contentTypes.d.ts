@@ -682,6 +682,36 @@ export interface ApiNavigationItemNavigationItem
   };
 }
 
+export interface ApiPlusSizePagePlusSizePage extends Struct.SingleTypeSchema {
+  collectionName: 'plus_size_pages';
+  info: {
+    displayName: 'Plus Size Page';
+    pluralName: 'plus-size-pages';
+    singularName: 'plus-size-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    breadcrumbLabel: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    heroImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::plus-size-page.plus-size-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -786,6 +816,7 @@ export interface ApiSizeSize extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    isPlusSize: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::size.size'> &
       Schema.Attribute.Private;
@@ -1317,6 +1348,7 @@ declare module '@strapi/strapi' {
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::mobile-menu.mobile-menu': ApiMobileMenuMobileMenu;
       'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;
+      'api::plus-size-page.plus-size-page': ApiPlusSizePagePlusSizePage;
       'api::product.product': ApiProductProduct;
       'api::shop-all-page.shop-all-page': ApiShopAllPageShopAllPage;
       'api::size.size': ApiSizeSize;

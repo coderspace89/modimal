@@ -16,6 +16,10 @@
     },
     "order": {
       "type": "integer"
+    },
+    "isPlusSize": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
