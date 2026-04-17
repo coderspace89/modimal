@@ -192,10 +192,10 @@ const SearchResults = () => {
         </Row>
 
         {/* Load More */}
-        {pathname === "/shop-all" && currentPage < pageCount && (
-          <Row>
-            <Col>
-              <div className={searchResultStyles.loadMoreBtnContainer}>
+        {(pathname === "/shop-all" || pathname === "/plus-size") &&
+          currentPage < pageCount && (
+            <Row>
+              <Col className="text-center mt-4">
                 <button
                   className={searchResultStyles.loadMoreBtn}
                   onClick={() => setCurrentPage(currentPage + 1)}
@@ -203,10 +203,9 @@ const SearchResults = () => {
                 >
                   {loading && currentPage > 1 ? "Loading..." : "Load More"}
                 </button>
-              </div>
-            </Col>
-          </Row>
-        )}
+              </Col>
+            </Row>
+          )}
       </Container>
     </section>
   );

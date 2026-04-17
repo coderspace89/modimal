@@ -64,7 +64,7 @@ const ProductFeatures = ({ slug }) => {
                 >
                   <Accordion.Header>{productDetail?.title}</Accordion.Header>
                   <Accordion.Body>
-                    <div className={productFeatures.accordionContent}>
+                    <div className={productFeatureStyles.accordionContent}>
                       <ReactMarkdown>{productDetail?.content}</ReactMarkdown>
                     </div>
                   </Accordion.Body>

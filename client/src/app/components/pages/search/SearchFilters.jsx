@@ -9,6 +9,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useSearch } from "@/context/SearchContext";
+import { usePathname } from "next/navigation";
 
 const SearchFilters = () => {
   const [sizeOptions, setSizeOptions] = useState(null);
@@ -17,8 +18,13 @@ const SearchFilters = () => {
   const [fabricOptions, setFabricOptions] = useState(null);
 
   // Get everything from context now
-  const { selectedFilters, handleFilterChange, removeFilter, clearAll } =
-    useSearch();
+  const {
+    selectedFilters,
+    handleFilterChange,
+    removeFilter,
+    clearAll,
+    baseFilters,
+  } = useSearch();
 
   const sortOptions = [
     { label: "Featured", value: "featured" }, // custom logic
@@ -27,22 +33,40 @@ const SearchFilters = () => {
     { label: "Price: High To Low", value: "price:desc" }, // Strapi sort
   ];
 
+  const pathname = usePathname(); // ADD THIS
+
+  const isPlusSizePage = pathname === "/plus-size";
+
+  // Only show removable filters, not baseFilters
+  const removableFilters = selectedFilters.filter(
+    (f) => f.type !== "internal", // or any type you use for baseg
+  );
+
   // Your useEffects to fetch options stay the same...
   useEffect(() => {
     const fetchAll = async () => {
       const [sizes, colors, collections, fabrics] = await Promise.all([
-        fetch(`/api/sizes`).then((r) => r.json()),
+        fetch(`/api/sizes?sort=order:asc`).then((r) => r.json()),
         fetch(`/api/colors`).then((r) => r.json()),
         fetch(`/api/collections`).then((r) => r.json()),
         fetch(`/api/fabrics`).then((r) => r.json()),
       ]);
-      setSizeOptions(sizes?.data || null);
+
+      // Filter sizes based on page
+      let filteredSizes = sizes?.data || [];
+      if (isPlusSizePage) {
+        filteredSizes = filteredSizes.filter((s) => s.isPlusSize === true); // ONLY 1X, 2X, 3X
+      } else {
+        filteredSizes = filteredSizes.filter((s) => !s.isPlusSize); // ONLY XS, S, M, L, XL
+      }
+
+      setSizeOptions(filteredSizes);
       setColorOptions(colors?.data || null);
       setCollectionOptions(collections?.data || null);
       setFabricOptions(fabrics?.data || null);
     };
     fetchAll();
-  }, []);
+  }, [isPlusSizePage]);
 
   // offcanvas
   const [showFilters, setShowFilters] = useState(false);
@@ -59,11 +83,11 @@ const SearchFilters = () => {
               <div>
                 <h3 className={searchFilterStyles.filtersTitle}>filters</h3>
               </div>
-              {/* Selected Filters Section */}
-              {selectedFilters.length > 0 && (
+              {/* Selected/Removable Filters Section */}
+              {removableFilters.length > 0 && (
                 <div className="mb-4">
                   <div className="d-flex flex-wrap gap-2 mb-3">
-                    {selectedFilters.map((filter) => (
+                    {removableFilters.map((filter) => (
                       <div
                         /* Combine type and id to ensure the key is globally unique */
                         key={`${filter.type}-${filter.id}`}
