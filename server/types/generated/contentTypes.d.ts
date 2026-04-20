@@ -641,6 +641,51 @@ export interface ApiMobileMenuMobileMenu extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiModiweekDayModiweekDay extends Struct.CollectionTypeSchema {
+  collectionName: 'modiweek_days';
+  info: {
+    displayName: 'Modiweek Day';
+    pluralName: 'modiweek-days';
+    singularName: 'modiweek-day';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    day: Schema.Attribute.Enumeration<
+      [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ]
+    > &
+      Schema.Attribute.Required;
+    heroImage: Schema.Attribute.Media<'images'>;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::modiweek-day.modiweek-day'
+    > &
+      Schema.Attribute.Private;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiNavigationItemNavigationItem
   extends Struct.CollectionTypeSchema {
   collectionName: 'navigation_items';
@@ -1347,6 +1392,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::mobile-menu.mobile-menu': ApiMobileMenuMobileMenu;
+      'api::modiweek-day.modiweek-day': ApiModiweekDayModiweekDay;
       'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;
       'api::plus-size-page.plus-size-page': ApiPlusSizePagePlusSizePage;
       'api::product.product': ApiProductProduct;

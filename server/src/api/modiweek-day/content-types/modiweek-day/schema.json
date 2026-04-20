@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "modiweek_days",
+  "info": {
+    "singularName": "modiweek-day",
+    "pluralName": "modiweek-days",
+    "displayName": "Modiweek Day"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "day": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    }
+  }
+}

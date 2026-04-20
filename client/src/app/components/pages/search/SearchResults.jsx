@@ -94,13 +94,15 @@ const SearchResults = () => {
               <div>
                 <div className={searchResultStyles.productImgContainer}>
                   <Link href={`/products/${product?.slug}`}>
-                    <Image
-                      src={getStrapiMedia(product?.mainImage?.url)}
-                      width={product?.mainImage?.width}
-                      height={product?.mainImage?.height}
-                      alt={product?.mainImage?.name}
-                      className={searchResultStyles.mainImage}
-                    />
+                    {product?.mainImage && (
+                      <Image
+                        src={getStrapiMedia(product?.mainImage?.url)}
+                        width={product?.mainImage?.width}
+                        height={product?.mainImage?.height}
+                        alt={product?.mainImage?.name}
+                        className={searchResultStyles.mainImage}
+                      />
+                    )}
                   </Link>
 
                   <button

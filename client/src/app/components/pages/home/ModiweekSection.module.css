@@ -1,37 +1,37 @@
 .container {
-    margin-bottom: 88px;
+  margin-bottom: 88px;
 }
 
 .mainImage {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .sectionHeader {
-    margin-bottom: clamp(8px, 1vw, 24px);
+  margin-bottom: clamp(8px, 1vw, 24px);
 }
 
 .sectionTitle {
-    font-size: clamp(20px, 5vw, 32px);
-    color: var(--black);
-    font-weight: 600;
+  font-size: clamp(20px, 5vw, 32px);
+  color: var(--black);
+  font-weight: 600;
 }
 
 .productImgContainer {
-    position: relative;
-    margin-bottom: clamp(0px, 2vw, 38px);
+  position: relative;
+  margin-bottom: clamp(0px, 2vw, 38px);
 }
 
 .productTitle {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--black);
-    margin-bottom: 8px;
-    text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 8px;
+  text-transform: capitalize;
 }
 
-@media(max-width:600px) {
-    .container {
-        margin-bottom: 48px;
-    }
+@media (max-width: 600px) {
+  .container {
+    margin-bottom: 48px;
+  }
 }

@@ -1,0 +1,209 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 32px;
+}
+
+.breadcrumbsContainer {
+  margin-bottom: clamp(20px, 5vw, 40px);
+}
+
+.breadcrumbsText {
+  color: var(--black) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.breadcrumbsLink a {
+  color: var(--primary) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.heroImage {
+  width: 100%;
+  height: 750px;
+  aspect-ratio: 1/2;
+  object-fit: cover;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+}
+
+.heroTitle {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: clamp(16px, 3vw, 24px);
+  text-transform: capitalize;
+}
+
+.productsHeader > h5 {
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: 600;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.productsHeader > span {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--black);
+  text-transform: capitalize;
+  margin-bottom: clamp(16px, 3vw, 24px);
+  display: block;
+}
+
+.productTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+.productImgContainer {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.categoryName {
+  font-size: 16px;
+  color: var(--black);
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.priceText {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+/* color options css */
+
+.colorOptions {
+  display: flex;
+  gap: 8px;
+  /* Space between color swatches */
+  margin-top: 8px;
+}
+
+.colorLabel {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  /* Needed for positioning the checkmark */
+}
+
+.colorInput {
+  /* Hide the native radio button */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  /* Allows click to pass through to the label */
+}
+
+.colorSwatch {
+  display: block;
+  width: clamp(16px, 5vw, 24px);
+  /* Size of your color circle */
+  height: clamp(16px, 5vw, 24px);
+  border-radius: 50%;
+  /* Makes it a circle */
+  border: 1px solid transparent;
+  /* Default border, will change on hover/checked */
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  /* Subtle inner shadow for definition */
+}
+
+/* Style for when the radio button is focused (for keyboard accessibility) */
+.colorInput:focus + .colorSwatch {
+  outline: 1px solid #007bff;
+  /* Example focus style */
+  outline-offset: 1px;
+}
+
+/* Style for when the radio button is checked */
+.colorInput:checked + .colorSwatch {
+  border-color: var(--black);
+  /* Black border around selected color */
+  box-shadow: 0 0 0 1px var(--black);
+  /* Stronger border on checked state */
+  transform: scale(1.05);
+  /* Slightly larger for visual emphasis */
+}
+
+/* Style for the checkmark SVG */
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  /* Size of the checkmark */
+  height: 18px;
+  color: #fff;
+  /* Checkmark color (e.g., white for dark swatches) */
+  /* For light swatches, you might want a dark checkmark: */
+  /* filter: invert(1); */
+}
+
+.newLabel {
+  background-color: var(--background);
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+.resultsLabel {
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: 400;
+  color: var(--black);
+}
+
+.resultsLabelContainer {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.favoriteBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 2;
+}
+.favoriteBtn:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .favoriteBtn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+  .heroImage {
+    height: 480px;
+  }
+}

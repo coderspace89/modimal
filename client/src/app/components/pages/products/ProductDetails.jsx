@@ -141,13 +141,15 @@ const ProductDetails = ({ slug }) => {
                 <Slider {...thumbnailSettings}>
                   {productDetails?.galleryImages?.map((galleryImage) => (
                     <div key={galleryImage?.id}>
-                      <Image
-                        src={getStrapiMedia(galleryImage?.url)}
-                        width={galleryImage?.width}
-                        height={galleryImage?.height}
-                        alt={galleryImage?.name}
-                        className={productDetailStyles?.galleryImage}
-                      />
+                      {galleryImage && (
+                        <Image
+                          src={getStrapiMedia(galleryImage?.url)}
+                          width={galleryImage?.width}
+                          height={galleryImage?.height}
+                          alt={galleryImage?.name}
+                          className={productDetailStyles?.galleryImage}
+                        />
+                      )}
                     </div>
                   ))}
                 </Slider>
@@ -157,13 +159,15 @@ const ProductDetails = ({ slug }) => {
                 <Slider asNavFor={nav2} ref={sliderRef1} {...settings}>
                   {productDetails?.galleryImages?.map((galleryImage) => (
                     <div key={galleryImage?.id}>
-                      <Image
-                        src={getStrapiMedia(galleryImage?.url)}
-                        width={galleryImage?.width}
-                        height={galleryImage?.height}
-                        alt={galleryImage?.name}
-                        className={productDetailStyles?.mainImage}
-                      />
+                      {galleryImage && (
+                        <Image
+                          src={getStrapiMedia(galleryImage?.url)}
+                          width={galleryImage?.width}
+                          height={galleryImage?.height}
+                          alt={galleryImage?.name}
+                          className={productDetailStyles?.mainImage}
+                        />
+                      )}
                     </div>
                   ))}
                 </Slider>
