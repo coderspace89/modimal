@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "register_pages",
+  "info": {
+    "singularName": "register-page",
+    "pluralName": "register-pages",
+    "displayName": "Register Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "loginText": {
+      "type": "string"
+    },
+    "loginLinkText": {
+      "type": "string"
+    },
+    "loginLinkUrl": {
+      "type": "string"
+    },
+    "termsText": {
+      "type": "string"
+    },
+    "termsLink": {
+      "type": "string"
+    },
+    "privacyLink": {
+      "type": "string"
+    }
+  }
+}

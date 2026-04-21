@@ -817,6 +817,42 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiRegisterPageRegisterPage extends Struct.SingleTypeSchema {
+  collectionName: 'register_pages';
+  info: {
+    displayName: 'Register Page';
+    pluralName: 'register-pages';
+    singularName: 'register-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    buttonText: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    heroImage: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::register-page.register-page'
+    > &
+      Schema.Attribute.Private;
+    loginLinkText: Schema.Attribute.String;
+    loginLinkUrl: Schema.Attribute.String;
+    loginText: Schema.Attribute.String;
+    privacyLink: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    termsLink: Schema.Attribute.String;
+    termsText: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiShopAllPageShopAllPage extends Struct.SingleTypeSchema {
   collectionName: 'shop_all_pages';
   info: {
@@ -1330,7 +1366,6 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1344,6 +1379,8 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    firstName: Schema.Attribute.String;
+    lastName: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1396,6 +1433,7 @@ declare module '@strapi/strapi' {
       'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;
       'api::plus-size-page.plus-size-page': ApiPlusSizePagePlusSizePage;
       'api::product.product': ApiProductProduct;
+      'api::register-page.register-page': ApiRegisterPageRegisterPage;
       'api::shop-all-page.shop-all-page': ApiShopAllPageShopAllPage;
       'api::size.size': ApiSizeSize;
       'plugin::content-releases.release': PluginContentReleasesRelease;

@@ -8,8 +8,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "next/image";
 import { getStrapiMedia } from "@/lib/utils";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { useFavorites } from "@/context/FavoritesContext";
 import Link from "next/link";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -17,7 +15,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 const ModiweekDays = () => {
   const [modiweekDaysData, setModiweekDaysData] = useState(null);
-  const { toggleFavorite, isFavorite } = useFavorites();
 
   const daysQuery = qs.stringify(
     {
@@ -107,23 +104,6 @@ const ModiweekDays = () => {
                               className={modiweekDayStyles.mainImage}
                             />
                           </Link>
-
-                          <div className="position-absolute top-0 end-0 p-lg-4 p-2">
-                            {/* Favorites Icon - Outside Link to prevent navigation */}
-                            <button
-                              className={modiweekDayStyles.favoriteBtn}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                toggleFavorite(modiweekCard?.id);
-                              }}
-                            >
-                              {isFavorite(modiweekCard?.id) ? (
-                                <FaHeart color="#C30000" size={24} />
-                              ) : (
-                                <FaRegHeart color="#000" size={24} />
-                              )}
-                            </button>
-                          </div>
                         </div>
                       )}
                       <div>
