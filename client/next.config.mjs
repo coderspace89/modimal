@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   reactCompiler: true,
   images: {
     remotePatterns: [
@@ -10,7 +9,6 @@ const nextConfig = {
         port: "1337",
         pathname: "/uploads/**",
       },
-      // Strapi Cloud
       {
         protocol: "https",
         hostname: "**.media.strapiapp.com",
@@ -22,24 +20,19 @@ const nextConfig = {
   async rewrites() {
     const strapiUrl =
       process.env.NEXT_PUBLIC_STRAPI_CLOUD_URL ||
-      process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL;
+      process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL ||
+      "http://localhost:1337";
 
-    // Only attempt rewrite if the production URL is actually found
-    if (strapiUrl) {
-      return [
-        {
-          source: "/api/:path*",
-          // .replace(/\/$/, "") safely removes any trailing slash if it exists
-          destination: `${strapiUrl.replace(/\/$/, "")}/api/:path*`,
-        },
-      ];
-    }
+    const sanitizedUrl = strapiUrl.replace(/\/$/, "");
 
-    // Local fallback for development only
     return [
       {
-        source: "/api/:path*",
-        destination: "http://localhost:1337/api/:path*",
+        /* This is the ONLY rule you need for /api.
+           It says: "Take everything starting with /api/ 
+           EXCEPT for /api/auth and send it to Strapi."
+        */
+        source: "/api/:path((?!auth).*)",
+        destination: `${sanitizedUrl}/api/:path*`,
       },
     ];
   },

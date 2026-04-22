@@ -12,6 +12,7 @@
   --lightgray: #868686;
   --accordionbg: #f0f2ef;
   --fabricsBorder: #adadad;
+  --formInputBorder: #606060;
 }
 
 @media (prefers-color-scheme: dark) {
