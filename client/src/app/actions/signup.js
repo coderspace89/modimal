@@ -2,12 +2,21 @@
 
 import { signIn } from "@/app/actions/auth";
 import { AuthError } from "next-auth";
+import { SignupFormSchema } from "@/lib/definitions";
 
 export async function signup(state, formData) {
-  const email = formData.get("email");
-  const password = formData.get("password");
-  const firstName = formData.get("firstName");
-  const lastName = formData.get("lastName");
+  // 2. Validate fields locally first
+  const validatedFields = SignupFormSchema.safeParse(
+    Object.fromEntries(formData.entries()),
+  );
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { email, password, firstName, lastName } = validatedFields.data;
 
   try {
     // STEP 1: Register the user (Standard fields only)

@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "login_pages",
+  "info": {
+    "singularName": "login-page",
+    "pluralName": "login-pages",
+    "displayName": "Login Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "signupText": {
+      "type": "string"
+    },
+    "signupLinkText": {
+      "type": "string"
+    },
+    "signupLinkUrl": {
+      "type": "string"
+    },
+    "forgotPasswordText": {
+      "type": "string"
+    }
+  }
+}

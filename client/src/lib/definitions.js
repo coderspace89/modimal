@@ -20,3 +20,10 @@ export const SignupFormSchema = z.object({
     })
     .trim(),
 });
+
+// login schema
+
+export const LoginSchema = z.object({
+  email: z.email({ message: "Please enter a valid email." }).trim(),
+  password: z.string().min(1, { message: "Password is required." }),
+});

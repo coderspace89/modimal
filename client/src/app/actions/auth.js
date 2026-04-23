@@ -7,7 +7,6 @@ import Facebook from "next-auth/providers/facebook";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
   providers: [
-    // 1. Social Providers
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -16,13 +15,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
     }),
-    // 2. Your existing Credentials Provider
     CredentialsProvider({
       name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
       async authorize(credentials) {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/auth/local`,
@@ -43,7 +37,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             id: user.user.id,
             email: user.user.email,
             jwt: user.jwt,
-            firstName: user.user.firstName, // Make sure to grab these from Strapi response
+            firstName: user.user.firstName,
             lastName: user.user.lastName,
           };
         }
@@ -53,12 +47,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   secret: process.env.AUTH_SECRET,
   callbacks: {
-    // 3. The Sync logic for Social Logins
     async signIn({ user, account, profile }) {
-      // If the user is logging in via Google/Facebook
       if (account.provider !== "credentials") {
         try {
-          // Normalize names based on provider
           const firstName =
             profile.given_name ||
             profile.first_name ||
@@ -67,18 +58,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             profile.family_name ||
             profile.last_name ||
             profile.name?.split(" ").slice(1).join(" ");
-          // Sync with Strapi using the access_token provided by the social platform
+
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/auth/${account.provider}/callback?access_token=${account.access_token || account.id_token}`,
           );
           const data = await response.json();
 
-          if (!data.jwt) {
-            console.log("Strapi rejected login. Response details:", data); // Check your VS Code terminal for this!
-          }
-
           if (data.jwt) {
-            // Inside the 'if (data.jwt)' block in your signIn callback:
+            // Update Strapi so the database isn't empty
             await fetch(
               `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/users/${data.user.id}`,
               {
@@ -90,11 +77,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 body: JSON.stringify({ firstName, lastName }),
               },
             );
-            // Attach the Strapi JWT and names to the user object for the jwt() callback
+
+            // Set these on the 'user' object so the jwt() callback below can see them
             user.jwt = data.jwt;
-            // Map the names to the user object so they persist in the session
-            user.firstName = data.user.firstName || firstName;
-            user.lastName = data.user.lastName || lastName;
+            user.firstName = firstName;
+            user.lastName = lastName;
             return true;
           }
           return false;
@@ -103,11 +90,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return false;
         }
       }
-      return true; // Allow credentials login to proceed
+      return true;
     },
 
-    // 4. Persist data into the JWT
     async jwt({ token, user }) {
+      // This 'user' object comes from either authorize() or the modified 'user' in signIn()
       if (user) {
         token.accessToken = user.jwt;
         token.firstName = user.firstName;
@@ -116,7 +103,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
 
-    // 5. Make data available to the Frontend
     async session({ session, token }) {
       session.accessToken = token.accessToken;
       session.user.firstName = token.firstName;

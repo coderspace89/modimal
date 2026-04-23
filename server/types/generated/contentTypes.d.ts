@@ -610,6 +610,40 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiLoginPageLoginPage extends Struct.SingleTypeSchema {
+  collectionName: 'login_pages';
+  info: {
+    displayName: 'Login Page';
+    pluralName: 'login-pages';
+    singularName: 'login-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    buttonText: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    forgotPasswordText: Schema.Attribute.String;
+    heroImage: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::login-page.login-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    signupLinkText: Schema.Attribute.String;
+    signupLinkUrl: Schema.Attribute.String;
+    signupText: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMobileMenuMobileMenu extends Struct.SingleTypeSchema {
   collectionName: 'mobile_menus';
   info: {
@@ -1428,6 +1462,7 @@ declare module '@strapi/strapi' {
       'api::fabric.fabric': ApiFabricFabric;
       'api::global.global': ApiGlobalGlobal;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::login-page.login-page': ApiLoginPageLoginPage;
       'api::mobile-menu.mobile-menu': ApiMobileMenuMobileMenu;
       'api::modiweek-day.modiweek-day': ApiModiweekDayModiweekDay;
       'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;

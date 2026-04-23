@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import signupStyles from "./Signup.module.css";
+import loginStyles from "./Login.module.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,19 +9,19 @@ import qs from "qs";
 import { getStrapiMedia } from "@/lib/utils";
 import Image from "next/image";
 import Form from "react-bootstrap/Form";
-import { signup } from "@/app/actions/signup";
+import { login } from "@/app/actions/login";
 import { useActionState } from "react";
 import Link from "next/link";
 import { FaApple, FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
 
-const Signup = () => {
-  const [signupData, setSignupData] = useState(null);
-  const [state, action, pending] = useActionState(signup, undefined);
+const Login = () => {
+  const [loginData, setLoginData] = useState(null);
+  const [state, action, pending] = useActionState(login, undefined);
   const [isSocialLoading, setIsSocialLoading] = useState(false);
 
-  const signupQuery = qs.stringify(
+  const loginQuery = qs.stringify(
     {
       populate: {
         heroImage: true,
@@ -31,20 +31,18 @@ const Signup = () => {
   );
 
   useEffect(() => {
-    const fetchSignupData = async () => {
-      const res = await fetch(`/api/register-page?${signupQuery}`);
+    const fetchLoginData = async () => {
+      const res = await fetch(`/api/login-page?${loginQuery}`);
       const data = await res.json();
       console.log(data?.data);
-      setSignupData(data?.data || null);
+      setLoginData(data?.data || null);
     };
-    fetchSignupData();
+    fetchLoginData();
   }, []);
 
   const formFields = [
-    { id: 1, label: "First Name", name: "firstName", type: "text" },
-    { id: 2, label: "Last Name", name: "lastName", type: "text" },
-    { id: 3, label: "Email", name: "email", type: "email" },
-    { id: 4, label: "Password", name: "password", type: "password" },
+    { id: 1, label: "Email", name: "email", type: "email" },
+    { id: 2, label: "Password", name: "password", type: "password" },
   ];
 
   const handleSocialLogin = async (provider) => {
@@ -53,25 +51,25 @@ const Signup = () => {
   };
 
   return (
-    <section className={signupStyles.container}>
+    <section className={loginStyles.container}>
       <Container>
         <Row className="align-items-center">
           <Col lg={6} className="mb-lg-0 mb-3">
             <div>
-              {signupData?.heroImage && (
+              {loginData?.heroImage && (
                 <Image
-                  src={getStrapiMedia(signupData?.heroImage?.url)}
-                  width={signupData?.heroImage?.width}
-                  height={signupData?.heroImage?.height}
-                  alt={signupData?.heroImage?.name}
-                  className={signupStyles.heroImage}
+                  src={getStrapiMedia(loginData?.heroImage?.url)}
+                  width={loginData?.heroImage?.width}
+                  height={loginData?.heroImage?.height}
+                  alt={loginData?.heroImage?.name}
+                  className={loginStyles.heroImage}
                 />
               )}
             </div>
           </Col>
           <Col lg={6}>
             <div className="text-center">
-              <h2 className={signupStyles.signupTitle}>{signupData?.title}</h2>
+              <h2 className={loginStyles.signupTitle}>{loginData?.title}</h2>
             </div>
             <div>
               <Form action={action}>
@@ -85,7 +83,7 @@ const Signup = () => {
                       name={formField.name}
                       type={formField.type}
                       placeholder={formField.label}
-                      className={signupStyles.formInput}
+                      className={loginStyles.formInput}
                       isInvalid={!!state?.errors?.[formField.name]}
                     />
                     {/* Show validation errors if they exist */}
@@ -96,34 +94,42 @@ const Signup = () => {
                     )}
                   </Form.Group>
                 ))}
+                <div className={loginStyles.forgotLinkContainer}>
+                  <Link
+                    href="/forgot-password"
+                    className={loginStyles.forgotLink}
+                  >
+                    {loginData?.forgotPasswordText}
+                  </Link>
+                </div>
                 <button
                   type="submit"
                   disabled={pending}
-                  className={signupStyles.formBtn}
+                  className={loginStyles.formBtn}
                 >
-                  {pending ? "Creating Account..." : signupData?.buttonText}
+                  {pending ? "Signing in..." : loginData?.buttonText}
                 </button>
                 {state?.message && (
                   <p className="text-danger">{state.message}</p>
                 )}
               </Form>
               <div className="text-center my-3">
-                <span className={signupStyles.loginText}>
-                  {signupData?.loginText}
+                <span className={loginStyles.loginText}>
+                  {loginData?.loginText}
                 </span>
                 <span>
                   <Link
-                    href={signupData?.loginLinkUrl || "/login"}
-                    className={signupStyles.loginLink}
+                    href={loginData?.loginLinkUrl || "/login"}
+                    className={loginStyles.loginLink}
                   >
-                    {signupData?.loginLinkText}
+                    {loginData?.loginLinkText}
                   </Link>
                 </span>
               </div>
               <div className="text-center">
                 <p>Or</p>
               </div>
-              <div className={signupStyles.socialIconContainer}>
+              <div className={loginStyles.socialIconContainer}>
                 {/* Apple Login */}
                 <button
                   type="button"
@@ -155,16 +161,11 @@ const Signup = () => {
                 </button>
               </div>
               <div className="text-center">
-                <p className={signupStyles.termsText}>
-                  {signupData?.termsText}{" "}
-                  <Link href={signupData?.termsLink || "/terms-and-condition"}>
-                    Terms & Conditions
-                  </Link>{" "}
-                  And{" "}
-                  <Link href={signupData?.privacyLink || "/privacy-policy"}>
-                    Privacy Policy
+                <p className={loginStyles.termsText}>
+                  {loginData?.signupText}{" "}
+                  <Link href={loginData?.signupLinkUrl || "/sign-up"}>
+                    {loginData?.signupLinkText}
                   </Link>
-                  .
                 </p>
               </div>
             </div>
@@ -175,4 +176,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
