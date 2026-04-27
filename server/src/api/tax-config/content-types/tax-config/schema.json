@@ -1,0 +1,38 @@
+{
+  "kind": "singleType",
+  "collectionName": "tax_configs",
+  "info": {
+    "singularName": "tax-config",
+    "pluralName": "tax-configs",
+    "displayName": "Tax Config"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "defaultTaxRate": {
+      "type": "decimal",
+      "required": true,
+      "default": 0.08
+    },
+    "taxLabel": {
+      "type": "string"
+    },
+    "taxInclusive": {
+      "type": "boolean",
+      "default": false
+    },
+    "regionRates": {
+      "type": "json"
+    },
+    "shippingThreshold": {
+      "type": "decimal",
+      "default": 0
+    },
+    "shippingFlatRate": {
+      "type": "decimal",
+      "default": 10
+    }
+  }
+}

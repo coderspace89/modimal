@@ -13,6 +13,7 @@
   --accordionbg: #f0f2ef;
   --fabricsBorder: #adadad;
   --formInputBorder: #606060;
+  --cartIcon: #404e3e;
 }
 
 @media (prefers-color-scheme: dark) {

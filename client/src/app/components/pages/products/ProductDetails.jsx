@@ -17,11 +17,15 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useFavorites } from "@/context/FavoritesContext";
+import { useCart } from "@/context/CartContext";
 
 const ProductDetails = ({ slug }) => {
   const [productDetails, setProductDetails] = useState(null);
-  const [selectedColors, setSelectedColors] = useState({});
-  const { favoriteIds, toggleFavorite, isFavorite } = useFavorites();
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [error, setError] = useState("");
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const { addItem } = useCart();
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   let sliderRef1 = useRef(null);
@@ -103,6 +107,15 @@ const ProductDetails = ({ slug }) => {
         },
       },
     ],
+  };
+
+  const handleAddToCart = () => {
+    if (!selectedColor || !selectedSize) {
+      setError("Please select a color and size");
+      return;
+    }
+    setError("");
+    addItem(productDetails, selectedSize, selectedColor, 1);
   };
 
   return (
@@ -197,16 +210,8 @@ const ProductDetails = ({ slug }) => {
                       type="radio"
                       name={`color-${productDetails?.id}`}
                       value={colorOption.id}
-                      checked={
-                        selectedColors[productDetails?.id]?.id ===
-                        colorOption.id
-                      }
-                      onChange={() =>
-                        setSelectedColors((prev) => ({
-                          ...prev,
-                          [productDetails?.id]: colorOption,
-                        }))
-                      }
+                      checked={selectedColor?.id === colorOption.id}
+                      onChange={() => setSelectedColor(colorOption)} // store whole object
                       className={productDetailStyles.colorInput}
                     />
                     <span
@@ -214,8 +219,7 @@ const ProductDetails = ({ slug }) => {
                       style={{ backgroundColor: colorOption.colorCode }}
                       title={colorOption.colorName}
                     >
-                      {selectedColors[productDetails?.id]?.id ===
-                        colorOption.id && (
+                      {selectedColor?.id === colorOption.id && (
                         <svg
                           className={productDetailStyles.checkmark}
                           viewBox="0 0 24 24"
@@ -251,15 +255,18 @@ const ProductDetails = ({ slug }) => {
                         id={size?.id}
                         key={size?.id}
                         className={productDetailStyles.formCheck}
+                        onClick={() => setSelectedSize(size)}
                       />
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
+              {error && <p className="text-danger mt-2">{error}</p>}
               <div className={productDetailStyles.addToCartBtnContainer}>
                 <Button
                   variant="success"
                   className={productDetailStyles.addToCartBtn}
+                  onClick={handleAddToCart}
                 >
                   Add To Cart
                 </Button>

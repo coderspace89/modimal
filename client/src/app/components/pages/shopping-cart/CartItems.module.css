@@ -1,0 +1,71 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 48px;
+}
+
+.removeBtn {
+  border: 0;
+  background-color: transparent;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.backBtn {
+  border: 0;
+  background-color: transparent;
+  color: var(--topbarbg);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.cartTitleContainer {
+  margin-bottom: clamp(24px, 3vw, 40px);
+  display: flex;
+  gap: 50px;
+}
+
+.orderSummaryContainer {
+  padding-bottom: clamp(16px, 3vw, 24px);
+  margin-bottom: clamp(24px, 3vw, 32px);
+  border-bottom: 1px solid var(--bordergray);
+}
+
+.orderSummaryLabel {
+  font-size: clamp(16px, 3vw, 18px);
+  font-weight: 400;
+  color: var(--black);
+}
+
+.cartTitle {
+  font-size: clamp(24px, 3vw, 32px);
+  color: var(--black);
+  font-weight: 600;
+}
+
+.productName {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+  text-transform: capitalize;
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+.productSizeColor {
+  font-size: 16px;
+  color: var(--neutralgray);
+  font-weight: 400;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-bottom: 24px;
+  }
+}

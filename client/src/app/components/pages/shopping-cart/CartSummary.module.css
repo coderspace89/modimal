@@ -1,0 +1,40 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 48px;
+}
+
+.continueLinkContainer {
+  margin-bottom: clamp(24px, 5vw, 90px);
+  text-align: end;
+  display: block;
+}
+
+.continueLink {
+  border: 0;
+  background-color: transparent;
+  color: var(--topbarbg);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: capitalize;
+  text-decoration: none;
+  display: block;
+}
+
+.orderSummaryContainer {
+  padding-bottom: clamp(16px, 3vw, 24px);
+  margin-bottom: clamp(24px, 3vw, 32px);
+  border-bottom: 1px solid var(--bordergray);
+  display: flex;
+}
+
+.orderSummaryLabel {
+  font-size: clamp(16px, 3vw, 18px);
+  font-weight: 400;
+  color: var(--black);
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 0;
+  }
+}

@@ -430,6 +430,50 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCartPageCartPage extends Struct.SingleTypeSchema {
+  collectionName: 'cart_pages';
+  info: {
+    displayName: 'Cart Page';
+    pluralName: 'cart-pages';
+    singularName: 'cart-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    backText: Schema.Attribute.String;
+    continueShoppingText: Schema.Attribute.String;
+    continueShoppingUrl: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    emptyCartText: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cart-page.cart-page'
+    > &
+      Schema.Attribute.Private;
+    nextButtonText: Schema.Attribute.String;
+    nextButtonUrl: Schema.Attribute.String;
+    orderSummaryLabel: Schema.Attribute.String;
+    priceLabel: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    quantityLabel: Schema.Attribute.String;
+    shippingDefaultText: Schema.Attribute.String;
+    shippingLabel: Schema.Attribute.String;
+    subtotalLabel: Schema.Attribute.String;
+    taxDisclaimer: Schema.Attribute.Text;
+    taxLabel: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    totalLabel: Schema.Attribute.String;
+    totalOrdersLabel: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -938,6 +982,41 @@ export interface ApiSizeSize extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTaxConfigTaxConfig extends Struct.SingleTypeSchema {
+  collectionName: 'tax_configs';
+  info: {
+    displayName: 'Tax Config';
+    pluralName: 'tax-configs';
+    singularName: 'tax-config';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    defaultTaxRate: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<0.08>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tax-config.tax-config'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    regionRates: Schema.Attribute.JSON;
+    shippingFlatRate: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<10>;
+    shippingThreshold: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    taxInclusive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    taxLabel: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1456,6 +1535,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::cart-page.cart-page': ApiCartPageCartPage;
       'api::category.category': ApiCategoryCategory;
       'api::collection.collection': ApiCollectionCollection;
       'api::color.color': ApiColorColor;
@@ -1471,6 +1551,7 @@ declare module '@strapi/strapi' {
       'api::register-page.register-page': ApiRegisterPageRegisterPage;
       'api::shop-all-page.shop-all-page': ApiShopAllPageShopAllPage;
       'api::size.size': ApiSizeSize;
+      'api::tax-config.tax-config': ApiTaxConfigTaxConfig;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

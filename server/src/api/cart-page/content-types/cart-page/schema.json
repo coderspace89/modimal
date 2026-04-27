@@ -1,0 +1,66 @@
+{
+  "kind": "singleType",
+  "collectionName": "cart_pages",
+  "info": {
+    "singularName": "cart-page",
+    "pluralName": "cart-pages",
+    "displayName": "Cart Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "backText": {
+      "type": "string"
+    },
+    "continueShoppingText": {
+      "type": "string"
+    },
+    "continueShoppingUrl": {
+      "type": "string"
+    },
+    "orderSummaryLabel": {
+      "type": "string"
+    },
+    "priceLabel": {
+      "type": "string"
+    },
+    "quantityLabel": {
+      "type": "string"
+    },
+    "totalLabel": {
+      "type": "string"
+    },
+    "subtotalLabel": {
+      "type": "string"
+    },
+    "taxLabel": {
+      "type": "string"
+    },
+    "shippingLabel": {
+      "type": "string"
+    },
+    "totalOrdersLabel": {
+      "type": "string"
+    },
+    "shippingDefaultText": {
+      "type": "string"
+    },
+    "taxDisclaimer": {
+      "type": "text"
+    },
+    "nextButtonText": {
+      "type": "string"
+    },
+    "nextButtonUrl": {
+      "type": "string"
+    },
+    "emptyCartText": {
+      "type": "string"
+    }
+  }
+}
