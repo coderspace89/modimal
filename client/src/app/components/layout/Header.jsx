@@ -13,6 +13,7 @@ import Form from "react-bootstrap/Form";
 import { useRouter, usePathname } from "next/navigation";
 import { FaHeart } from "react-icons/fa";
 import { useSearch } from "@/context/SearchContext";
+import { useCart } from "@/context/CartContext";
 
 const Header = () => {
   const [headerData, setHeaderData] = useState(null);
@@ -24,6 +25,7 @@ const Header = () => {
   const [show, setShow] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const { itemCount } = useCart();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(!show);
@@ -354,6 +356,19 @@ const Header = () => {
                               </span>
                             ) : pathname === "/favorites" && index === 2 ? (
                               <FaHeart color="#C30000" size={24} />
+                            ) : index === 3 ? (
+                              <span className="position-relative">
+                                <span className={headerStyles.cartItemCount}>
+                                  {itemCount === 0 ? "" : itemCount}
+                                </span>
+                                <Image
+                                  src={getStrapiMedia(headerIcon?.icon?.url)}
+                                  width={headerIcon?.icon?.width}
+                                  height={headerIcon?.icon?.height}
+                                  alt={headerIcon?.icon?.name}
+                                  className={headerStyles.mobileHeaderIcon}
+                                />
+                              </span>
                             ) : (
                               <Image
                                 src={getStrapiMedia(headerIcon?.icon?.url)}
@@ -509,6 +524,19 @@ const Header = () => {
                                 size={24}
                                 className={headerStyles.mobileHeaderIcon}
                               />
+                            ) : index === 3 ? (
+                              <span className="position-relative">
+                                <span className={headerStyles.cartItemCount}>
+                                  {itemCount === 0 ? "" : itemCount}
+                                </span>
+                                <Image
+                                  src={getStrapiMedia(headerIcon?.icon?.url)}
+                                  width={headerIcon?.icon?.width}
+                                  height={headerIcon?.icon?.height}
+                                  alt={headerIcon?.icon?.name}
+                                  className={headerStyles.mobileHeaderIcon}
+                                />
+                              </span>
                             ) : (
                               <Image
                                 src={getStrapiMedia(headerIcon?.icon?.url)}

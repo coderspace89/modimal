@@ -249,6 +249,14 @@
   border-bottom: 1px solid var(--form-placeholder);
 }
 
+.cartItemCount {
+  font-size: 10px;
+  color: var(--taxText);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 @media (max-width: 600px) {
   .searchContainer {
     padding: 20px;

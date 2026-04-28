@@ -64,8 +64,28 @@
   text-transform: capitalize;
 }
 
+.qtyBtnWrapper {
+  background-color: var(--placeholder);
+  display: inline-flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.qtyBtn {
+  border: 0;
+  background-color: transparent;
+}
+
 @media (max-width: 600px) {
   .container {
     margin-bottom: 24px;
+  }
+  .orderSummaryContainer {
+    margin-bottom: 16px;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  .removeBtn {
+    margin-bottom: 50px;
   }
 }

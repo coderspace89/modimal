@@ -10,6 +10,7 @@ import Image from "next/image";
 import { getStrapiMedia } from "@/lib/utils";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useRouter } from "next/navigation";
+import { FiMinus, FiPlus } from "react-icons/fi";
 
 const CartItems = () => {
   const [cartItemsData, setCartItemsData] = useState(null);
@@ -89,15 +90,35 @@ const CartItems = () => {
                     <p className={cartItemStyles.productSizeColor}>
                       Color: {item.color.colorName}
                     </p>
+                    <div className="d-lg-none d-block">
+                      <p>${item.price.toFixed(2)}</p>
+                    </div>
                   </div>
                 </div>
-                <div className="text-end">
+                <div className="d-flex justify-content-between align-items-end flex-column gap-4">
                   <button
                     onClick={() => removeItem(item.id)}
                     className={cartItemStyles.removeBtn}
                   >
                     <LiaTimesSolid size={24} color="#0C0C0C" />
                   </button>
+                  <div
+                    className={`${cartItemStyles.qtyBtnWrapper} d-lg-none d-inline-flex`}
+                  >
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      className={cartItemStyles.qtyBtn}
+                    >
+                      <FiMinus size={24} color="#404e3e" />
+                    </button>
+                    <span className="px-3">{item.quantity}</span>
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      className={cartItemStyles.qtyBtn}
+                    >
+                      <FiPlus size={24} color="#404e3e" />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
