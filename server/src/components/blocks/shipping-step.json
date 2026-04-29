@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_blocks_shipping_steps",
+  "info": {
+    "displayName": "shippingStep"
+  },
+  "options": {},
+  "attributes": {
+    "contactSectionTitle": {
+      "type": "string"
+    },
+    "shippingSectionTitle": {
+      "type": "string"
+    },
+    "deliveryOptionsLabel": {
+      "type": "string"
+    },
+    "expectedDateLabel": {
+      "type": "string"
+    },
+    "guaranteedLabel": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

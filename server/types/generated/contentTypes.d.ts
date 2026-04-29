@@ -504,6 +504,37 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCheckoutPageCheckoutPage extends Struct.SingleTypeSchema {
+  collectionName: 'checkout_pages';
+  info: {
+    displayName: 'Checkout Page';
+    pluralName: 'checkout-pages';
+    singularName: 'checkout-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    breadcrumbSteps: Schema.Attribute.JSON;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    info: Schema.Attribute.Component<'blocks.info-step', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::checkout-page.checkout-page'
+    > &
+      Schema.Attribute.Private;
+    payment: Schema.Attribute.Component<'blocks.payment-step', false>;
+    publishedAt: Schema.Attribute.DateTime;
+    shipping: Schema.Attribute.Component<'blocks.shipping-step', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCollectionCollection extends Struct.CollectionTypeSchema {
   collectionName: 'collections';
   info: {
@@ -805,6 +836,48 @@ export interface ApiNavigationItemNavigationItem
   };
 }
 
+export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
+  collectionName: 'orders';
+  info: {
+    displayName: 'Order';
+    pluralName: 'orders';
+    singularName: 'order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    emailOptIn: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    fulfillmentStatus: Schema.Attribute.Enumeration<
+      ['unfulfilled', 'fulfilled']
+    >;
+    items: Schema.Attribute.JSON;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
+      Schema.Attribute.Private;
+    orderNumber: Schema.Attribute.UID;
+    paymentIntentId: Schema.Attribute.String;
+    paymentStatus: Schema.Attribute.Enumeration<['pending', 'paid', 'failed']>;
+    publishedAt: Schema.Attribute.DateTime;
+    shipping: Schema.Attribute.Decimal;
+    shippingAddress: Schema.Attribute.JSON;
+    subtotal: Schema.Attribute.Decimal;
+    tax: Schema.Attribute.Decimal;
+    total: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiPlusSizePagePlusSizePage extends Struct.SingleTypeSchema {
   collectionName: 'plus_size_pages';
   info: {
@@ -925,6 +998,45 @@ export interface ApiRegisterPageRegisterPage extends Struct.SingleTypeSchema {
     termsLink: Schema.Attribute.String;
     termsText: Schema.Attribute.String;
     title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiShippingMethodShippingMethod
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'shipping_methods';
+  info: {
+    displayName: 'Shipping Method';
+    pluralName: 'shipping-methods';
+    singularName: 'shipping-method';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    estimatedDaysMax: Schema.Attribute.Integer;
+    estimatedDaysMin: Schema.Attribute.Integer;
+    guaranteeTime: Schema.Attribute.String;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    isGuaranteed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::shipping-method.shipping-method'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    order: Schema.Attribute.Integer;
+    price: Schema.Attribute.Decimal;
+    provider: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    regions: Schema.Attribute.JSON;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1500,6 +1612,7 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    orders: Schema.Attribute.Relation<'oneToMany', 'api::order.order'>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1537,6 +1650,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::cart-page.cart-page': ApiCartPageCartPage;
       'api::category.category': ApiCategoryCategory;
+      'api::checkout-page.checkout-page': ApiCheckoutPageCheckoutPage;
       'api::collection.collection': ApiCollectionCollection;
       'api::color.color': ApiColorColor;
       'api::fabric.fabric': ApiFabricFabric;
@@ -1546,9 +1660,11 @@ declare module '@strapi/strapi' {
       'api::mobile-menu.mobile-menu': ApiMobileMenuMobileMenu;
       'api::modiweek-day.modiweek-day': ApiModiweekDayModiweekDay;
       'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;
+      'api::order.order': ApiOrderOrder;
       'api::plus-size-page.plus-size-page': ApiPlusSizePagePlusSizePage;
       'api::product.product': ApiProductProduct;
       'api::register-page.register-page': ApiRegisterPageRegisterPage;
+      'api::shipping-method.shipping-method': ApiShippingMethodShippingMethod;
       'api::shop-all-page.shop-all-page': ApiShopAllPageShopAllPage;
       'api::size.size': ApiSizeSize;
       'api::tax-config.tax-config': ApiTaxConfigTaxConfig;

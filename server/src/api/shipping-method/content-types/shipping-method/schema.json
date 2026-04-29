@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shipping_methods",
+  "info": {
+    "singularName": "shipping-method",
+    "pluralName": "shipping-methods",
+    "displayName": "Shipping Method"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "regions": {
+      "type": "json"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "estimatedDaysMin": {
+      "type": "integer"
+    },
+    "estimatedDaysMax": {
+      "type": "integer"
+    },
+    "isGuaranteed": {
+      "type": "boolean",
+      "default": false
+    },
+    "guaranteeTime": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

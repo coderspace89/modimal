@@ -6,6 +6,7 @@ import Footer from "./components/layout/Footer";
 import { SearchProvider } from "@/context/SearchContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 import { CartProvider } from "@/context/CartContext";
+import { CheckoutProvider } from "@/context/CheckoutContext";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -24,9 +25,11 @@ export default function RootLayout({ children }) {
         <SearchProvider>
           <FavoritesProvider>
             <CartProvider>
-              <Header />
-              {children}
-              <Footer />
+              <CheckoutProvider>
+                <Header />
+                {children}
+                <Footer />
+              </CheckoutProvider>
             </CartProvider>
           </FavoritesProvider>
         </SearchProvider>

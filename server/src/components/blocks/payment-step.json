@@ -1,0 +1,55 @@
+{
+  "collectionName": "components_blocks_payment_steps",
+  "info": {
+    "displayName": "paymentStep"
+  },
+  "options": {},
+  "attributes": {
+    "billingAddressTitle": {
+      "type": "string"
+    },
+    "sameAsShippingText": {
+      "type": "text"
+    },
+    "alternativeAddressText": {
+      "type": "text"
+    },
+    "paymentTitle": {
+      "type": "string"
+    },
+    "paymentMethodLabel": {
+      "type": "text"
+    },
+    "cardNumberLabel": {
+      "type": "string"
+    },
+    "expiryDateLabel": {
+      "type": "string"
+    },
+    "monthPlaceholder": {
+      "type": "string"
+    },
+    "yearPlaceholder": {
+      "type": "string"
+    },
+    "securityCodeLabel": {
+      "type": "string"
+    },
+    "securityCodeHelpText": {
+      "type": "string"
+    },
+    "payButtonText": {
+      "type": "string"
+    },
+    "termsDisclaimer": {
+      "type": "text"
+    },
+    "termOfSaleUrl": {
+      "type": "string"
+    },
+    "privacyPolicyUrl": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

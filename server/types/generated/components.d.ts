@@ -88,6 +88,40 @@ export interface BlocksHeroSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksInfoStep extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_info_steps';
+  info: {
+    displayName: 'infoStep';
+  };
+  attributes: {
+    addressLabel: Schema.Attribute.String;
+    apartmentLabel: Schema.Attribute.String;
+    cartTitle: Schema.Attribute.String;
+    cityLabel: Schema.Attribute.String;
+    companyLabel: Schema.Attribute.String;
+    contactSectionTitle: Schema.Attribute.String;
+    continueToShippingText: Schema.Attribute.String;
+    countryLabel: Schema.Attribute.String;
+    emailLabel: Schema.Attribute.String;
+    emailOffersText: Schema.Attribute.String;
+    firstNameLabel: Schema.Attribute.String;
+    lastNameLabel: Schema.Attribute.String;
+    loginLinkText: Schema.Attribute.String;
+    loginLinkUrl: Schema.Attribute.String;
+    loginPromptText: Schema.Attribute.String;
+    phoneLabel: Schema.Attribute.String;
+    postalCodeLabel: Schema.Attribute.String;
+    returnToCartText: Schema.Attribute.String;
+    saveInfoText: Schema.Attribute.String;
+    shippingLabel: Schema.Attribute.String;
+    shippingSectionTitle: Schema.Attribute.String;
+    subtotalLabel: Schema.Attribute.String;
+    taxDisclaimer: Schema.Attribute.Text;
+    taxLabel: Schema.Attribute.String;
+    totalLabel: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksMegamenuColumn extends Struct.ComponentSchema {
   collectionName: 'components_blocks_megamenu_columns';
   info: {
@@ -124,6 +158,30 @@ export interface BlocksModiweekSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksPaymentStep extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_payment_steps';
+  info: {
+    displayName: 'paymentStep';
+  };
+  attributes: {
+    alternativeAddressText: Schema.Attribute.Text;
+    billingAddressTitle: Schema.Attribute.String;
+    cardNumberLabel: Schema.Attribute.String;
+    expiryDateLabel: Schema.Attribute.String;
+    monthPlaceholder: Schema.Attribute.String;
+    payButtonText: Schema.Attribute.String;
+    paymentMethodLabel: Schema.Attribute.Text;
+    paymentTitle: Schema.Attribute.String;
+    privacyPolicyUrl: Schema.Attribute.String;
+    sameAsShippingText: Schema.Attribute.Text;
+    securityCodeHelpText: Schema.Attribute.String;
+    securityCodeLabel: Schema.Attribute.String;
+    termOfSaleUrl: Schema.Attribute.String;
+    termsDisclaimer: Schema.Attribute.Text;
+    yearPlaceholder: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksProductAccordion extends Struct.ComponentSchema {
   collectionName: 'components_blocks_product_accordions';
   info: {
@@ -133,6 +191,20 @@ export interface BlocksProductAccordion extends Struct.ComponentSchema {
     content: Schema.Attribute.RichText;
     isOpen: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     title: Schema.Attribute.String;
+  };
+}
+
+export interface BlocksShippingStep extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_shipping_steps';
+  info: {
+    displayName: 'shippingStep';
+  };
+  attributes: {
+    contactSectionTitle: Schema.Attribute.String;
+    deliveryOptionsLabel: Schema.Attribute.String;
+    expectedDateLabel: Schema.Attribute.String;
+    guaranteedLabel: Schema.Attribute.String;
+    shippingSectionTitle: Schema.Attribute.String;
   };
 }
 
@@ -297,10 +369,13 @@ declare module '@strapi/strapi' {
       'blocks.follow-grid': BlocksFollowGrid;
       'blocks.follow-section': BlocksFollowSection;
       'blocks.hero-section': BlocksHeroSection;
+      'blocks.info-step': BlocksInfoStep;
       'blocks.megamenu-column': BlocksMegamenuColumn;
       'blocks.modiweek-card': BlocksModiweekCard;
       'blocks.modiweek-section': BlocksModiweekSection;
+      'blocks.payment-step': BlocksPaymentStep;
       'blocks.product-accordion': BlocksProductAccordion;
+      'blocks.shipping-step': BlocksShippingStep;
       'blocks.sustainability-section': BlocksSustainabilitySection;
       'elements.feature-tag': ElementsFeatureTag;
       'elements.footer-nav-link': ElementsFooterNavLink;

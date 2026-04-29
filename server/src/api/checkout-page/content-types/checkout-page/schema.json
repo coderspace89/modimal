@@ -1,0 +1,33 @@
+{
+  "kind": "singleType",
+  "collectionName": "checkout_pages",
+  "info": {
+    "singularName": "checkout-page",
+    "pluralName": "checkout-pages",
+    "displayName": "Checkout Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "breadcrumbSteps": {
+      "type": "json"
+    },
+    "info": {
+      "type": "component",
+      "component": "blocks.info-step",
+      "repeatable": false
+    },
+    "shipping": {
+      "type": "component",
+      "component": "blocks.shipping-step",
+      "repeatable": false
+    },
+    "payment": {
+      "type": "component",
+      "component": "blocks.payment-step",
+      "repeatable": false
+    }
+  }
+}

@@ -155,7 +155,7 @@ const CartSummary = () => {
               </p>
               <div className="text-end">
                 <Link
-                  href={cartSummaryData?.nextButtonUrl || "/checkout"}
+                  href={cartSummaryData?.nextButtonUrl || "/checkout/info"}
                   className={cartSummaryStyles.nextBtn}
                 >
                   {cartSummaryData?.nextButtonText}

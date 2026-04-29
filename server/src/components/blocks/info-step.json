@@ -1,0 +1,85 @@
+{
+  "collectionName": "components_blocks_info_steps",
+  "info": {
+    "displayName": "infoStep"
+  },
+  "options": {},
+  "attributes": {
+    "contactSectionTitle": {
+      "type": "string"
+    },
+    "loginPromptText": {
+      "type": "string"
+    },
+    "loginLinkText": {
+      "type": "string"
+    },
+    "loginLinkUrl": {
+      "type": "string"
+    },
+    "emailLabel": {
+      "type": "string"
+    },
+    "emailOffersText": {
+      "type": "string"
+    },
+    "shippingSectionTitle": {
+      "type": "string"
+    },
+    "countryLabel": {
+      "type": "string"
+    },
+    "firstNameLabel": {
+      "type": "string"
+    },
+    "lastNameLabel": {
+      "type": "string"
+    },
+    "companyLabel": {
+      "type": "string"
+    },
+    "addressLabel": {
+      "type": "string"
+    },
+    "apartmentLabel": {
+      "type": "string"
+    },
+    "postalCodeLabel": {
+      "type": "string"
+    },
+    "cityLabel": {
+      "type": "string"
+    },
+    "phoneLabel": {
+      "type": "string"
+    },
+    "saveInfoText": {
+      "type": "string"
+    },
+    "returnToCartText": {
+      "type": "string"
+    },
+    "continueToShippingText": {
+      "type": "string"
+    },
+    "cartTitle": {
+      "type": "string"
+    },
+    "subtotalLabel": {
+      "type": "string"
+    },
+    "taxLabel": {
+      "type": "string"
+    },
+    "shippingLabel": {
+      "type": "string"
+    },
+    "totalLabel": {
+      "type": "string"
+    },
+    "taxDisclaimer": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}
