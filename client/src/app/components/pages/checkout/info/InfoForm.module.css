@@ -84,9 +84,10 @@
   text-transform: capitalize;
 }
 
-.loginText span {
+.loginText a {
   color: var(--primary);
   text-transform: capitalize;
+  text-decoration: none;
 }
 
 .shippingTitle {
@@ -94,4 +95,35 @@
   color: var(--black);
   font-weight: 400;
   text-transform: capitalize;
+}
+
+.continueBtn {
+  color: var(--background);
+  background-color: var(--primary);
+  font-size: 14px;
+  padding: 8px 16px;
+  font-weight: 400;
+  border: 0;
+  border-radius: 0;
+}
+
+.returnLink {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.formBtnContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: clamp(24px, 3vw, 48px);
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
 }
