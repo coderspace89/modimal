@@ -19,6 +19,12 @@
     },
     "guaranteedLabel": {
       "type": "string"
+    },
+    "returnToInfoText": {
+      "type": "string"
+    },
+    "continueToPaymentText": {
+      "type": "string"
     }
   },
   "config": {}

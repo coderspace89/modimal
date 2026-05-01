@@ -11,11 +11,26 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { usePathname } from "next/navigation";
 
 const CheckoutCart = () => {
   const [checkoutCartData, setCheckoutCartData] = useState(null);
   const { items, updateQuantity, removeItem, subtotal, tax, shipping, total } =
     useCart();
+
+  const pathname = usePathname();
+
+  console.log(pathname);
+
+  // 1. Determine the current active index based on route
+  const activeIdx =
+    pathname === "/checkout/info"
+      ? 1
+      : pathname === "/checkout/shipping"
+        ? 2
+        : pathname === "/checkout/payment"
+          ? 3
+          : "";
 
   // Fetch Page Data
   useEffect(() => {
@@ -46,20 +61,24 @@ const CheckoutCart = () => {
               <Breadcrumb
                 className={`${checkoutCartStyles.breadcrumbsContainer} d-lg-none d-md-none d-block`}
               >
-                {checkoutCartData?.breadcrumbSteps?.map((step, idx) => (
-                  <Breadcrumb.Item
-                    key={step.text}
-                    href={step.link}
-                    active={idx === 1}
-                    className={
-                      idx === 1
-                        ? checkoutCartStyles.breadcrumbsText
-                        : checkoutCartStyles.breadcrumbsLink
-                    }
-                  >
-                    {step.text}
-                  </Breadcrumb.Item>
-                ))}
+                {checkoutCartData?.breadcrumbSteps?.map((step, idx) => {
+                  const isActive = idx === activeIdx;
+
+                  return (
+                    <Breadcrumb.Item
+                      key={step.text}
+                      href={isActive ? undefined : step.link} // Disable link if active
+                      active={isActive}
+                      className={
+                        isActive
+                          ? checkoutCartStyles.breadcrumbsText
+                          : checkoutCartStyles.breadcrumbsLink
+                      }
+                    >
+                      {step.text}
+                    </Breadcrumb.Item>
+                  );
+                })}
               </Breadcrumb>
               <div className={checkoutCartStyles.cartTitleContainer}>
                 <h2 className={checkoutCartStyles.cartTitle}>

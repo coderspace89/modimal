@@ -7,10 +7,12 @@ import { useRouter } from "next/navigation";
 import { IoChevronBackSharp } from "react-icons/io5";
 import qs from "qs";
 import infoFormStyles from "./InfoForm.module.css";
+import { useCheckout } from "@/context/CheckoutContext";
 
 const InfoForm = () => {
   const router = useRouter();
   const [infoFormData, setInfoFormData] = useState(null);
+  const { checkoutData, setCheckoutData } = useCheckout();
   const [form, setForm] = useState({
     email: "",
     emailOptIn: false,
@@ -56,6 +58,24 @@ const InfoForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     router.push("/checkout/shipping");
+    setCheckoutData({
+      ...checkoutData,
+      email: form.email,
+      emailOptIn: form.emailOptIn,
+      shippingAddress: {
+        country: form.country,
+        address: form.address,
+        apartment: form.apartment,
+        postalCode: form.postalCode,
+        city: form.city,
+      },
+      billingAddress: {
+        address: form.address,
+        apartment: form.apartment,
+        postalCode: form.postalCode,
+        city: form.city,
+      },
+    });
   };
 
   // Field Configuration

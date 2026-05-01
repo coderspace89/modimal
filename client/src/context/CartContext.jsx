@@ -7,6 +7,7 @@ export const CartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [taxConfig, setTaxConfig] = useState(null);
   const [shippingRegion, setShippingRegion] = useState("DEFAULT"); // PK-SD, US-CA, etc
+  const [shipping, setShipping] = useState(0);
 
   // Load cart + tax config
   useEffect(() => {
@@ -51,7 +52,6 @@ export const CartProvider = ({ children }) => {
   const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const taxRate = getTaxRate();
   const tax = subtotal * taxRate;
-  const shipping = getShippingCost(subtotal);
   const total = subtotal + tax + shipping;
 
   const addItem = (product, size, color, quantity = 1) => {
@@ -109,6 +109,7 @@ export const CartProvider = ({ children }) => {
         tax,
         taxRate, // expose so you can show "Tax (8%)"
         shipping,
+        setShipping,
         total,
         itemCount: items.reduce((sum, i) => sum + i.quantity, 0),
         setRegion,

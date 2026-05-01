@@ -201,9 +201,11 @@ export interface BlocksShippingStep extends Struct.ComponentSchema {
   };
   attributes: {
     contactSectionTitle: Schema.Attribute.String;
+    continueToPaymentText: Schema.Attribute.String;
     deliveryOptionsLabel: Schema.Attribute.String;
     expectedDateLabel: Schema.Attribute.String;
     guaranteedLabel: Schema.Attribute.String;
+    returnToInfoText: Schema.Attribute.String;
     shippingSectionTitle: Schema.Attribute.String;
   };
 }

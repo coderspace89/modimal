@@ -1,0 +1,86 @@
+.container {
+    margin-top: 150px;
+    margin-bottom: 48px;
+}
+
+.breadcrumbsContainer {
+    margin-bottom: clamp(25px, 3vw, 50px);
+}
+
+.breadcrumbsText {
+    color: var(--black) !important;
+    font-size: clamp(16px, 3vw, 18px);
+    text-decoration: none !important;
+    font-weight: 400;
+}
+
+.breadcrumbsLink a {
+    color: var(--primary) !important;
+    font-size: clamp(16px, 3vw, 18px);
+    text-decoration: none !important;
+    font-weight: 400;
+}
+
+.contactTitle {
+    font-size: clamp(16px, 3vw, 18px);
+    color: var(--black);
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.shipTitle {
+    font-size: clamp(16px, 3vw, 18px);
+    color: var(--black);
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.changeLink {
+    font-size: 14px;
+    color: var(--topbarbg);
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.deliveryTitle {
+    font-size: clamp(16px, 3vw, 20px);
+    font-weight: 700;
+    color: var(--black);
+    padding-bottom: clamp(16px, 3vw, 24px);
+    margin-bottom: clamp(24px, 3vw, 32px);
+    border-bottom: 1px solid var(--bordergray);
+}
+
+.providerName {
+    color: var(--lightgray);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.providerDescription {
+    color: var(--shippingText);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: clamp(24px, 3vw, 32px);
+}
+
+.expectedDateLabel {
+    color: var(--lightgray);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.expectedDateText {
+    color: var(--taxText);
+    font-size: clamp(14px, 3vw, 16px);
+    font-weight: 400;
+}
+
+@media(max-width:600px) {
+    .container {
+        margin-top: 0;
+        margin-bottom: 24px;
+    }
+}
