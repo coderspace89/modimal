@@ -4,7 +4,7 @@ import { useCheckout } from "@/context/CheckoutContext";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { FiChevronLeft } from "react-icons/fi";
+import { IoChevronBackSharp } from "react-icons/io5";
 import qs from "qs";
 import shippingOptionStyles from "./ShippingOptions.module.css";
 import Container from "react-bootstrap/Container";
@@ -242,8 +242,10 @@ const ShippingOptions = () => {
                         </div>
 
                         {isSelected && (
-                          <div className="row">
-                            <div className="col-lg-6">
+                          <div
+                            className={`${shippingOptionStyles.freeDeliveryContainer} row`}
+                          >
+                            <div className="col-lg-5">
                               <p
                                 className={
                                   shippingOptionStyles.expectedDateLabel
@@ -255,7 +257,7 @@ const ShippingOptions = () => {
                                 }
                               </p>
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-7">
                               <div className="row">
                                 {getExpectedDates(attr.estimatedDaysMin).map(
                                   (dateObj) => (
@@ -263,7 +265,11 @@ const ShippingOptions = () => {
                                       key={dateObj.id}
                                       className="col-6 mb-2"
                                     >
-                                      <div className="form-check">
+                                      <div
+                                        className={
+                                          shippingOptionStyles.formCheck
+                                        }
+                                      >
                                         <input
                                           type="radio"
                                           className="form-check-input"
@@ -296,17 +302,25 @@ const ShippingOptions = () => {
                     )}
 
                     {attr.isGuaranteed && (
-                      <div className="mt-4">
-                        <div className="d-flex justify-content-between align-items-start mb-2">
+                      <div className="mt-4 d-flex align-items-lg-center justify-content-between flex-lg-row flex-column">
+                        <div className="d-flex justify-content-between align-items-center mb-2">
                           <div>
-                            <h6 className="text-muted mb-1">
+                            <h6
+                              className={shippingOptionStyles.expectedDateLabel}
+                            >
                               {shippingOptionsData?.shipping?.guaranteedLabel}
                             </h6>
-                            <p className="text-muted mb-0">{attr.provider}</p>
+                            <p
+                              className={
+                                shippingOptionStyles.providerDescription
+                              }
+                            >
+                              {attr.provider}
+                            </p>
                           </div>
                         </div>
                         <div
-                          className={`d-flex justify-content-between align-items-center py-2 cursor-pointer ${isSelected ? "bg-light" : ""}`}
+                          className="d-flex justify-content-between align-items-center py-2 cursor-pointer"
                           onClick={() => {
                             handleSelectMethod(method);
                             setSelectedDate(
@@ -318,7 +332,7 @@ const ShippingOptions = () => {
                           }}
                           style={{ cursor: "pointer" }}
                         >
-                          <div className="form-check">
+                          <div className={shippingOptionStyles.formCheck}>
                             <input
                               type="radio"
                               className="form-check-input"
@@ -333,6 +347,11 @@ const ShippingOptions = () => {
                               )}
                             </label>
                           </div>
+                          <div className="d-lg-none d-flex">
+                            <strong>${attr.price.toFixed(2)}</strong>
+                          </div>
+                        </div>
+                        <div className="d-lg-flex d-none">
                           <strong>${attr.price.toFixed(2)}</strong>
                         </div>
                       </div>
@@ -341,15 +360,18 @@ const ShippingOptions = () => {
                 );
               })}
 
-              <div className="d-flex justify-content-between mt-5">
+              <div className={shippingOptionStyles.formBtnContainer}>
                 <Link
                   href="/checkout/info"
-                  className="text-decoration-none d-flex align-items-center"
+                  className={shippingOptionStyles.returnLink}
                 >
-                  <FiChevronLeft />{" "}
+                  <IoChevronBackSharp size={24} color="#5A6D57" />{" "}
                   {shippingOptionsData?.shipping?.returnToInfoText}
                 </Link>
-                <button onClick={handleContinue} className="btn btn-dark px-5">
+                <button
+                  onClick={handleContinue}
+                  className={shippingOptionStyles.continueBtn}
+                >
                   {shippingOptionsData?.shipping?.continueToPaymentText}
                 </button>
               </div>

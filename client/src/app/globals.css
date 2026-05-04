@@ -16,6 +16,7 @@
   --cartIcon: #404e3e;
   --taxText: #202020;
   --shippingText: #606060;
+  --formRadio: #a2b39f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -63,7 +64,7 @@ a {
   }
 }
 
-.slick-slide>div {
+.slick-slide > div {
   padding: 0 10px;
 }
 

@@ -1,86 +1,143 @@
 .container {
-    margin-top: 150px;
-    margin-bottom: 48px;
+  margin-top: 150px;
+  margin-bottom: 48px;
 }
 
 .breadcrumbsContainer {
-    margin-bottom: clamp(25px, 3vw, 50px);
+  margin-bottom: clamp(25px, 3vw, 50px);
 }
 
 .breadcrumbsText {
-    color: var(--black) !important;
-    font-size: clamp(16px, 3vw, 18px);
-    text-decoration: none !important;
-    font-weight: 400;
+  color: var(--black) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
 }
 
 .breadcrumbsLink a {
-    color: var(--primary) !important;
-    font-size: clamp(16px, 3vw, 18px);
-    text-decoration: none !important;
-    font-weight: 400;
+  color: var(--primary) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
 }
 
 .contactTitle {
-    font-size: clamp(16px, 3vw, 18px);
-    color: var(--black);
-    font-weight: 400;
-    text-transform: capitalize;
+  font-size: clamp(16px, 3vw, 18px);
+  color: var(--black);
+  font-weight: 400;
+  text-transform: capitalize;
 }
 
 .shipTitle {
-    font-size: clamp(16px, 3vw, 18px);
-    color: var(--black);
-    font-weight: 400;
-    text-transform: capitalize;
+  font-size: clamp(16px, 3vw, 18px);
+  color: var(--black);
+  font-weight: 400;
+  text-transform: capitalize;
 }
 
 .changeLink {
-    font-size: 14px;
-    color: var(--topbarbg);
-    font-weight: 400;
-    text-decoration: none;
+  font-size: 14px;
+  color: var(--topbarbg);
+  font-weight: 400;
+  text-decoration: none;
 }
 
 .deliveryTitle {
-    font-size: clamp(16px, 3vw, 20px);
-    font-weight: 700;
-    color: var(--black);
-    padding-bottom: clamp(16px, 3vw, 24px);
-    margin-bottom: clamp(24px, 3vw, 32px);
-    border-bottom: 1px solid var(--bordergray);
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: 700;
+  color: var(--black);
+  padding-bottom: clamp(16px, 3vw, 24px);
+  margin-bottom: clamp(24px, 3vw, 32px);
+  border-bottom: 1px solid var(--bordergray);
 }
 
 .providerName {
-    color: var(--lightgray);
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
+  color: var(--lightgray);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .providerDescription {
-    color: var(--shippingText);
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: clamp(24px, 3vw, 32px);
+  color: var(--shippingText);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: clamp(16px, 3vw, 24px);
 }
 
 .expectedDateLabel {
-    color: var(--lightgray);
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
+  color: var(--lightgray);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .expectedDateText {
-    color: var(--taxText);
-    font-size: clamp(14px, 3vw, 16px);
-    font-weight: 400;
+  color: var(--taxText);
+  font-size: clamp(14px, 3vw, 16px);
+  font-weight: 400;
 }
 
-@media(max-width:600px) {
-    .container {
-        margin-top: 0;
-        margin-bottom: 24px;
-    }
+.freeDeliveryContainer {
+  margin-bottom: clamp(24px, 3vw, 40px);
+  padding-bottom: clamp(24px, 3vw, 32px);
+  border-bottom: 1px solid var(--bordergray);
+}
+
+.formCheck input[type="radio"] {
+  border-radius: 0 !important;
+  color: var(--black);
+  text-transform: capitalize;
+  border-color: var(--formRadio) !important;
+  border-radius: 50% !important;
+}
+
+.formCheck input[type="radio"]:checked {
+  background-color: var(--topbarbg) !important;
+  border-color: var(--formRadio) !important;
+  /* background-image: none !important; */
+  accent-color: var(--formRadio) !important;
+}
+
+.formCheck input[type="radio"]:focus {
+  box-shadow: none !important;
+}
+
+.formCheck label {
+  color: var(--black) !important;
+  text-transform: capitalize !important;
+  font-weight: 400;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.continueBtn {
+  color: var(--background);
+  background-color: var(--primary);
+  font-size: 14px;
+  padding: 8px 16px;
+  font-weight: 400;
+  border: 0;
+  border-radius: 0;
+}
+
+.returnLink {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.formBtnContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: clamp(24px, 3vw, 48px);
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
 }

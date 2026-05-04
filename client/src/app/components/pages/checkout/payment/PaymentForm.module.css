@@ -1,0 +1,22 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 48px;
+}
+
+.breadcrumbsContainer {
+  margin-bottom: clamp(16px, 3vw, 24px);
+}
+
+.breadcrumbsText {
+  color: var(--black) !important;
+  font-size: clamp(14px, 3vw, 16px);
+  text-decoration: none !important;
+  font-weight: 400;
+}
+
+.breadcrumbsLink a {
+  color: var(--primary) !important;
+  font-size: clamp(14px, 3vw, 16px);
+  text-decoration: none !important;
+  font-weight: 400;
+}
