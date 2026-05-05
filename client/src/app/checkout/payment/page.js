@@ -15,11 +15,6 @@ const page = () => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    // 1. Fetch page labels from Strapi
-    // fetch("/api/checkout-page?populate=deep")
-    //   .then((res) => res.json())
-    //   .then((data) => setPageData(data?.data?.attributes));
-
     // 2. Create PaymentIntent and get clientSecret
     if (total > 0) {
       fetch("/api/create-payment-intent", {

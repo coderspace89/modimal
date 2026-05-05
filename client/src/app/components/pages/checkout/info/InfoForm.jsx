@@ -63,11 +63,14 @@ const InfoForm = () => {
       email: form.email,
       emailOptIn: form.emailOptIn,
       shippingAddress: {
+        firstName: form.firstName,
+        lastName: form.lastName,
         country: form.country,
         address: form.address,
         apartment: form.apartment,
         postalCode: form.postalCode,
         city: form.city,
+        phone: form.phone,
       },
       billingAddress: {
         address: form.address,

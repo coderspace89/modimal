@@ -17,7 +17,7 @@ import {
   MdLocationCity,
   MdPhone,
 } from "react-icons/md";
-import { BsInfoCircle } from "react-icons/bs";
+import { BsInfoCircle, BsMailboxFlag } from "react-icons/bs";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -26,7 +26,7 @@ import qs from "qs";
 import { usePathname } from "next/navigation";
 import paymentFormStyles from "./PaymentForm.module.css";
 
-const PaymentForm = ({ labels }) => {
+const PaymentForm = () => {
   const { checkoutData, setCheckoutData } = useCheckout();
   const { items, subtotal, tax, shipping, total, clearCart } = useCart();
   const router = useRouter();
@@ -85,6 +85,38 @@ const PaymentForm = ({ labels }) => {
     fetchPaymentFormData();
   }, []);
 
+  // Redirect if no checkout data
+  useEffect(() => {
+    if (!checkoutData?.shippingAddress || !checkoutData?.shippingMethod) {
+      router.push("/checkout/info");
+    }
+  }, [checkoutData, router]);
+
+  // Pre-fill billing from shipping if "Same As" is checked
+  useEffect(() => {
+    if (billingAddress.useShipping && checkoutData?.shippingAddress) {
+      const addr = checkoutData.shippingAddress;
+      setBillingAddress((prev) => ({
+        ...prev,
+        name: `${addr.firstName} ${addr.lastName}`,
+        email: checkoutData.email,
+        country: addr.country,
+        address1: addr.address,
+        address2: addr.apartment,
+        city: addr.city,
+        postalCode: addr.postalCode,
+        phone: addr.phone,
+      }));
+    }
+  }, [billingAddress.useShipping, checkoutData]);
+
+  // Redirect if no checkout data
+  useEffect(() => {
+    if (!checkoutData?.shippingAddress || !checkoutData?.shippingMethod) {
+      router.push("/checkout/info");
+    }
+  }, [checkoutData, router]);
+
   // Pre-fill billing from shipping if "Same As" is checked
   useEffect(() => {
     if (billingAddress.useShipping && checkoutData?.shippingAddress) {
@@ -110,106 +142,129 @@ const PaymentForm = ({ labels }) => {
     setIsProcessing(true);
     setError("");
 
-    try {
-      // 1. Create PaymentIntent on your backend
-      const res = await fetch("/api/create-payment-intent", {
+    // 1. Validate the PaymentElement
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      setError(submitError.message);
+      setIsProcessing(false);
+      return;
+    }
+
+    // 2. Create PaymentIntent on backend
+    const res = await fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: Math.round(total * 100), // Stripe uses cents
+        currency: "usd",
+        metadata: {
+          email: checkoutData.email,
+          shippingAddress: JSON.stringify(checkoutData.shippingAddress),
+          shippingMethod: JSON.stringify(checkoutData.shippingMethod),
+          items: JSON.stringify(
+            items.map((i) => ({
+              productId: i.productId,
+              name: i.product.name,
+              price: i.price,
+              quantity: i.quantity,
+              size: i.size.name,
+              color: i.color.colorName,
+              image: i.product.mainImage.url,
+            })),
+          ),
+          subtotal: Math.round(subtotal * 100),
+          tax: Math.round(tax * 100),
+          shipping: Math.round(shipping * 100),
+        },
+      }),
+    });
+
+    if (!res.ok) {
+      setError("Failed to initialize payment. Please try again.");
+      setIsProcessing(false);
+      return;
+    }
+
+    const { clientSecret } = await res.json();
+
+    // 3. Confirm payment - handles card, PayPal, Apple Pay automatically
+    const { error: stripeError, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      clientSecret,
+      confirmParams: {
+        return_url: `${window.location.origin}/checkout/success`,
+        payment_method_data: {
+          billing_details: {
+            name: billingAddress.name,
+            email: billingAddress.email,
+            address: {
+              line1: billingAddress.address1,
+              line2: billingAddress.address2,
+              city: billingAddress.city,
+              postal_code: billingAddress.postalCode,
+              country: billingAddress.country,
+            },
+            phone: billingAddress.phone,
+          },
+        },
+      },
+      redirect: "if_required", // Cards stay on page, PayPal redirects
+    });
+
+    if (stripeError) {
+      setError(stripeError.message);
+      setIsProcessing(false);
+      return;
+    }
+
+    // 4. Payment succeeded - create order in Strapi
+    if (paymentIntent.status === "succeeded") {
+      const orderRes = await fetch(`/api/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: Math.round(total * 100), // Stripe uses cents
-          currency: "usd",
-          metadata: {
+          data: {
+            orderNumber: paymentIntent.id,
             email: checkoutData.email,
-            shipping: JSON.stringify(checkoutData.shippingMethod),
+            shippingAddress: checkoutData.shippingAddress,
+            billingAddress: billingAddress,
+            items: items.map((i) => ({
+              productId: i.productId,
+              name: i.product.name,
+              price: i.price,
+              quantity: i.quantity,
+              size: i.size.name,
+              color: i.color.colorName,
+              image: i.product.mainImage.url,
+            })),
+            subtotal,
+            tax,
+            shipping,
+            total,
+            paymentStatus: "paid",
+            paymentIntentId: paymentIntent.id,
+            fulfillmentStatus: "unfulfilled",
+            emailOptIn: checkoutData.emailOptIn,
+            shippingMethod: checkoutData.shippingMethod,
           },
         }),
       });
-      const { clientSecret } = await res.json();
 
-      // 2. Confirm card payment
-      const cardElement = elements.getElement(CardElement);
-      const { error: stripeError, paymentIntent } =
-        await stripe.confirmCardPayment(clientSecret, {
-          payment_method: {
-            card: cardElement,
-            billing_details: {
-              name: billingAddress.name,
-              email: billingAddress.email,
-              address: {
-                line1: billingAddress.address1,
-                line2: billingAddress.address2,
-                city: billingAddress.city,
-                postal_code: billingAddress.postalCode,
-                country: billingAddress.country,
-              },
-              phone: billingAddress.phone,
-            },
-          },
-        });
-
-      if (stripeError) {
-        setError(stripeError.message);
+      if (!orderRes.ok) {
+        const errData = await orderRes.json();
+        console.error("Strapi error:", errData); // <-- Add this
+        setError(
+          `Payment succeeded but failed to save order: ${errData.error?.message || "Contact support"}`,
+        );
         setIsProcessing(false);
         return;
       }
 
-      // 3. Payment succeeded - create order in Strapi
-      if (paymentIntent.status === "succeeded") {
-        const orderRes = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/orders`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              data: {
-                orderNumber: paymentIntent.id,
-                email: checkoutData.email,
-                shippingAddress: checkoutData.shippingAddress,
-                billingAddress: billingAddress,
-                items: items.map((i) => ({
-                  productId: i.productId,
-                  name: i.product.name,
-                  price: i.price,
-                  quantity: i.quantity,
-                  size: i.size.name,
-                  color: i.color.colorName,
-                  image: i.product.mainImage.url,
-                })),
-                subtotal,
-                tax,
-                shipping,
-                total,
-                paymentStatus: "paid",
-                paymentIntentId: paymentIntent.id,
-                fulfillmentStatus: "unfulfilled",
-                emailOptIn: checkoutData.emailOptIn,
-                shippingMethod: checkoutData.shippingMethod,
-              },
-            }),
-          },
-        );
-
-        const order = await orderRes.json();
-        clearCart();
-        sessionStorage.removeItem("checkout");
-        router.push(`/checkout/success?orderId=${order.data.id}`);
-      }
-    } catch (err) {
-      setError("Payment failed. Please try again.");
-      setIsProcessing(false);
+      const order = await orderRes.json();
+      clearCart();
+      sessionStorage.removeItem("checkout");
+      router.push(`/checkout/success?orderId=${order.data.id}`);
     }
-  };
-
-  const cardStyle = {
-    style: {
-      base: {
-        fontSize: "16px",
-        color: "#424770",
-        "::placeholder": { color: "#aab7c4" },
-        padding: "10px 12px",
-      },
-      invalid: { color: "#9e2146" },
-    },
   };
 
   return (
@@ -382,7 +437,7 @@ const PaymentForm = ({ labels }) => {
                       />
                     </div>
                     <div className="position-relative mb-3">
-                      <MdLocationCity className="position-absolute top-50 translate-middle-y ms-2" />
+                      <BsMailboxFlag className="position-absolute top-50 translate-middle-y ms-2" />
                       <input
                         type="text"
                         placeholder="Zip / Postcode"
@@ -442,7 +497,9 @@ const PaymentForm = ({ labels }) => {
               </div>
 
               <div className="mb-3">
-                <label className="form-label">{labels?.cardNumberLabel}</label>
+                <label className="form-label">
+                  {paymentFormData?.payment?.cardNumberLabel}
+                </label>
                 <div className="form-control p-2">
                   <PaymentElement
                     options={{
@@ -455,18 +512,18 @@ const PaymentForm = ({ labels }) => {
               <div className="row mb-3">
                 <div className="col">
                   <label className="form-label">
-                    {labels?.expiryDateLabel}
+                    {paymentFormData?.payment?.expiryDateLabel}
                   </label>
                   <div className="d-flex gap-2">
                     <input
                       type="text"
-                      placeholder={labels?.monthPlaceholder}
+                      placeholder={paymentFormData?.payment?.monthPlaceholder}
                       className="form-control"
                       maxLength={2}
                     />
                     <input
                       type="text"
-                      placeholder={labels?.yearPlaceholder}
+                      placeholder={paymentFormData?.payment?.yearPlaceholder}
                       className="form-control"
                       maxLength={4}
                     />
@@ -476,14 +533,14 @@ const PaymentForm = ({ labels }) => {
 
               <div className="mb-4">
                 <label className="form-label d-flex align-items-center gap-2">
-                  {labels?.securityCodeLabel}
+                  {paymentFormData?.payment?.securityCodeLabel}
                   <BsInfoCircle
                     onClick={() => setShowCvcHelp(!showCvcHelp)}
                     style={{ cursor: "pointer" }}
                   />
                   {showCvcHelp && (
                     <small className="text-muted">
-                      {labels?.securityCodeHelpText}
+                      {paymentFormData?.payment?.securityCodeHelpText}
                     </small>
                   )}
                 </label>
@@ -502,18 +559,20 @@ const PaymentForm = ({ labels }) => {
                 disabled={!stripe || isProcessing}
                 className="btn btn-dark w-100 py-3 mb-3"
               >
-                {isProcessing ? "Processing..." : labels?.payButtonText}
+                {isProcessing
+                  ? "Processing..."
+                  : paymentFormData?.payment?.payButtonText}
               </button>
 
               <p className="small text-muted">
-                {labels?.termsDisclaimer
+                {paymentFormData?.payment?.termsDisclaimer
                   ?.replace(
                     "Term Of Sale",
-                    `<a href="${labels?.termOfSaleUrl}">Term Of Sale</a>`,
+                    `<a href="${paymentFormData?.payment?.termOfSaleUrl}">Term Of Sale</a>`,
                   )
                   .replace(
                     "Privacy Policy",
-                    `<a href="${labels?.privacyPolicyUrl}">Privacy Policy</a>`,
+                    `<a href="${paymentFormData?.payment?.privacyPolicyUrl}">Privacy Policy</a>`,
                   )}
               </p>
             </form>

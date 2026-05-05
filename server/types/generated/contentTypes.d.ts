@@ -847,6 +847,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    billingAddress: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -859,12 +860,13 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
-    orderNumber: Schema.Attribute.UID;
+    orderNumber: Schema.Attribute.String;
     paymentIntentId: Schema.Attribute.String;
     paymentStatus: Schema.Attribute.Enumeration<['pending', 'paid', 'failed']>;
     publishedAt: Schema.Attribute.DateTime;
     shipping: Schema.Attribute.Decimal;
     shippingAddress: Schema.Attribute.JSON;
+    shippingMethod: Schema.Attribute.JSON;
     subtotal: Schema.Attribute.Decimal;
     tax: Schema.Attribute.Decimal;
     total: Schema.Attribute.Decimal;
