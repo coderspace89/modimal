@@ -15,27 +15,50 @@ const page = () => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    // 2. Create PaymentIntent and get clientSecret
-    if (total > 0) {
+    // Create PaymentIntent only once
+    if (total > 0 && !clientSecret) {
       fetch("/api/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: Math.round(total * 100), // cents
+          amount: Math.round(total * 100),
           currency: "usd",
         }),
       })
         .then((res) => res.json())
         .then((data) => setClientSecret(data.clientSecret));
     }
-  }, [total]);
+  }, [total, clientSecret]); // Only run if clientSecret doesn't exist
 
-  if (!clientSecret) {
-    return <div className="p-5">Loading payment...</div>;
-  }
+  if (!clientSecret) return <div className="p-5">Loading payment...</div>;
+
+  // Stripe form styles
+  const appearance = {
+    theme: "none",
+    variables: {
+      fontFamily: "system-ui",
+      fontSizeBase: "16px",
+      borderRadius: "0.375rem", // Bootstrap .form-control radius
+    },
+    rules: {
+      ".Input": {
+        border: "1px solid #dee2e6", // Bootstrap border
+        padding: "0.375rem 0.75rem", // Bootstrap padding
+        lineHeight: "1.5",
+      },
+      ".Input:focus": {
+        borderColor: "#86b7fe", // Bootstrap focus
+        boxShadow: "0 0 0 0.25rem rgba(13, 110, 253, 0.25)",
+      },
+      ".Label": {
+        marginBottom: "0.5rem",
+        fontWeight: "400",
+      },
+    },
+  };
 
   return (
-    <Elements stripe={stripePromise} options={{ clientSecret }}>
+    <Elements stripe={stripePromise} options={{ clientSecret, appearance }}>
       <div>
         <PaymentForm />
       </div>

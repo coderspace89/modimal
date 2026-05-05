@@ -20,3 +20,61 @@
   text-decoration: none !important;
   font-weight: 400;
 }
+
+.billingAddressTitle,
+.paymentFormTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--bordergray);
+}
+
+.formCheck input[type="radio"] {
+  border-radius: 0 !important;
+  color: var(--black);
+  text-transform: capitalize;
+  border-color: var(--formRadio) !important;
+}
+
+.formCheck input[type="radio"]:checked {
+  background-color: var(--topbarbg) !important;
+  border-color: var(--formRadio) !important;
+  background-image: none !important;
+  accent-color: var(--formRadio) !important;
+}
+
+.formCheck input[type="radio"]:focus {
+  box-shadow: none !important;
+}
+
+.formCheck label {
+  color: var(--black) !important;
+  text-transform: capitalize !important;
+  font-weight: 400;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.formInput {
+  border-radius: 0 !important;
+  border: 1px solid var(--formInputBorder);
+  padding: 16px;
+  font-size: 12px;
+  font-weight: 400;
+  width: 100%;
+  padding-left: 50px;
+}
+
+.formInput::placeholder {
+  color: var(--formInputBorder);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.formInput:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid var(--formInputBorder);
+}

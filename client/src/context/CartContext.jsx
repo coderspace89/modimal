@@ -98,6 +98,12 @@ export const CartProvider = ({ children }) => {
   // Call this from checkout when user enters address
   const setRegion = (regionCode) => setShippingRegion(regionCode);
 
+  // clear cart
+  const clearCart = () => {
+    setItems([]);
+    localStorage.removeItem("cart");
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -115,6 +121,7 @@ export const CartProvider = ({ children }) => {
         setRegion,
         taxLabel: taxConfig?.taxLabel || "Tax",
         taxInclusive: taxConfig?.taxInclusive || false,
+        clearCart,
       }}
     >
       {children}

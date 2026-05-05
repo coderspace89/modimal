@@ -157,24 +157,31 @@ const PaymentForm = () => {
       body: JSON.stringify({
         amount: Math.round(total * 100), // Stripe uses cents
         currency: "usd",
+        // metadata: {
+        //   email: checkoutData.email,
+        //   shippingAddress: JSON.stringify(checkoutData.shippingAddress),
+        //   shippingMethod: JSON.stringify(checkoutData.shippingMethod),
+        //   items: JSON.stringify(
+        //     items.map((i) => ({
+        //       productId: i.productId,
+        //       name: i.product.name,
+        //       price: i.price,
+        //       quantity: i.quantity,
+        //       size: i.size.name,
+        //       color: i.color.colorName,
+        //       image: i.product.mainImage.url,
+        //     })),
+        //   ),
+        //   subtotal: Math.round(subtotal * 100),
+        //   tax: Math.round(tax * 100),
+        //   shipping: Math.round(shipping * 100),
+        // },
         metadata: {
           email: checkoutData.email,
-          shippingAddress: JSON.stringify(checkoutData.shippingAddress),
-          shippingMethod: JSON.stringify(checkoutData.shippingMethod),
-          items: JSON.stringify(
-            items.map((i) => ({
-              productId: i.productId,
-              name: i.product.name,
-              price: i.price,
-              quantity: i.quantity,
-              size: i.size.name,
-              color: i.color.colorName,
-              image: i.product.mainImage.url,
-            })),
-          ),
-          subtotal: Math.round(subtotal * 100),
-          tax: Math.round(tax * 100),
-          shipping: Math.round(shipping * 100),
+          order_total: total.toString(),
+          // Remove these - too large:
+          // shippingAddress: JSON.stringify(checkoutData.shippingAddress),
+          // items: JSON.stringify(items)
         },
       }),
     });
@@ -267,6 +274,37 @@ const PaymentForm = () => {
     }
   };
 
+  useEffect(() => {
+    if (total === 0) {
+      router.push("/shopping-cart");
+    }
+  }, [total, router]);
+
+  // render terms disclaimer
+  const renderTermsText = (text, termUrl, privacyUrl) => {
+    if (!text) return null;
+
+    const parts = text.split(/(Term Of Sale|Privacy Policy)/g);
+
+    return parts.map((part, i) => {
+      if (part === "Term Of Sale") {
+        return (
+          <Link key={i} href={termUrl || "/terms-and-condition"}>
+            Term Of Sale
+          </Link>
+        );
+      }
+      if (part === "Privacy Policy") {
+        return (
+          <Link key={i} href={privacyUrl || "/privacy-policy"}>
+            Privacy Policy
+          </Link>
+        );
+      }
+      return part;
+    });
+  };
+
   return (
     <section className={paymentFormStyles.container}>
       <Container>
@@ -297,11 +335,11 @@ const PaymentForm = () => {
           <Col lg={5}>
             <div>
               {/* Billing Address */}
-              <h3 className="mb-3">
+              <h6 className={paymentFormStyles.billingAddressTitle}>
                 {paymentFormData?.payment?.billingAddressTitle}
-              </h3>
+              </h6>
               <div className="mb-4">
-                <div className="form-check mb-2">
+                <div className={`${paymentFormStyles.formCheck} mb-3`}>
                   <input
                     type="radio"
                     className="form-check-input"
@@ -318,7 +356,7 @@ const PaymentForm = () => {
                     {paymentFormData?.payment?.sameAsShippingText}
                   </label>
                 </div>
-                <div className="form-check mb-3">
+                <div className={`${paymentFormStyles.formCheck} mb-3`}>
                   <input
                     type="radio"
                     className="form-check-input"
@@ -342,11 +380,15 @@ const PaymentForm = () => {
                 {!billingAddress.useShipping && (
                   <div>
                     <div className="position-relative mb-3">
-                      <MdPerson className="position-absolute top-50 translate-middle-y ms-2" />
+                      <MdPerson
+                        size={16}
+                        color="#606060"
+                        className="position-absolute top-50 translate-middle-y mx-3"
+                      />
                       <input
                         type="text"
                         placeholder="Name"
-                        className="form-control ps-5"
+                        className={paymentFormStyles.formInput}
                         value={billingAddress.name}
                         onChange={(e) =>
                           setBillingAddress({
@@ -358,11 +400,15 @@ const PaymentForm = () => {
                       />
                     </div>
                     <div className="position-relative mb-3">
-                      <MdEmail className="position-absolute top-50 translate-middle-y ms-2" />
+                      <MdEmail
+                        size={16}
+                        color="#606060"
+                        className="position-absolute top-50 translate-middle-y mx-3"
+                      />
                       <input
                         type="email"
                         placeholder="Email"
-                        className="form-control ps-5"
+                        className={paymentFormStyles.formInput}
                         value={billingAddress.email}
                         onChange={(e) =>
                           setBillingAddress({
@@ -374,11 +420,15 @@ const PaymentForm = () => {
                       />
                     </div>
                     <div className="position-relative mb-3">
-                      <MdFlag className="position-absolute top-50 translate-middle-y ms-2" />
+                      <MdFlag
+                        size={16}
+                        color="#606060"
+                        className="position-absolute top-50 translate-middle-y mx-3"
+                      />
                       <input
                         type="text"
                         placeholder="Country"
-                        className="form-control ps-5"
+                        className={paymentFormStyles.formInput}
                         value={billingAddress.country}
                         onChange={(e) =>
                           setBillingAddress({
@@ -390,11 +440,15 @@ const PaymentForm = () => {
                       />
                     </div>
                     <div className="position-relative mb-3">
-                      <MdHome className="position-absolute top-50 translate-middle-y ms-2" />
+                      <MdHome
+                        size={16}
+                        color="#606060"
+                        className="position-absolute top-50 translate-middle-y mx-3"
+                      />
                       <input
                         type="text"
                         placeholder="Address Line1"
-                        className="form-control ps-5"
+                        className={paymentFormStyles.formInput}
                         value={billingAddress.address1}
                         onChange={(e) =>
                           setBillingAddress({
@@ -406,11 +460,15 @@ const PaymentForm = () => {
                       />
                     </div>
                     <div className="position-relative mb-3">
-                      <MdHome className="position-absolute top-50 translate-middle-y ms-2" />
+                      <MdHome
+                        size={16}
+                        color="#606060"
+                        className="position-absolute top-50 translate-middle-y mx-3"
+                      />
                       <input
                         type="text"
                         placeholder="Address Line2"
-                        className="form-control ps-5"
+                        className={paymentFormStyles.formInput}
                         value={billingAddress.address2}
                         onChange={(e) =>
                           setBillingAddress({
@@ -421,11 +479,15 @@ const PaymentForm = () => {
                       />
                     </div>
                     <div className="position-relative mb-3">
-                      <MdLocationCity className="position-absolute top-50 translate-middle-y ms-2" />
+                      <MdLocationCity
+                        size={16}
+                        color="#606060"
+                        className="position-absolute top-50 translate-middle-y mx-3"
+                      />
                       <input
                         type="text"
                         placeholder="City / Suburb"
-                        className="form-control ps-5"
+                        className={paymentFormStyles.formInput}
                         value={billingAddress.city}
                         onChange={(e) =>
                           setBillingAddress({
@@ -437,11 +499,15 @@ const PaymentForm = () => {
                       />
                     </div>
                     <div className="position-relative mb-3">
-                      <BsMailboxFlag className="position-absolute top-50 translate-middle-y ms-2" />
+                      <BsMailboxFlag
+                        size={16}
+                        color="#606060"
+                        className="position-absolute top-50 translate-middle-y mx-3"
+                      />
                       <input
                         type="text"
                         placeholder="Zip / Postcode"
-                        className="form-control ps-5"
+                        className={paymentFormStyles.formInput}
                         value={billingAddress.postalCode}
                         onChange={(e) =>
                           setBillingAddress({
@@ -453,11 +519,15 @@ const PaymentForm = () => {
                       />
                     </div>
                     <div className="position-relative mb-3">
-                      <MdPhone className="position-absolute top-50 translate-middle-y ms-2" />
+                      <MdPhone
+                        size={16}
+                        color="#606060"
+                        className="position-absolute top-50 translate-middle-y mx-3"
+                      />
                       <input
                         type="tel"
                         placeholder="Phone"
-                        className="form-control ps-5"
+                        className={paymentFormStyles.formInput}
                         value={billingAddress.phone}
                         onChange={(e) =>
                           setBillingAddress({
@@ -477,29 +547,14 @@ const PaymentForm = () => {
             <form onSubmit={handlePayment}>
               {/* Payment Method */}
               <div>
-                <h3 className="mb-3">
+                <h6 className={paymentFormStyles.paymentFormTitle}>
                   {paymentFormData?.payment?.paymentTitle}
-                </h3>
+                </h6>
                 <p className="mb-3">
                   {paymentFormData?.payment?.paymentMethodLabel}
                 </p>
               </div>
-
-              <div className="d-flex gap-3 mb-4">
-                <img src="/amex.png" alt="Amex" style={{ height: 30 }} />
-                <img src="/visa.png" alt="Visa" style={{ height: 30 }} />
-                <img
-                  src="/mastercard.png"
-                  alt="Mastercard"
-                  style={{ height: 30 }}
-                />
-                <img src="/paypal.png" alt="PayPal" style={{ height: 30 }} />
-              </div>
-
               <div className="mb-3">
-                <label className="form-label">
-                  {paymentFormData?.payment?.cardNumberLabel}
-                </label>
                 <div className="form-control p-2">
                   <PaymentElement
                     options={{
@@ -507,49 +562,6 @@ const PaymentForm = () => {
                     }}
                   />
                 </div>
-              </div>
-
-              <div className="row mb-3">
-                <div className="col">
-                  <label className="form-label">
-                    {paymentFormData?.payment?.expiryDateLabel}
-                  </label>
-                  <div className="d-flex gap-2">
-                    <input
-                      type="text"
-                      placeholder={paymentFormData?.payment?.monthPlaceholder}
-                      className="form-control"
-                      maxLength={2}
-                    />
-                    <input
-                      type="text"
-                      placeholder={paymentFormData?.payment?.yearPlaceholder}
-                      className="form-control"
-                      maxLength={4}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-4">
-                <label className="form-label d-flex align-items-center gap-2">
-                  {paymentFormData?.payment?.securityCodeLabel}
-                  <BsInfoCircle
-                    onClick={() => setShowCvcHelp(!showCvcHelp)}
-                    style={{ cursor: "pointer" }}
-                  />
-                  {showCvcHelp && (
-                    <small className="text-muted">
-                      {paymentFormData?.payment?.securityCodeHelpText}
-                    </small>
-                  )}
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  maxLength={4}
-                  style={{ width: 150 }}
-                />
               </div>
 
               {error && <p className="text-danger mb-3">{error}</p>}
@@ -565,15 +577,11 @@ const PaymentForm = () => {
               </button>
 
               <p className="small text-muted">
-                {paymentFormData?.payment?.termsDisclaimer
-                  ?.replace(
-                    "Term Of Sale",
-                    `<a href="${paymentFormData?.payment?.termOfSaleUrl}">Term Of Sale</a>`,
-                  )
-                  .replace(
-                    "Privacy Policy",
-                    `<a href="${paymentFormData?.payment?.privacyPolicyUrl}">Privacy Policy</a>`,
-                  )}
+                {renderTermsText(
+                  paymentFormData?.payment?.termsDisclaimer,
+                  paymentFormData?.payment?.termOfSaleUrl,
+                  paymentFormData?.payment?.privacyPolicyUrl,
+                )}
               </p>
             </form>
           </Col>
