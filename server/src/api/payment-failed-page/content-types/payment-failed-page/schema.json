@@ -1,0 +1,43 @@
+{
+  "kind": "singleType",
+  "collectionName": "payment_failed_pages",
+  "info": {
+    "singularName": "payment-failed-page",
+    "pluralName": "payment-failed-pages",
+    "displayName": "Payment Failed Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description1": {
+      "type": "text"
+    },
+    "description2": {
+      "type": "text"
+    },
+    "description3": {
+      "type": "text"
+    },
+    "payNowButtonText": {
+      "type": "string"
+    },
+    "backToOrdersText": {
+      "type": "string"
+    },
+    "backToOrdersUrl": {
+      "type": "string"
+    },
+    "errorIcon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

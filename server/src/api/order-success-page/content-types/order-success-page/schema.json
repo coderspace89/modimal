@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "order_success_pages",
+  "info": {
+    "singularName": "order-success-page",
+    "pluralName": "order-success-pages",
+    "displayName": "Order Success Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "receiptText": {
+      "type": "string"
+    },
+    "contactHeading": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "successIcon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

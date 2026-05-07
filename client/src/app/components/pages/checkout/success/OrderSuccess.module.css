@@ -1,0 +1,48 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 48px;
+}
+
+.iconContainer {
+  margin-bottom: clamp(16px, 3vw, 24px);
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(28px, 3vw, 40px);
+  color: var(--successTitle);
+  font-weight: 700;
+  margin-bottom: clamp(24px, 3vw, 32px);
+  text-transform: capitalize;
+}
+
+.subtitle {
+  font-size: clamp(18px, 3vw, 20px);
+  color: var(--black);
+  font-weight: 400;
+  margin-bottom: 16px;
+  text-transform: capitalize;
+}
+
+.receiptText {
+  font-size: clamp(18px, 3vw, 20px);
+  color: var(--black);
+  font-weight: 400;
+  margin-bottom: clamp(24px, 3vw, 40px);
+  text-transform: capitalize;
+}
+
+.contactHeading {
+  font-size: clamp(16px, 3vw, 18px);
+  color: var(--neutralgray);
+  font-weight: 400;
+  margin-bottom: 16px;
+  text-transform: capitalize;
+}
+
+.phone {
+  font-size: 14px;
+  color: var(--neutralgray);
+  font-weight: 400;
+  margin-bottom: 8px;
+}

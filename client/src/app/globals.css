@@ -17,6 +17,8 @@
   --taxText: #202020;
   --shippingText: #606060;
   --formRadio: #a2b39f;
+  --successTitle: #00966d;
+  --failedTitle: #c30000;
 }
 
 @media (prefers-color-scheme: dark) {

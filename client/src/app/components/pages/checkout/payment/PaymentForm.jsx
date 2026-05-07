@@ -17,7 +17,7 @@ import {
   MdLocationCity,
   MdPhone,
 } from "react-icons/md";
-import { BsInfoCircle, BsMailboxFlag } from "react-icons/bs";
+import { BsMailboxFlag } from "react-icons/bs";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -44,10 +44,8 @@ const PaymentForm = () => {
     postalCode: "",
     phone: "",
   });
-  const [paymentMethod, setPaymentMethod] = useState("card");
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState("");
-  const [showCvcHelp, setShowCvcHelp] = useState(false);
 
   const pathname = usePathname();
 
@@ -221,6 +219,9 @@ const PaymentForm = () => {
     if (stripeError) {
       setError(stripeError.message);
       setIsProcessing(false);
+      router.push(
+        `/checkout/failed?message=${encodeURIComponent(stripeError.message)}`,
+      );
       return;
     }
 
@@ -274,11 +275,11 @@ const PaymentForm = () => {
     }
   };
 
-  useEffect(() => {
-    if (total === 0) {
-      router.push("/shopping-cart");
-    }
-  }, [total, router]);
+  // useEffect(() => {
+  //   if (total === 0) {
+  //     router.push("/shopping-cart");
+  //   }
+  // }, [total, router]);
 
   // render terms disclaimer
   const renderTermsText = (text, termUrl, privacyUrl) => {
@@ -289,14 +290,22 @@ const PaymentForm = () => {
     return parts.map((part, i) => {
       if (part === "Term Of Sale") {
         return (
-          <Link key={i} href={termUrl || "/terms-and-condition"}>
+          <Link
+            key={i}
+            href={termUrl || "/terms-and-condition"}
+            className={paymentFormStyles.termsLink}
+          >
             Term Of Sale
           </Link>
         );
       }
       if (part === "Privacy Policy") {
         return (
-          <Link key={i} href={privacyUrl || "/privacy-policy"}>
+          <Link
+            key={i}
+            href={privacyUrl || "/privacy-policy"}
+            className={paymentFormStyles.termsLink}
+          >
             Privacy Policy
           </Link>
         );
@@ -555,7 +564,7 @@ const PaymentForm = () => {
                 </p>
               </div>
               <div className="mb-3">
-                <div className="form-control p-2">
+                <div>
                   <PaymentElement
                     options={{
                       layout: "tabs", // shows Visa/MC/AMEX/PayPal as selectable tabs
@@ -569,14 +578,14 @@ const PaymentForm = () => {
               <button
                 type="submit"
                 disabled={!stripe || isProcessing}
-                className="btn btn-dark w-100 py-3 mb-3"
+                className={paymentFormStyles.paymentBtn}
               >
                 {isProcessing
                   ? "Processing..."
                   : paymentFormData?.payment?.payButtonText}
               </button>
 
-              <p className="small text-muted">
+              <p className={paymentFormStyles.termsText}>
                 {renderTermsText(
                   paymentFormData?.payment?.termsDisclaimer,
                   paymentFormData?.payment?.termOfSaleUrl,

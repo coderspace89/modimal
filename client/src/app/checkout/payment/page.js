@@ -36,23 +36,25 @@ const page = () => {
   const appearance = {
     theme: "none",
     variables: {
-      fontFamily: "system-ui",
+      fontFamily: "Montserrat, system-ui, sans-serif",
       fontSizeBase: "16px",
-      borderRadius: "0.375rem", // Bootstrap .form-control radius
+      borderRadius: "0", // Bootstrap .form-control radius
     },
     rules: {
       ".Input": {
-        border: "1px solid #dee2e6", // Bootstrap border
-        padding: "0.375rem 0.75rem", // Bootstrap padding
+        border: "1px solid #606060", // Bootstrap border
+        padding: "16px", // Bootstrap padding
         lineHeight: "1.5",
       },
       ".Input:focus": {
-        borderColor: "#86b7fe", // Bootstrap focus
-        boxShadow: "0 0 0 0.25rem rgba(13, 110, 253, 0.25)",
+        borderColor: "none", // Bootstrap focus
+        boxShadow: "none",
       },
       ".Label": {
         marginBottom: "0.5rem",
         fontWeight: "400",
+        fontSize: "16px",
+        color: "#0C0C0C",
       },
     },
   };

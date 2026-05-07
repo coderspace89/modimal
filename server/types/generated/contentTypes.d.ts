@@ -836,6 +836,41 @@ export interface ApiNavigationItemNavigationItem
   };
 }
 
+export interface ApiOrderSuccessPageOrderSuccessPage
+  extends Struct.SingleTypeSchema {
+  collectionName: 'order_success_pages';
+  info: {
+    displayName: 'Order Success Page';
+    pluralName: 'order-success-pages';
+    singularName: 'order-success-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    contactHeading: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::order-success-page.order-success-page'
+    > &
+      Schema.Attribute.Private;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    receiptText: Schema.Attribute.String;
+    subtitle: Schema.Attribute.String;
+    successIcon: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   collectionName: 'orders';
   info: {
@@ -877,6 +912,42 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+  };
+}
+
+export interface ApiPaymentFailedPagePaymentFailedPage
+  extends Struct.SingleTypeSchema {
+  collectionName: 'payment_failed_pages';
+  info: {
+    displayName: 'Payment Failed Page';
+    pluralName: 'payment-failed-pages';
+    singularName: 'payment-failed-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    backToOrdersText: Schema.Attribute.String;
+    backToOrdersUrl: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description1: Schema.Attribute.Text;
+    description2: Schema.Attribute.Text;
+    description3: Schema.Attribute.Text;
+    errorIcon: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::payment-failed-page.payment-failed-page'
+    > &
+      Schema.Attribute.Private;
+    payNowButtonText: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1662,7 +1733,9 @@ declare module '@strapi/strapi' {
       'api::mobile-menu.mobile-menu': ApiMobileMenuMobileMenu;
       'api::modiweek-day.modiweek-day': ApiModiweekDayModiweekDay;
       'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;
+      'api::order-success-page.order-success-page': ApiOrderSuccessPageOrderSuccessPage;
       'api::order.order': ApiOrderOrder;
+      'api::payment-failed-page.payment-failed-page': ApiPaymentFailedPagePaymentFailedPage;
       'api::plus-size-page.plus-size-page': ApiPlusSizePagePlusSizePage;
       'api::product.product': ApiProductProduct;
       'api::register-page.register-page': ApiRegisterPageRegisterPage;

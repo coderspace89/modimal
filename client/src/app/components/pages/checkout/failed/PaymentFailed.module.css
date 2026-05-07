@@ -1,0 +1,51 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 48px;
+}
+
+.iconContainer {
+  margin-bottom: clamp(16px, 3vw, 24px);
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(28px, 3vw, 40px);
+  color: var(--failedTitle);
+  font-weight: 700;
+  margin-bottom: clamp(24px, 3vw, 32px);
+  text-transform: capitalize;
+}
+
+.subtitle {
+  font-size: clamp(18px, 3vw, 20px);
+  color: var(--black);
+  font-weight: 400;
+  margin-bottom: 16px;
+  text-transform: capitalize;
+}
+
+.descriptionContainer {
+  margin-bottom: clamp(24px, 3vw, 48px);
+}
+
+.payNowLink {
+  max-width: 300px;
+  display: block;
+  text-decoration: none;
+  background-color: var(--topbarbg);
+  color: var(--background);
+  margin-bottom: clamp(16px, 3vw, 24px);
+  padding: 16px;
+}
+
+.backToOrdersLink {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@media (max-width: 600px) {
+  .payNowLink {
+    max-width: 100%;
+  }
+}

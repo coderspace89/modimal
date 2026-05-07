@@ -78,3 +78,29 @@
   outline: none;
   border: 1px solid var(--formInputBorder);
 }
+
+.paymentBtn {
+  color: var(--background);
+  background-color: var(--primary);
+  font-size: 16px;
+  padding: 16px;
+  font-weight: 400;
+  border: 0;
+  border-radius: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.termsText {
+  color: var(--taxText);
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.termsLink {
+  color: var(--primary);
+  font-weight: 400;
+  font-size: 12px;
+  text-decoration: underline;
+}
