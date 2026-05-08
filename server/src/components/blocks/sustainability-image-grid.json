@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blocks_sustainability_image_grids",
+  "info": {
+    "displayName": "Sustainability Image Grid"
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "component": "blocks.sustainability-grid-item",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

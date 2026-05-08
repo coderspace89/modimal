@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_blocks_sustainability_text_blocks",
+  "info": {
+    "displayName": "Sustainability Text Block"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    }
+  },
+  "config": {}
+}

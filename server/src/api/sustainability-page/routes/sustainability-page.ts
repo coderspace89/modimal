@@ -1,0 +1,7 @@
+/**
+ * sustainability-page router
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::sustainability-page.sustainability-page');

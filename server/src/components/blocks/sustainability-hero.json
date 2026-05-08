@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_blocks_sustainability_heroes",
+  "info": {
+    "displayName": "Sustainability Hero"
+  },
+  "options": {},
+  "attributes": {
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

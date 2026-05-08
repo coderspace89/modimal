@@ -1173,6 +1173,48 @@ export interface ApiSizeSize extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiSustainabilityPageSustainabilityPage
+  extends Struct.SingleTypeSchema {
+  collectionName: 'sustainability_pages';
+  info: {
+    displayName: 'Sustainability Page';
+    pluralName: 'sustainability-pages';
+    singularName: 'sustainability-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    heroBanner: Schema.Attribute.DynamicZone<['blocks.sustainability-hero']>;
+    imageGrid: Schema.Attribute.DynamicZone<
+      ['blocks.sustainability-image-grid']
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sustainability-page.sustainability-page'
+    > &
+      Schema.Attribute.Private;
+    peopleGallery: Schema.Attribute.DynamicZone<
+      ['blocks.sustainability-people-gallery']
+    >;
+    pillarsBlock: Schema.Attribute.DynamicZone<['blocks.pillars-wrapper']>;
+    publishedAt: Schema.Attribute.DateTime;
+    quoteBlock: Schema.Attribute.DynamicZone<
+      ['blocks.sustainability-quote-block']
+    >;
+    textBlock: Schema.Attribute.DynamicZone<
+      ['blocks.sustainability-text-block']
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTaxConfigTaxConfig extends Struct.SingleTypeSchema {
   collectionName: 'tax_configs';
   info: {
@@ -1742,6 +1784,7 @@ declare module '@strapi/strapi' {
       'api::shipping-method.shipping-method': ApiShippingMethodShippingMethod;
       'api::shop-all-page.shop-all-page': ApiShopAllPageShopAllPage;
       'api::size.size': ApiSizeSize;
+      'api::sustainability-page.sustainability-page': ApiSustainabilityPageSustainabilityPage;
       'api::tax-config.tax-config': ApiTaxConfigTaxConfig;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

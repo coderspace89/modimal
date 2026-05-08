@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_pillars_wrappers",
+  "info": {
+    "displayName": "Pillars Wrapper"
+  },
+  "options": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string"
+    },
+    "pillars": {
+      "type": "component",
+      "component": "blocks.sustainability-pillar",
+      "repeatable": true
+    },
+    "content": {
+      "type": "richtext"
+    }
+  },
+  "config": {}
+}

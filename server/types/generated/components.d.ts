@@ -182,6 +182,18 @@ export interface BlocksPaymentStep extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksPillarsWrapper extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_pillars_wrappers';
+  info: {
+    displayName: 'Pillars Wrapper';
+  };
+  attributes: {
+    content: Schema.Attribute.RichText;
+    pillars: Schema.Attribute.Component<'blocks.sustainability-pillar', true>;
+    sectionTitle: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksProductAccordion extends Struct.ComponentSchema {
   collectionName: 'components_blocks_product_accordions';
   info: {
@@ -210,6 +222,75 @@ export interface BlocksShippingStep extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksSustainabilityGridItem extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_sustainability_grid_items';
+  info: {
+    displayName: 'Sustainability Grid Item';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images'>;
+    label: Schema.Attribute.String;
+    link: Schema.Attribute.String;
+  };
+}
+
+export interface BlocksSustainabilityHero extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_sustainability_heroes';
+  info: {
+    displayName: 'Sustainability Hero';
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlocksSustainabilityImageGrid extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_sustainability_image_grids';
+  info: {
+    displayName: 'Sustainability Image Grid';
+  };
+  attributes: {
+    items: Schema.Attribute.Component<'blocks.sustainability-grid-item', true>;
+  };
+}
+
+export interface BlocksSustainabilityPeopleGallery
+  extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_sustainability_people_galleries';
+  info: {
+    displayName: 'Sustainability People Gallery';
+  };
+  attributes: {
+    buttonText: Schema.Attribute.String;
+    buttonUrl: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    images: Schema.Attribute.Media<'images', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlocksSustainabilityPillar extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_sustainability_pillars';
+  info: {
+    displayName: 'Sustainability Pillar';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlocksSustainabilityQuoteBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_sustainability_quote_blocks';
+  info: {
+    displayName: 'Sustainability Quote Block';
+  };
+  attributes: {
+    quote: Schema.Attribute.Text;
+  };
+}
+
 export interface BlocksSustainabilitySection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_sustainability_sections';
   info: {
@@ -219,6 +300,17 @@ export interface BlocksSustainabilitySection extends Struct.ComponentSchema {
     ctaLabel: Schema.Attribute.String;
     ctaUrl: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlocksSustainabilityTextBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_sustainability_text_blocks';
+  info: {
+    displayName: 'Sustainability Text Block';
+  };
+  attributes: {
+    content: Schema.Attribute.RichText;
     title: Schema.Attribute.String;
   };
 }
@@ -376,9 +468,17 @@ declare module '@strapi/strapi' {
       'blocks.modiweek-card': BlocksModiweekCard;
       'blocks.modiweek-section': BlocksModiweekSection;
       'blocks.payment-step': BlocksPaymentStep;
+      'blocks.pillars-wrapper': BlocksPillarsWrapper;
       'blocks.product-accordion': BlocksProductAccordion;
       'blocks.shipping-step': BlocksShippingStep;
+      'blocks.sustainability-grid-item': BlocksSustainabilityGridItem;
+      'blocks.sustainability-hero': BlocksSustainabilityHero;
+      'blocks.sustainability-image-grid': BlocksSustainabilityImageGrid;
+      'blocks.sustainability-people-gallery': BlocksSustainabilityPeopleGallery;
+      'blocks.sustainability-pillar': BlocksSustainabilityPillar;
+      'blocks.sustainability-quote-block': BlocksSustainabilityQuoteBlock;
       'blocks.sustainability-section': BlocksSustainabilitySection;
+      'blocks.sustainability-text-block': BlocksSustainabilityTextBlock;
       'elements.feature-tag': ElementsFeatureTag;
       'elements.footer-nav-link': ElementsFooterNavLink;
       'elements.footer-nav-section': ElementsFooterNavSection;

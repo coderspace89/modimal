@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_blocks_sustainability_quote_blocks",
+  "info": {
+    "displayName": "Sustainability Quote Block"
+  },
+  "options": {},
+  "attributes": {
+    "quote": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

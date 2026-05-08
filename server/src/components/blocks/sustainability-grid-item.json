@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_blocks_sustainability_grid_items",
+  "info": {
+    "displayName": "Sustainability Grid Item"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "label": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

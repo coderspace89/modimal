@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_blocks_sustainability_people_galleries",
+  "info": {
+    "displayName": "Sustainability People Gallery"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "buttonUrl": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,18 @@
+.container {
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: clamp(24px, 3vw, 32px);
+  color: var(--black);
+  margin-bottom: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.content {
+  text-transform: capitalize;
+  font-weight: 400;
+  color: var(--black);
+  font-size: clamp(16px, 3vw, 20px);
+}

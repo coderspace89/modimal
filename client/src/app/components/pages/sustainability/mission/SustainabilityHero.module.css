@@ -1,0 +1,45 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 32px;
+}
+
+.breadcrumbsContainer {
+  margin-bottom: clamp(16px, 3vw, 24px);
+}
+
+.breadcrumbsText {
+  color: var(--black) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.breadcrumbsLink a {
+  color: var(--primary) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.heroImageContainer {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 600px;
+  position: relative;
+}
+
+.title {
+  font-size: clamp(24px, 3vw, 32px);
+  color: var(--background);
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .heroImageContainer {
+    height: 360px;
+  }
+}

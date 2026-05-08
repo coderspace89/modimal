@@ -1,0 +1,51 @@
+{
+  "kind": "singleType",
+  "collectionName": "sustainability_pages",
+  "info": {
+    "singularName": "sustainability-page",
+    "pluralName": "sustainability-pages",
+    "displayName": "Sustainability Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroBanner": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.sustainability-hero"
+      ]
+    },
+    "textBlock": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.sustainability-text-block"
+      ]
+    },
+    "pillarsBlock": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.pillars-wrapper"
+      ]
+    },
+    "imageGrid": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.sustainability-image-grid"
+      ]
+    },
+    "quoteBlock": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.sustainability-quote-block"
+      ]
+    },
+    "peopleGallery": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.sustainability-people-gallery"
+      ]
+    }
+  }
+}

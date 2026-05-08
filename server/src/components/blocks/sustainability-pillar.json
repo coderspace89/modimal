@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_blocks_sustainability_pillars",
+  "info": {
+    "displayName": "Sustainability Pillar"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}
