@@ -1,0 +1,39 @@
+.container {
+  margin-bottom: 48px;
+}
+
+.sectionTitleContainer {
+  margin-bottom: clamp(24px, 3vw, 32px);
+}
+
+.sectionTitle {
+  font-size: clamp(14px, 3vw, 24px);
+  font-weight: 700;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.pillarTitle {
+  font-size: clamp(14px, 3vw, 20px);
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: clamp(8px, 3vw, 16px);
+  text-transform: capitalize;
+}
+
+.pillarText {
+  font-size: clamp(14px, 3vw, 18px);
+  font-weight: 400;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.pillarColumn {
+  margin-bottom: clamp(24px, 3vw, 48px);
+}
+
+@media (max-width: 600px) {
+  .pillarTitle {
+    margin-bottom: 0;
+  }
+}

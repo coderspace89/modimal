@@ -4,6 +4,10 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TextBlock from "@/app/components/pages/sustainability/mission/TextBlock";
+import PillarsBlock from "@/app/components/pages/sustainability/mission/PillarsBlock";
+import ImageGrid from "@/app/components/pages/sustainability/mission/ImageGrid";
+import QuoteBlock from "@/app/components/pages/sustainability/mission/QuoteBlock";
+import PeopleGallery from "@/app/components/pages/sustainability/mission/PeopleGallery";
 
 const page = () => {
   return (
@@ -17,8 +21,20 @@ const page = () => {
       </Container>
       <Container>
         <Row>
-          <Col>
+          <Col lg={12}>
             <TextBlock />
+          </Col>
+          <Col lg={12}>
+            <PillarsBlock />
+          </Col>
+          <Col lg={12}>
+            <ImageGrid />
+          </Col>
+          <Col lg={12}>
+            <QuoteBlock />
+          </Col>
+          <Col lg={12}>
+            <PeopleGallery />
           </Col>
         </Row>
       </Container>

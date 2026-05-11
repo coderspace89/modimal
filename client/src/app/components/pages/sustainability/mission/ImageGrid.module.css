@@ -1,0 +1,90 @@
+.container {
+  margin-bottom: 48px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 8px;
+}
+
+.gridItem {
+  background-color: #fff;
+}
+
+/* Stagger heights to match screenshot layout */
+.gridItem:nth-child(1) {
+  grid-row: span 1; /* Processing - shorter */
+}
+
+.gridItem:nth-child(2) {
+  grid-row: span 2; /* Materials - taller */
+}
+
+.gridItem:nth-child(3) {
+  grid-row: span 2; /* Packaging - taller */
+}
+
+.gridItem:nth-child(4) {
+  grid-row: span 1; /* Product Caring - shorter */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  margin-bottom: clamp(8px, 3vw, 16px);
+}
+
+/* Different aspect ratios per item to match screenshot */
+.gridItem:nth-child(1) .imageWrap {
+  aspect-ratio: 4/3; /* Processing */
+}
+
+.gridItem:nth-child(2) .imageWrap {
+  aspect-ratio: 3/4; /* Materials - taller */
+}
+
+.gridItem:nth-child(3) .imageWrap {
+  aspect-ratio: 3/4; /* Packaging - taller */
+}
+
+.gridItem:nth-child(4) .imageWrap {
+  aspect-ratio: 4/3; /* Product Caring */
+}
+
+.image {
+  object-fit: cover;
+}
+
+.label {
+  background-color: var(--primary); /* Sage green from screenshot */
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* Mobile: stack to 1 column */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .gridItem:nth-child(n) {
+    grid-row: span 1;
+  }
+
+  /* .imageWrap {
+    aspect-ratio: 4/3 !important;
+  } */
+}

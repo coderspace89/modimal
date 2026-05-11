@@ -1,0 +1,10 @@
+.container {
+  margin-bottom: 48px;
+}
+
+.content {
+  text-transform: capitalize;
+  font-weight: 400;
+  color: var(--black);
+  font-size: clamp(14px, 3vw, 20px);
+}

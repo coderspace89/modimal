@@ -82,7 +82,7 @@ const SustainabilityHero = () => {
             backgroundImage: bgUrl ? `url(${bgUrl})` : "none",
           }}
         >
-          <div className="position-absolute bottom-0 start-50 translate-middle">
+          <div className="position-absolute bottom-0 start-50 translate-middle d-flex align-items-center justify-content-center w-100">
             <h2 className={sustainabilityHeroStyles.title}>
               {heroSectionData?.title}
             </h2>

@@ -33,7 +33,7 @@
 }
 
 .title {
-  font-size: clamp(24px, 3vw, 32px);
+  font-size: clamp(14px, 3vw, 32px);
   color: var(--background);
   font-weight: 700;
 }
