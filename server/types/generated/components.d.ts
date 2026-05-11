@@ -122,6 +122,20 @@ export interface BlocksInfoStep extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksMaterialSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_material_sections';
+  info: {
+    displayName: 'Material Section';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText;
+    image: Schema.Attribute.Media<'images'>;
+    imagePosition: Schema.Attribute.Enumeration<['left', 'right']> &
+      Schema.Attribute.DefaultTo<'left'>;
+    name: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksMegamenuColumn extends Struct.ComponentSchema {
   collectionName: 'components_blocks_megamenu_columns';
   info: {
@@ -464,6 +478,7 @@ declare module '@strapi/strapi' {
       'blocks.follow-section': BlocksFollowSection;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.info-step': BlocksInfoStep;
+      'blocks.material-section': BlocksMaterialSection;
       'blocks.megamenu-column': BlocksMegamenuColumn;
       'blocks.modiweek-card': BlocksModiweekCard;
       'blocks.modiweek-section': BlocksModiweekSection;

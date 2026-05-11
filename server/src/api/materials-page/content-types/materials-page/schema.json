@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "materials_pages",
+  "info": {
+    "singularName": "materials-page",
+    "pluralName": "materials-pages",
+    "displayName": "Materials Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "introText": {
+      "type": "richtext"
+    },
+    "closingText": {
+      "type": "richtext"
+    },
+    "reportLink": {
+      "type": "string"
+    },
+    "materials": {
+      "type": "component",
+      "component": "blocks.material-section",
+      "repeatable": true
+    }
+  }
+}

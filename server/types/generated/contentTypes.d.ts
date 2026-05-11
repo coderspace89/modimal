@@ -719,6 +719,38 @@ export interface ApiLoginPageLoginPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiMaterialsPageMaterialsPage extends Struct.SingleTypeSchema {
+  collectionName: 'materials_pages';
+  info: {
+    displayName: 'Materials Page';
+    pluralName: 'materials-pages';
+    singularName: 'materials-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    closingText: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    introText: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::materials-page.materials-page'
+    > &
+      Schema.Attribute.Private;
+    materials: Schema.Attribute.Component<'blocks.material-section', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    reportLink: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMobileMenuMobileMenu extends Struct.SingleTypeSchema {
   collectionName: 'mobile_menus';
   info: {
@@ -1772,6 +1804,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::login-page.login-page': ApiLoginPageLoginPage;
+      'api::materials-page.materials-page': ApiMaterialsPageMaterialsPage;
       'api::mobile-menu.mobile-menu': ApiMobileMenuMobileMenu;
       'api::modiweek-day.modiweek-day': ApiModiweekDayModiweekDay;
       'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;

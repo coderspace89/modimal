@@ -1,0 +1,77 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 32px;
+}
+
+.breadcrumbsContainer {
+  margin-bottom: clamp(16px, 3vw, 24px);
+}
+
+.breadcrumbsText {
+  color: var(--black) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.breadcrumbsLink a {
+  color: var(--primary) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.materialImage {
+  width: 100%;
+  height: 100%;
+}
+
+.materialsRow {
+  margin-bottom: clamp(16px, 3vw, 24px);
+}
+
+.markdownContainer > p {
+  text-transform: capitalize;
+  color: var(--black);
+  font-size: clamp(14px, 3vw, 20px);
+}
+
+.markdownLink {
+  color: var(--primary);
+}
+
+.title {
+  font-size: clamp(14px, 3vw, 32px);
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: clamp(8px, 3vw, 32px);
+  text-transform: capitalize;
+}
+
+.introContainer {
+  margin-bottom: clamp(24px, 3vw, 48px);
+}
+
+.materialName {
+  font-size: clamp(14px, 3vw, 24px);
+  color: var(--black);
+  font-weight: 700;
+  margin-bottom: clamp(8px, 3vw, 16px);
+  text-transform: capitalize;
+}
+
+.materialText {
+  font-size: clamp(14px, 3vw, 18px);
+  color: var(--black);
+  font-weight: 400;
+  margin-bottom: clamp(8px, 3vw, 16px);
+  text-transform: capitalize;
+}
+
+@media (max-width: 600px) {
+  .materialImage {
+    margin-bottom: 16px;
+  }
+}
