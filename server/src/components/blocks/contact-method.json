@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_blocks_contact_methods",
+  "info": {
+    "displayName": "Contact Method"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "buttonLink": {
+      "type": "string"
+    },
+    "buttonType": {
+      "type": "enumeration",
+      "enum": [
+        "chat",
+        "phone",
+        "email"
+      ]
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

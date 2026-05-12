@@ -590,6 +590,44 @@ export interface ApiColorColor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiContactUsPageContactUsPage extends Struct.SingleTypeSchema {
+  collectionName: 'contact_us_pages';
+  info: {
+    displayName: 'Contact Us Page';
+    pluralName: 'contact-us-pages';
+    singularName: 'contact-us-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    contactMethods: Schema.Attribute.Component<'blocks.contact-method', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    formSectionTitle: Schema.Attribute.String;
+    formSubtitle: Schema.Attribute.String;
+    introText: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact-us-page.contact-us-page'
+    > &
+      Schema.Attribute.Private;
+    privacyCheckboxText: Schema.Attribute.Text;
+    privacyPolicyLink: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    responseTimeText: Schema.Attribute.Text;
+    subjectOptions: Schema.Attribute.JSON;
+    supportEmail: Schema.Attribute.Email;
+    supportPhone: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFabricFabric extends Struct.CollectionTypeSchema {
   collectionName: 'fabrics';
   info: {
@@ -1800,6 +1838,7 @@ declare module '@strapi/strapi' {
       'api::checkout-page.checkout-page': ApiCheckoutPageCheckoutPage;
       'api::collection.collection': ApiCollectionCollection;
       'api::color.color': ApiColorColor;
+      'api::contact-us-page.contact-us-page': ApiContactUsPageContactUsPage;
       'api::fabric.fabric': ApiFabricFabric;
       'api::global.global': ApiGlobalGlobal;
       'api::home-page.home-page': ApiHomePageHomePage;

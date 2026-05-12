@@ -1,0 +1,8 @@
+.container {
+  margin-bottom: 48px;
+}
+
+.contactCard {
+  background-color: var(--accordiobg);
+  padding: 16px;
+}

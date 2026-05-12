@@ -1,0 +1,50 @@
+{
+  "kind": "singleType",
+  "collectionName": "contact_us_pages",
+  "info": {
+    "singularName": "contact-us-page",
+    "pluralName": "contact-us-pages",
+    "displayName": "Contact Us Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "introText": {
+      "type": "richtext"
+    },
+    "formSectionTitle": {
+      "type": "string"
+    },
+    "formSubtitle": {
+      "type": "string"
+    },
+    "subjectOptions": {
+      "type": "json"
+    },
+    "privacyCheckboxText": {
+      "type": "text"
+    },
+    "privacyPolicyLink": {
+      "type": "string"
+    },
+    "supportEmail": {
+      "type": "email"
+    },
+    "supportPhone": {
+      "type": "string"
+    },
+    "responseTimeText": {
+      "type": "text"
+    },
+    "contactMethods": {
+      "type": "component",
+      "component": "blocks.contact-method",
+      "repeatable": true
+    }
+  }
+}

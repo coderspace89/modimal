@@ -10,7 +10,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "next/image";
 import { getStrapiMedia } from "@/lib/utils";
-import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
 const MaterialsPage = () => {

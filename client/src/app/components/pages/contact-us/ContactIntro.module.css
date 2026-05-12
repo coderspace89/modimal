@@ -1,0 +1,47 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 32px;
+}
+
+.breadcrumbsContainer {
+  margin-bottom: clamp(16px, 3vw, 24px);
+}
+
+.breadcrumbsText {
+  color: var(--black) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.breadcrumbsLink a {
+  color: var(--primary) !important;
+  font-size: clamp(16px, 3vw, 18px);
+  text-decoration: none !important;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.titleContainer {
+  margin-bottom: clamp(12px, 3vw, 24px);
+}
+
+.title {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  color: var(--black);
+}
+
+.markdownContainer {
+  background-color: var(--accordionbg);
+  padding: 8px 16px;
+}
+
+.markdownContainer > p {
+  color: var(--black);
+  line-height: 180%;
+  font-weight: 400;
+  text-transform: capitalize;
+  font-size: 16px;
+}

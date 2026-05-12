@@ -39,6 +39,21 @@ export interface BlocksCollectionSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksContactMethod extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_contact_methods';
+  info: {
+    displayName: 'Contact Method';
+  };
+  attributes: {
+    buttonLink: Schema.Attribute.String;
+    buttonText: Schema.Attribute.String;
+    buttonType: Schema.Attribute.Enumeration<['chat', 'phone', 'email']>;
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksFeaturedItem extends Struct.ComponentSchema {
   collectionName: 'components_blocks_featured_items';
   info: {
@@ -473,6 +488,7 @@ declare module '@strapi/strapi' {
       'blocks.best-sellers': BlocksBestSellers;
       'blocks.collection-banner': BlocksCollectionBanner;
       'blocks.collection-section': BlocksCollectionSection;
+      'blocks.contact-method': BlocksContactMethod;
       'blocks.featured-item': BlocksFeaturedItem;
       'blocks.follow-grid': BlocksFollowGrid;
       'blocks.follow-section': BlocksFollowSection;
