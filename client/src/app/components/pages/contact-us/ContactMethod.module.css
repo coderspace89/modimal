@@ -3,6 +3,42 @@
 }
 
 .contactCard {
-  background-color: var(--accordiobg);
+  background-color: var(--accordionbg);
   padding: 16px;
+  text-align: center;
+}
+
+.iconContainer {
+  margin-bottom: 12px;
+}
+
+.contactCardTitle {
+  font-size: 16px;
+  color: var(--black);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.contactCardText {
+  font-size: 12px;
+  color: var(--black);
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+.contactCardBtn {
+  background-color: transparent;
+  border: 1px solid var(--topbarbg);
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  color: var(--topbarbg);
+  font-weight: 400;
+  padding: 8px;
+}
+
+@media(max-width:600px) {
+  .contactCard {
+    margin-bottom: 16px;
+  }
 }
