@@ -7,6 +7,7 @@ import { SearchProvider } from "@/context/SearchContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 import { CartProvider } from "@/context/CartContext";
 import { CheckoutProvider } from "@/context/CheckoutContext";
+import { Suspense } from "react";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -22,17 +23,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${montserrat.variable}`}>
       <body>
-        <SearchProvider>
-          <FavoritesProvider>
-            <CartProvider>
-              <CheckoutProvider>
-                <Header />
-                {children}
-                <Footer />
-              </CheckoutProvider>
-            </CartProvider>
-          </FavoritesProvider>
-        </SearchProvider>
+        <Suspense fallback={null}>
+          <SearchProvider>
+            <FavoritesProvider>
+              <CartProvider>
+                <CheckoutProvider>
+                  <Header />
+                  {children}
+                  <Footer />
+                </CheckoutProvider>
+              </CartProvider>
+            </FavoritesProvider>
+          </SearchProvider>
+        </Suspense>
       </body>
     </html>
   );
