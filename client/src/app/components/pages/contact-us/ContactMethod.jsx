@@ -38,7 +38,7 @@ const ContactMethod = () => {
   return (
     <section className={contactMethodStyles.container}>
       <Container>
-        <Row>
+        <Row className="g-3">
           {contactMethodData?.contactMethods?.map((contactMethod) => (
             <Col
               key={contactMethod.id}
