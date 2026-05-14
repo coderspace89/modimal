@@ -40,25 +40,29 @@ const ContactMethod = () => {
       <Container>
         <Row className="g-3">
           {contactMethodData?.contactMethods?.map((contactMethod) => (
-            <Col
-              key={contactMethod.id}
-              lg={4}
-              className={contactMethodStyles.contactCard}
-            >
-              <div>
-                {contactMethod?.icon && (
-                  <Image
-                    src={getStrapiMedia(contactMethod?.icon?.url)}
-                    width={contactMethod?.icon.width}
-                    height={contactMethod?.icon?.height}
-                    alt={contactMethod?.icon?.name}
-                  />
-                )}
-              </div>
-              <div>
-                <h6>{contactMethod?.title}</h6>
-                <p>{contactMethod?.description}</p>
-                <button>{contactMethod?.buttonText}</button>
+            <Col key={contactMethod.id} lg={4}>
+              <div className={contactMethodStyles.contactCard}>
+                <div className={contactMethodStyles.iconContainer}>
+                  {contactMethod?.icon && (
+                    <Image
+                      src={getStrapiMedia(contactMethod?.icon?.url)}
+                      width={contactMethod?.icon.width}
+                      height={contactMethod?.icon?.height}
+                      alt={contactMethod?.icon?.name}
+                    />
+                  )}
+                </div>
+                <div>
+                  <h6 className={contactMethodStyles.contactCardTitle}>
+                    {contactMethod?.title}
+                  </h6>
+                  <p className={contactMethodStyles.contactCardText}>
+                    {contactMethod?.description}
+                  </p>
+                  <button className={contactMethodStyles.contactCardBtn}>
+                    {contactMethod?.buttonText}
+                  </button>
+                </div>
               </div>
             </Col>
           ))}
