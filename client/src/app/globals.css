@@ -173,3 +173,26 @@ a {
   font-size: 14px !important;
   color: var(--primary) !important;
 }
+
+/* faqs accordion */
+#faqs-accordion .accordion-button {
+  background-color: var(--background) !important;
+  color: var(--black) !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  text-transform: capitalize;
+  font-size: clamp(14px, 3vw, 20px) !important;
+  margin: 10px 0;
+}
+
+#faqs-accordion .accordion-button.collapsed::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M13 8H8V13C8 13.55 7.55 14 7 14C6.45 14 6 13.55 6 13V8H1C0.45 8 0 7.55 0 7C0 6.45 0.45 6 1 6H6V1C6 0.45 6.45 0 7 0C7.55 0 8 0.45 8 1V6H13C13.55 6 14 6.45 14 7C14 7.55 13.55 8 13 8Z' fill='%230c0c0c'/%3E%3C/svg%3E") !important;
+  background-size: 14px !important;
+}
+
+#faqs-accordion .accordion-button:not(.collapsed) {
+  border-radius: 0 !important;
+  font-weight: 700;
+  font-size: clamp(14px, 3vw, 20px) !important;
+  color: var(--primary) !important;
+}

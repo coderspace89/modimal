@@ -54,6 +54,19 @@ export interface BlocksContactMethod extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksFaqItem extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_faq_items';
+  info: {
+    displayName: 'FAQ Item';
+  };
+  attributes: {
+    answer: Schema.Attribute.RichText;
+    isOpenByDefault: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    question: Schema.Attribute.Text;
+  };
+}
+
 export interface BlocksFeaturedItem extends Struct.ComponentSchema {
   collectionName: 'components_blocks_featured_items';
   info: {
@@ -489,6 +502,7 @@ declare module '@strapi/strapi' {
       'blocks.collection-banner': BlocksCollectionBanner;
       'blocks.collection-section': BlocksCollectionSection;
       'blocks.contact-method': BlocksContactMethod;
+      'blocks.faq-item': BlocksFaqItem;
       'blocks.featured-item': BlocksFeaturedItem;
       'blocks.follow-grid': BlocksFollowGrid;
       'blocks.follow-section': BlocksFollowSection;

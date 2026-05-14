@@ -659,6 +659,35 @@ export interface ApiFabricFabric extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiFaqsPageFaqsPage extends Struct.SingleTypeSchema {
+  collectionName: 'faqs_pages';
+  info: {
+    displayName: 'FAQs Page';
+    pluralName: 'faqs-pages';
+    singularName: 'faqs-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    faqs: Schema.Attribute.Component<'blocks.faq-item', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::faqs-page.faqs-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -1840,6 +1869,7 @@ declare module '@strapi/strapi' {
       'api::color.color': ApiColorColor;
       'api::contact-us-page.contact-us-page': ApiContactUsPageContactUsPage;
       'api::fabric.fabric': ApiFabricFabric;
+      'api::faqs-page.faqs-page': ApiFaqsPageFaqsPage;
       'api::global.global': ApiGlobalGlobal;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::login-page.login-page': ApiLoginPageLoginPage;
