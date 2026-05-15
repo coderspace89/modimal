@@ -1,8 +1,4 @@
-import type { Core } from "@strapi/strapi";
-
-const config = ({
-  env,
-}: Core.Config.Shared.ConfigParams): Core.Config.Plugin => ({
+export default ({ env }: { env: any }) => ({
   email: {
     config: {
       provider: "nodemailer",
@@ -13,6 +9,9 @@ const config = ({
           user: env("MAILTRAP_USER"),
           pass: env("MAILTRAP_PASS"),
         },
+        tls: {
+          rejectUnauthorized: false,
+        },
       },
       settings: {
         defaultFrom: "no-reply@modimal.com",
@@ -21,5 +20,3 @@ const config = ({
     },
   },
 });
-
-export default config;
