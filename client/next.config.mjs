@@ -20,17 +20,17 @@ const nextConfig = {
   async rewrites() {
     const strapiUrl =
       process.env.NEXT_PUBLIC_STRAPI_CLOUD_URL ||
-      process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL ||
-      "http://localhost:1337";
+      process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL;
+
+    // If neither variable is available on Vercel, skip the rewrite rule entirely
+    if (!strapiUrl) {
+      return [];
+    }
 
     const sanitizedUrl = strapiUrl.replace(/\/$/, "");
 
     return [
       {
-        /* This is the ONLY rule you need for /api.
-           It says: "Take everything starting with /api/ 
-           EXCEPT for /api/auth and send it to Strapi."
-        */
         source: "/api/:path((?!auth).*)",
         destination: `${sanitizedUrl}/api/:path*`,
       },
