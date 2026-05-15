@@ -4,6 +4,11 @@ import Google from "next-auth/providers/google";
 import Facebook from "next-auth/providers/facebook";
 // import Apple from "next-auth/providers/apple"; // Uncomment when ready with .p8 key
 
+// At the top of your function, dynamically pick the correct backend URL
+const strapiUrl =
+  process.env.NEXT_PUBLIC_STRAPI_CLOUD_URL ||
+  process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL;
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
   providers: [
@@ -19,7 +24,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       name: "Credentials",
       async authorize(credentials) {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/auth/local`,
+          `${strapiUrl}/api/auth/local`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -60,14 +65,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             profile.name?.split(" ").slice(1).join(" ");
 
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/auth/${account.provider}/callback?access_token=${account.access_token || account.id_token}`,
+            `${strapiUrl}/api/auth/${account.provider}/callback?access_token=${account.access_token || account.id_token}`,
           );
           const data = await response.json();
 
           if (data.jwt) {
             // Update Strapi so the database isn't empty
             await fetch(
-              `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/users/${data.user.id}`,
+              `${strapiUrl}/api/users/${data.user.id}`,
               {
                 method: "PUT",
                 headers: {

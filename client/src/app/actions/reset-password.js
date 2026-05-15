@@ -6,9 +6,14 @@ export async function resetPassword(formData) {
   const passwordConfirmation = formData.get("passwordConfirmation");
   const code = formData.get("code"); // The token from the URL
 
+  // At the top of your function, dynamically pick the correct backend URL
+  const strapiUrl =
+    process.env.NEXT_PUBLIC_STRAPI_CLOUD_URL ||
+    process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL;
+
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/auth/reset-password`,
+      `${strapiUrl}/api/auth/reset-password`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

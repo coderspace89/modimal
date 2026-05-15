@@ -18,10 +18,15 @@ export async function signup(state, formData) {
 
   const { email, password, firstName, lastName } = validatedFields.data;
 
+  // At the top of your function, dynamically pick the correct backend URL
+  const strapiUrl =
+    process.env.NEXT_PUBLIC_STRAPI_CLOUD_URL ||
+    process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL;
+
   try {
     // STEP 1: Register the user (Standard fields only)
     const registerResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/auth/local/register`,
+      `${strapiUrl}/api/auth/local/register`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -42,7 +47,7 @@ export async function signup(state, formData) {
     // STEP 2: Update the profile with custom fields
     // We use the registerData.jwt to authorize this specific update
     const updateResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/users/${registerData.user.id}`,
+      `${strapiUrl}/api/users/${registerData.user.id}`,
       {
         method: "PUT",
         headers: {

@@ -3,9 +3,14 @@
 export async function forgotPassword(formData) {
   const email = formData.get("email");
 
+  // At the top of your function, dynamically pick the correct backend URL
+  const strapiUrl =
+    process.env.NEXT_PUBLIC_STRAPI_CLOUD_URL ||
+    process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL;
+
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/auth/forgot-password`,
+      `${strapiUrl}/api/auth/forgot-password`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
