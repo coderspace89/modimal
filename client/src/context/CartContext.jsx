@@ -3,6 +3,11 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext(null);
 
+// At the top of your function, dynamically pick the correct backend URL
+const strapiUrl =
+  process.env.NEXT_PUBLIC_STRAPI_CLOUD_URL ||
+  process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL;
+
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [taxConfig, setTaxConfig] = useState(null);
@@ -18,7 +23,7 @@ export const CartProvider = ({ children }) => {
     const fetchTax = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_LOCAL_URL}/api/tax-config`,
+          `${strapiUrl}/api/tax-config`,
         );
         const data = await res.json();
         setTaxConfig(data?.data || { defaultTaxRate: 0.08 });
