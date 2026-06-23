@@ -6,7 +6,7 @@ Live Demo: [modimal-theta.vercel.app](https://vercel.app)
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** [Next.js](https://nextjs.org) (App Router, TypeScript, Tailwind CSS)
+- **Frontend:** [Next.js](https://nextjs.org) (App Router, React Bootstrap, CSS modules)
 - **Backend / CMS:** [Strapi CMS v5](https://strapi.io/) (Headless Content Management)
 - **Database:** [PostgreSQL](https://postgresql.org) (Production-ready data persistence)
 - **Payments:** [Stripe API](https://stripe.com) (Secure checkout sessions and webhooks)
