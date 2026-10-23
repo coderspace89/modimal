@@ -5,6 +5,7 @@
   "description": "A Strapi application",
   "scripts": {
     "build": "strapi build",
+    "build:back4app": "npm run build && node -e \"require('node:fs').rmSync('dist/build/uploads', { recursive: true, force: true })\"",
     "console": "strapi console",
     "deploy": "strapi deploy",
     "dev": "strapi develop",

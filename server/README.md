@@ -42,7 +42,18 @@ yarn strapi deploy
 
 ### Back4app Containers demo deployment
 
-Back4app Containers requires a Dockerfile. Use `server/Dockerfile` when creating a container from this repository and set the repository root directory to `server`. Configure the Strapi secrets listed in `.env.example` as container environment variables; generate fresh values in Back4app and do not reuse secrets from chat or commit them to Git. Set `HOST=0.0.0.0` and use the platform-provided `PORT`.
+Back4app Containers requires a Dockerfile. Use `server/Dockerfile` when creating a container from this repository and set the repository root directory to `server`. The free container has limited memory, so build the Strapi admin panel on a development machine before deploying:
+
+```bash
+cd server
+npm ci
+npm run build:back4app
+git add dist
+git commit -m "Build Strapi deployment assets"
+git push
+```
+
+The deployment build removes copied local uploads from the generated admin assets so they are not committed or bundled. The Docker image uses the committed `server/dist/` output (compiled server code and admin assets) and does not compile during deployment. Rebuild and commit this output whenever changing Strapi server source, configuration, plugins, admin settings, or dependencies. Configure the Strapi secrets listed in `.env.example` as container environment variables; generate fresh values in Back4App and do not reuse secrets from chat or commit them to Git. Set `HOST=0.0.0.0` and use the platform-provided `PORT`.
 
 This demo image starts with an empty SQLite database and does not include local uploads or content. Container-local database and upload files may not persist across container replacement, so this setup is for demos only. For production, use a supported managed PostgreSQL database and durable object storage for uploads. See the [Strapi deployment documentation](https://docs.strapi.io/cms/deployment).
 

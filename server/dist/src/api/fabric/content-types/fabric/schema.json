@@ -1,0 +1,30 @@
+{
+    "kind": "collectionType",
+    "collectionName": "fabrics",
+    "info": {
+        "singularName": "fabric",
+        "pluralName": "fabrics",
+        "displayName": "Fabric"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "name"
+        },
+        "description": {
+            "type": "richtext"
+        },
+        "features": {
+            "type": "component",
+            "component": "elements.feature-tag",
+            "repeatable": true
+        }
+    }
+}
