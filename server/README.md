@@ -40,6 +40,16 @@ Strapi gives you many possible deployment options for your project including [St
 yarn strapi deploy
 ```
 
+### Railway deployment
+
+Railway can build the backend using `server/Dockerfile`. Create a service from this repository and set its root directory to `/server` so Railway detects the Dockerfile. Select the branch that contains the deployment changes and prebuilt `server/dist/` output; this avoids compiling the Strapi admin panel during the hosted image build.
+
+Add fresh values for `APP_KEYS` (four comma-separated random keys), `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `TRANSFER_TOKEN_SALT`, `JWT_SECRET`, and `ENCRYPTION_KEY` in the Railway service variables. Do not set a fixed `PORT`; Railway provides it. The server defaults to SQLite, so attach a persistent volume mounted at `/app/.tmp` to retain the database across redeployments. Locally uploaded media is not included in the image and needs persistent storage of its own if it must survive redeployments.
+
+After deployment, generate a Railway public domain with HTTPS and set Vercel's `NEXT_PUBLIC_STRAPI_CLOUD_URL` to that base URL (without `/api`). Redeploy the Vercel frontend after saving the variable.
+
+Railway's free plan has a monthly usage-credit limit and a 500 MB maximum service memory; it is not unlimited free hosting. Check current [Railway pricing](https://railway.com/pricing) and monitor usage. This demo still needs validation against the free service's runtime memory limit.
+
 ### Back4app Containers demo deployment
 
 Back4app Containers requires a Dockerfile. Use `server/Dockerfile` when creating a container from this repository and set the repository root directory to `server`. The free container has limited memory, so build the Strapi admin panel on a development machine before deploying:
@@ -47,7 +57,7 @@ Back4app Containers requires a Dockerfile. Use `server/Dockerfile` when creating
 ```bash
 cd server
 npm ci
-npm run build:back4app
+npm run build:deploy
 git add dist
 git commit -m "Build Strapi deployment assets"
 git push
