@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: modimal-strapi
+    runtime: docker
+    plan: free
+    branch: agents/no-pull-requests-yet
+    rootDir: server
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_CLIENT
+        value: postgres
+      - key: DATABASE_SSL
+        value: "true"
+      - key: DATABASE_URL
+        sync: false
+      - key: APP_KEYS
+        sync: false
+      - key: API_TOKEN_SALT
+        sync: false
+      - key: ADMIN_JWT_SECRET
+        sync: false
+      - key: TRANSFER_TOKEN_SALT
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ENCRYPTION_KEY
+        sync: false

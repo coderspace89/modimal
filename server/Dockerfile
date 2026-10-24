@@ -20,6 +20,6 @@ RUN mkdir -p /app/.tmp \
       exit 1; \
     fi
 
-EXPOSE 1337
+EXPOSE 10000
 
 CMD ["npm", "run", "start"]

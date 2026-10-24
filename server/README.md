@@ -40,32 +40,15 @@ Strapi gives you many possible deployment options for your project including [St
 yarn strapi deploy
 ```
 
-### Railway deployment
+### Render deployment
 
-Railway can build the backend using `server/Dockerfile`. Create a service from this repository and set its root directory to `/server` so Railway detects the Dockerfile. Select the branch that contains the deployment changes and prebuilt `server/dist/` output; this avoids compiling the Strapi admin panel during the hosted image build.
+This repository includes a Render Blueprint at `render.yaml` for the Strapi web service. It builds from `server/Dockerfile` on the `agents/no-pull-requests-yet` branch and uses the committed `server/dist/` output, avoiding the memory-intensive Strapi admin build on Render.
 
-Add fresh values for `APP_KEYS` (four comma-separated random keys), `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `TRANSFER_TOKEN_SALT`, `JWT_SECRET`, and `ENCRYPTION_KEY` in the Railway service variables. Do not set a fixed `PORT`; Railway provides it. The server defaults to SQLite, so attach a persistent volume mounted at `/app/.tmp` to retain the database across redeployments. Locally uploaded media is not included in the image and needs persistent storage of its own if it must survive redeployments.
+Create a free Neon PostgreSQL database, then create a Render Blueprint from this repository and select the deployment branch. Render will prompt for `DATABASE_URL` and the Strapi secrets. Use Neon's pooled connection string for `DATABASE_URL`; keep `DATABASE_SSL=true`. Generate fresh secrets for `APP_KEYS` (four comma-separated random strings), `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `TRANSFER_TOKEN_SALT`, `JWT_SECRET`, and `ENCRYPTION_KEY`. Never reuse the secrets posted in chat. Do not set `PORT`; Render supplies it.
 
-After deployment, generate a Railway public domain with HTTPS and set Vercel's `NEXT_PUBLIC_STRAPI_CLOUD_URL` to that base URL (without `/api`). Redeploy the Vercel frontend after saving the variable.
+Once deployed, use the Render service's `onrender.com` URL as Vercel's `NEXT_PUBLIC_STRAPI_CLOUD_URL` (base URL only, no `/api`) and redeploy the frontend.
 
-Railway's free plan has a monthly usage-credit limit and a 500 MB maximum service memory; it is not unlimited free hosting. Check current [Railway pricing](https://railway.com/pricing) and monitor usage. This demo still needs validation against the free service's runtime memory limit.
-
-### Back4app Containers demo deployment
-
-Back4app Containers requires a Dockerfile. Use `server/Dockerfile` when creating a container from this repository and set the repository root directory to `server`. The free container has limited memory, so build the Strapi admin panel on a development machine before deploying:
-
-```bash
-cd server
-npm ci
-npm run build:deploy
-git add dist
-git commit -m "Build Strapi deployment assets"
-git push
-```
-
-The deployment build removes copied local uploads from the generated admin assets so they are not committed or bundled. The Docker image uses the committed `server/dist/` output (compiled server code and admin assets) and does not compile during deployment. Rebuild and commit this output whenever changing Strapi server source, configuration, plugins, admin settings, or dependencies. Configure the Strapi secrets listed in `.env.example` as container environment variables; generate fresh values in Back4App and do not reuse secrets from chat or commit them to Git. Set `HOST=0.0.0.0` and use the platform-provided `PORT`.
-
-This demo image starts with an empty SQLite database and does not include local uploads or content. Container-local database and upload files may not persist across container replacement, so this setup is for demos only. For production, use a supported managed PostgreSQL database and durable object storage for uploads. See the [Strapi deployment documentation](https://docs.strapi.io/cms/deployment).
+Render Free web services sleep after 15 minutes without traffic, take about a minute to wake, and have an ephemeral filesystem. Neon Free is the persistent database, but Strapi uploads stored on the service filesystem will disappear after restarts or redeploys. For an interview demo, seed the database, verify API requests and media, then open/wake the backend before presenting. Free services are intended for testing and hobby projects, not production; confirm the current provider limits before relying on them.
 
 ## 📚 Learn more
 
