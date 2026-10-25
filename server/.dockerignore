@@ -1,7 +1,6 @@
 .env
 .tmp
 node_modules
-dist
 .strapi
 .git
 public/uploads
