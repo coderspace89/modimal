@@ -14,8 +14,12 @@ COPY . .
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 
-RUN mkdir -p /app/.tmp && npm run build
+RUN mkdir -p /app/.tmp \
+    && if [ ! -s /app/dist/build/index.html ]; then \
+      echo "Missing prebuilt Strapi output. Run 'npm run build' in server/ and commit server/dist/ before deploying." >&2; \
+      exit 1; \
+    fi
 
-EXPOSE 1337
+EXPOSE 10000
 
 CMD ["npm", "run", "start"]

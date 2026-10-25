@@ -5,6 +5,7 @@
   "description": "A Strapi application",
   "scripts": {
     "build": "strapi build",
+    "build:deploy": "npm run build && node -e \"require('node:fs').rmSync('dist/build/uploads', { recursive: true, force: true })\"",
     "console": "strapi console",
     "deploy": "strapi deploy",
     "dev": "strapi develop",
@@ -20,6 +21,7 @@
     "@strapi/provider-email-nodemailer": "^5.43.0",
     "@strapi/strapi": "5.40.0",
     "better-sqlite3": "12.6.2",
+    "pg": "^8.23.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
